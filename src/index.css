@@ -2,15 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #0E2038;
-  color: white;
+/* ================= FONT: Century Gothic Pro ================= */
+
+/* Regular */
+@font-face {
+  font-family: "Century Gothic Pro";
+  src: url("./assets/fonts/CenturyGothicPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
+/* Bold */
+@font-face {
+  font-family: "Century Gothic Pro";
+  src: url("./assets/fonts/CenturyGothicPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
+
+/* ================= GLOBAL STYLES ================= */
+
+body {
+  font-family: "Century Gothic Pro", "Century Gothic", Arial, sans-serif;
+  background-color: #0E2038;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Century Gothic Pro", "Century Gothic", Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ================= CUSTOM ANIMATIONS ================= */
+
 @keyframes spinSlow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -19,25 +49,18 @@ h1, h2, h3, h4 {
 .animate-spin-slow {
   animation: spinSlow 20s linear infinite;
 }
+
 @keyframes fly1 {
-  from {
-    offset-distance: 0%;
-  }
-  to {
-    offset-distance: 100%;
-  }
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
 }
 
 @keyframes fly2 {
-  from {
-    offset-distance: 0%;
-  }
-  to {
-    offset-distance: 100%;
-  }
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
 }
 
-
+/* ================= THEME VARIABLES (Tailwind Base Layer) ================= */
 
 @layer base {
   :root {
@@ -67,6 +90,7 @@ h1, h2, h3, h4 {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

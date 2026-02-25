@@ -1,200 +1,221 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import jetVideo from "../assets/jet.mov";
 
-// Sample airport list (you can expand later)
-const airports = [
-  "New York",
-  "London",
-  "Dubai",
-  "Delhi",
-  "Mumbai",
-  "Paris",
-  "Singapore",
-  "Tokyo",
-  "Los Angeles",
-  "Sydney",
-];
+/* ================= ANIMATIONS ================= */
 
-function Hero() {
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.18, delayChildren: 0.3 },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 35, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 1, ease: "easeOut" },
+  },
+};
+
+const tabAnim = {
+  hidden: { opacity: 0, x: 40 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  exit: { opacity: 0, x: -40, transition: { duration: 0.4 } },
+};
+
+/* ================= COMPONENT ================= */
+
+export default function Hero() {
   const [activeTab, setActiveTab] = useState("jet");
-  const [fromSearch, setFromSearch] = useState("");
-  const [toSearch, setToSearch] = useState("");
-
-  const filteredFrom = airports.filter((a) =>
-    a.toLowerCase().includes(fromSearch.toLowerCase())
-  );
-
-  const filteredTo = airports.filter((a) =>
-    a.toLowerCase().includes(toSearch.toLowerCase())
-  );
 
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden">
 
-      {/* Background Video */}
-      <video
+      {/* VIDEO */}
+      <motion.video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover"
+        initial={{ scale: 1.25 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2.5, ease: "easeOut" }}
       >
         <source src={jetVideo} type="video/mp4" />
-      </video>
+      </motion.video>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#0E2038]/80"></div>
+      {/* OVERLAY */}
+      <motion.div
+        className="absolute inset-0 bg-[#0E2038]/80"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      />
 
-      {/* Content Layout */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid md:grid-cols-2 gap-12 items-center text-white">
+      {/* CONTENT */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 py-24 sm:py-32 grid lg:grid-cols-2 gap-12 items-center text-white"
+      >
 
-        {/* LEFT CONTENT */}
-        <motion.div
-          initial={{ opacity: 0, x: -80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-4xl md:text-6xl font-heading leading-tight">
-            Fly Beyond Limits
-            <br />
-            <span className="text-[#A3B5C0]">
+        {/* LEFT TEXT */}
+        <motion.div className="text-center lg:text-left">
+
+          <motion.h1
+            variants={fadeUp}
+            className="font-heading leading-tight"
+            style={{ fontSize: "clamp(1.9rem, 4vw, 3.2rem)" }}
+          >
+            <span className="italic font-normal block">
+              Fly Beyond Limits
+            </span>
+            <span className="font-medium">
               Private Aviation Redefined
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-6 text-[#DAD5CF] max-w-lg font-body">
-            Experience world-class comfort, privacy, and performance with our
-            premium fleet and personalized aviation services.
-          </p>
+          <motion.p
+            variants={fadeUp}
+            className="mt-4 text-[#DAD5CF] italic max-w-xl mx-auto lg:mx-0"
+            style={{ fontSize: "clamp(0.9rem, 1.4vw, 1.05rem)" }}
+          >
+            Experience world-class comfort, privacy, and performance
+            with our premium fleet and personalized aviation services.
+          </motion.p>
 
-          <div className="mt-8 flex gap-4">
-            <button className="bg-[#A3B5C0] text-[#0E2038] px-8 py-3 rounded-full font-body shadow-lg hover:bg-white transition">
-              Book Your Flight
-            </button>
+          {/* BUTTONS */}
+          <motion.div
+            variants={fadeUp}
+            className="mt-7 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          >
+            <LuxuryButton filled text="Book Your Flight" />
+            <LuxuryButton text="Explore Fleet" />
+          </motion.div>
 
-            <button className="border border-[#A3B5C0] px-8 py-3 rounded-full font-body hover:bg-[#A3B5C0] hover:text-[#0E2038] transition">
-              Explore Fleet
-            </button>
+        </motion.div>
+
+        {/* RIGHT CARD */}
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          className="w-full max-w-md mx-auto lg:ml-auto"
+        >
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 shadow-2xl">
+
+            {/* TABS */}
+            <div className="flex mb-5 bg-[#213A5C] rounded-lg overflow-hidden text-sm">
+              {["jet", "heli"].map((tab) => (
+                <motion.button
+                  key={tab}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setActiveTab(tab)}
+                  className={`flex-1 py-2 transition ${
+                    activeTab === tab
+                      ? "bg-[#A3B5C0] text-[#0E2038]"
+                      : "text-white hover:bg-[#2c4a73]"
+                  }`}
+                >
+                  {tab === "jet" ? "Jet Charter" : "Helicopter"}
+                </motion.button>
+              ))}
+            </div>
+
+            {/* FORMS */}
+            <AnimatePresence mode="wait">
+              {activeTab === "jet" && (
+                <motion.div
+                  key="jet"
+                  variants={tabAnim}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className="space-y-3"
+                >
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <AnimatedInput placeholder="From" />
+                    <AnimatedInput placeholder="To" />
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <AnimatedInput type="date" />
+                    <AnimatedInput placeholder="Passengers" type="number" />
+                  </div>
+
+                  <ActionButton text="Search Flights" />
+                </motion.div>
+              )}
+
+              {activeTab === "heli" && (
+                <motion.div
+                  key="heli"
+                  variants={tabAnim}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className="space-y-3"
+                >
+                  <AnimatedInput placeholder="Full Name" />
+                  <AnimatedInput type="email" placeholder="Email" />
+                  <AnimatedInput type="tel" placeholder="Phone" />
+                  <motion.textarea
+                    whileFocus={{ scale: 1.02 }}
+                    rows="3"
+                    placeholder="Message"
+                    className="p-3 rounded-lg w-full text-black text-sm focus:outline-none"
+                  />
+                  <ActionButton text="Submit Inquiry" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
           </div>
         </motion.div>
 
-        {/* RIGHT BOOKING CARD */}
-       {/* RIGHT BOOKING CARD */}
-<motion.div
-  initial={{ opacity: 0, x: 80 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1 }}
-  className="w-full max-w-md mx-auto md:ml-auto"
->
-  <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-5">
-
-    {/* Tabs */}
-    <div className="flex mb-5 bg-[#213A5C] rounded-lg overflow-hidden text-sm">
-      <button
-        onClick={() => setActiveTab("jet")}
-        className={`flex-1 py-2 font-medium transition ${
-          activeTab === "jet"
-            ? "bg-[#A3B5C0] text-[#0E2038]"
-            : "text-white hover:bg-[#2c4a73]"
-        }`}
-      >
-        Jet Charter
-      </button>
-
-      <button
-        onClick={() => setActiveTab("heli")}
-        className={`flex-1 py-2 font-medium transition ${
-          activeTab === "heli"
-            ? "bg-[#A3B5C0] text-[#0E2038]"
-            : "text-white hover:bg-[#2c4a73]"
-        }`}
-      >
-        Helicopter
-      </button>
-    </div>
-
-    {/* JET FORM */}
-    {activeTab === "jet" && (
-      <div className="space-y-3">
-
-        {/* From & To */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input
-            type="text"
-            placeholder="From"
-            value={fromSearch}
-            onChange={(e) => setFromSearch(e.target.value)}
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
-
-          <input
-            type="text"
-            placeholder="To"
-            value={toSearch}
-            onChange={(e) => setToSearch(e.target.value)}
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
-        </div>
-
-        {/* Date & Passengers */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input
-            type="date"
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
-
-          <input
-            type="number"
-            placeholder="Passengers"
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
-        </div>
-
-        <button className="w-full mt-2 bg-[#A3B5C0] text-[#0E2038] py-3 rounded-full font-semibold hover:bg-white transition">
-          Search Flights
-        </button>
-      </div>
-    )}
-
-    {/* HELICOPTER FORM */}
-    {activeTab === "heli" && (
-      <div className="space-y-3">
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        />
-
-        <input
-          type="email"
-          placeholder="Email"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        />
-
-        <input
-          type="tel"
-          placeholder="Phone"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        />
-
-        <textarea
-          placeholder="Message"
-          rows="3"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        ></textarea>
-
-        <button className="w-full bg-[#A3B5C0] text-[#0E2038] py-3 rounded-full font-semibold hover:bg-white transition">
-          Submit Inquiry
-        </button>
-      </div>
-    )}
-  </div>
-</motion.div>
-
-      </div>
+      </motion.div>
     </section>
   );
 }
 
-export default Hero;
+/* ================= REUSABLE UI ================= */
+
+const AnimatedInput = ({ type = "text", placeholder }) => (
+  <motion.input
+    whileFocus={{ scale: 1.04 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    type={type}
+    placeholder={placeholder}
+    className="p-3 rounded-lg bg-white text-black text-sm w-full focus:outline-none"
+  />
+);
+
+const LuxuryButton = ({ text, filled }) => (
+  <motion.button
+    whileHover={{ scale: 1.06 }}
+    whileTap={{ scale: 0.94 }}
+    className={`px-8 py-3 rounded-full text-sm shadow-xl transition ${
+      filled
+        ? "bg-[#A3B5C0] text-[#0E2038]"
+        : "border border-[#A3B5C0]"
+    }`}
+  >
+    {text}
+  </motion.button>
+);
+
+const ActionButton = ({ text }) => (
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="w-full bg-[#A3B5C0] text-[#0E2038] py-3 rounded-full font-medium text-sm"
+  >
+    {text}
+  </motion.button>
+);
