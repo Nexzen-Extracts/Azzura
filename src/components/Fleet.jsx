@@ -44,21 +44,22 @@ function Fleet() {
         </p>
 
         {/* Flying Aircraft */}
-        <motion.div
-          key={active}
-          initial={{ x: -400, y: 80, opacity: 0, rotate: -8 }}
-          animate={{
-            x: 0,
-            y: 0,
-            opacity: 1,
-            rotate: 0,
-          }}
-          transition={{
-            duration: 1,
-            ease: "easeOut",
-          }}
-          className="flex justify-center"
-        >
+       <motion.div
+  key={active}
+  initial={{ x: -400, y: -200, opacity: 0, rotate: -6, scale: 0.95 }}
+  animate={{
+    x: 0,
+    y: [ -200, 20, 0 ],   // slight landing bounce
+    opacity: 1,
+    rotate: 0,
+    scale: 1,
+  }}
+  transition={{
+    duration: 1.2,
+    ease: "easeOut",
+  }}
+  className="flex justify-center"
+>
           {/* Floating effect */}
           <motion.img
             src={fleetData[active].img}

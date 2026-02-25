@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ctaBg from "../assets/cta-bg.webp";
+import ctaVideo from "../assets/cta.mp4";
 
 import "@fontsource/playfair-display/400.css";
 import "@fontsource/playfair-display/600.css";
@@ -10,20 +10,24 @@ function CTA() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden text-white">
 
-      {/* Background Image */}
-      <motion.img
-        src={ctaBg}
-        alt="Private Jet"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+      {/* Background Video */}
+      <motion.video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
         initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
         transition={{ duration: 10, ease: "easeOut" }}
-      />
+      >
+        <source src={ctaVideo} type="video/mp4" />
+      </motion.video>
 
       {/* Main Dark Overlay */}
       <div className="absolute inset-0 bg-[#081423]/70"></div>
 
-      {/* Bottom Heavy Gradient (Footer Blend) */}
+      {/* Bottom Heavy Gradient */}
       <div className="absolute bottom-0 left-0 w-full h-[45%] bg-gradient-to-t from-[#081423] via-[#081423]/90 to-transparent"></div>
 
       {/* Content */}
@@ -78,7 +82,6 @@ function CTA() {
           viewport={{ once: true }}
           className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
         >
-          {/* Premium Gold Button */}
           <button className="px-10 py-4 rounded-sm font-semibold tracking-[2px]
             bg-gradient-to-r from-[#B8962E] via-[#D4AF37] to-[#B8962E]
             text-[#081423]
@@ -87,7 +90,6 @@ function CTA() {
             BOOK YOUR FLIGHT
           </button>
 
-          {/* Outline Button */}
           <button className="px-10 py-4 rounded-sm font-semibold tracking-[2px]
             border border-white/30
             text-white
