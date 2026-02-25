@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 
 const products = [
   {
-    title: "AzzuraYatra",
+    title: "AzurAYatra",
     img: "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1200",
   },
   {
-    title: "AzzuraWed",
+    title: "AzurAWed",
     img: "https://images.unsplash.com/photo-1520857014576-2c4f4c972b57?q=80&w=1200",
   },
   {
@@ -14,7 +14,7 @@ const products = [
     img: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1200",
   },
   {
-    title: "Azzura Rescue",
+    title: "AzurA Rescue",
     img: "https://images.unsplash.com/photo-1584467735871-8f7b7c6d9d4b?q=80&w=1200",
   },
 ];

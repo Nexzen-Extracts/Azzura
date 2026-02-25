@@ -1,9 +1,24 @@
 import { motion } from "framer-motion";
-import aboutImg from "../assets/aviation-about.png";
+import { useEffect, useState } from "react";
+
+import img1 from "../assets/about1.jpg";
+import img2 from "../assets/about2.jpg";
+import img3 from "../assets/about3.jpg";
+import img4 from "../assets/about4.jpg";
 
 function About() {
+  const images = [img1, img2, img3, img4];
+  const [index, setIndex] = useState(0);
 
-  // Stagger animation for content
+  // Cinematic auto slider
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 4000); // Change every 4s
+    return () => clearInterval(interval);
+  }, []);
+
+  // Content animation
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -20,52 +35,45 @@ function About() {
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
+      transition: { duration: 0.8, ease: "easeOut" }
     }
   };
 
   return (
-    <section className="bg-[#F5F7FA] text-[#0E2038] py-20 md:py-28 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <section className="bg-[#F5F7FA] text-[#0E2038] py-12 md:py-16 px-6 overflow-hidden">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-        {/* ================= IMAGE SIDE (PNG FRIENDLY) ================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="relative flex justify-center items-center"
-        >
-          {/* Soft radial glow (no card effect) */}
-          <motion.div
-            className="absolute w-[70%] h-[70%] bg-[#0E2038]/10 rounded-full blur-[120px]"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          />
+        {/* ================= IMAGE SLIDER ================= */}
+        <div className="relative flex justify-center items-center">
 
-          {/* Floating PNG Image */}
-          <motion.img
-            src={aboutImg}
-            alt="Azzura Aviation"
-            className="
-              relative
-              w-full
-              max-w-sm
-              sm:max-w-md
-              md:max-w-lg
-              object-contain
-              drop-shadow-[0_40px_40px_rgba(0,0,0,0.15)]
-            "
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ scale: 1.04 }}
-          />
-        </motion.div>
+          {/* Soft glow */}
+          <div className="absolute w-[70%] h-[70%] bg-[#0E2038]/10 rounded-full blur-[120px]" />
 
-        {/* ================= CONTENT SIDE ================= */}
+          <div className="relative w-full max-w-lg h-[380px] md:h-[440px] overflow-hidden rounded-3xl shadow-2xl">
+
+            {images.map((img, i) => (
+              <motion.img
+                key={i}
+                src={img}
+                alt="AzurA Aviation"
+                className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+                animate={{
+                  opacity: index === i ? 1 : 0,
+                  scale: index === i ? 1 : 1.08
+                }}
+                transition={{
+                  opacity: { duration: 1.5, ease: "easeInOut" },
+                  scale: { duration: 6, ease: "easeOut" }
+                }}
+              />
+            ))}
+
+            {/* Cinematic gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl" />
+          </div>
+        </div>
+
+        {/* ================= CONTENT ================= */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -74,14 +82,14 @@ function About() {
         >
           <motion.p
             variants={item}
-            className="uppercase tracking-[5px] text-xs sm:text-sm text-[#7B8A95] mb-3 font-body"
+            className="uppercase tracking-[5px] text-xs sm:text-sm text-[#7B8A95] mb-3"
           >
             About Us
           </motion.p>
 
           <motion.h2
             variants={item}
-            className="text-3xl sm:text-4xl md:text-5xl font-heading leading-tight mb-5"
+            className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-5"
           >
             Redefining Private Aviation
           </motion.h2>
@@ -95,7 +103,7 @@ function About() {
             variants={item}
             className="text-[#3E556B] text-sm sm:text-base md:text-lg leading-relaxed mb-4"
           >
-            Azzura Aviation delivers premium private air travel solutions
+            AzurA Aviation delivers premium private air travel solutions
             designed for comfort, efficiency, and exclusivity. We combine
             advanced aviation expertise with personalized service to create a
             seamless flying experience.
@@ -114,7 +122,7 @@ function About() {
             variants={item}
             whileHover={{ y: -4, scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            className="bg-[#0E2038] text-white px-7 sm:px-9 py-3 rounded-full font-body shadow-lg hover:bg-[#1A3354] transition-all duration-300"
+            className="bg-[#0E2038] text-white px-8 py-3 rounded-full shadow-lg hover:bg-[#1A3354] transition-all duration-300"
           >
             Discover More
           </motion.button>
@@ -125,4 +133,4 @@ function About() {
   );
 }
 
-export default About;
+export default About; 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import jetVideo from "../assets/jet.mp4";
+import jetVideo from "../assets/jet.mov";
 
 // Sample airport list (you can expand later)
 const airports = [

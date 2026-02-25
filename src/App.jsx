@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Membership from "./pages/Membership";
+import FleetPage from "./pages/FleetPage";
+import YatraPage from "./pages/YatraPage";
+import Charter from "./pages/Charter";
 // import SplashCursor from "./components/SplashCursor";
 
 function App() {
@@ -12,6 +15,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/membership" element={<Membership />} />
+        <Route path="/fleet" element={<FleetPage />} />
+        <Route path="/yatra" element={<YatraPage />} />
+        <Route path="/charter" element={<Charter />} />
       </Routes>
     </BrowserRouter>
   );
