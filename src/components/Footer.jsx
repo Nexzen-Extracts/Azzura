@@ -5,8 +5,8 @@ import {
   Twitter
 } from "lucide-react";
 
-import footerBg from "../assets/footer.jpg";
-
+import footerBg from "../assets/Footer-Image.jpg";
+import logo from "../assets/logo.png";
 function Footer() {
   return (
     <footer className="relative text-white">
@@ -28,7 +28,15 @@ function Footer() {
 
           {/* Column 1 – Logo & About */}
           <div>
-            <h2 className="text-2xl font-heading mb-4">AzurA</h2>
+            {/* Logo */}
+        
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-8 md:h-10 w-auto object-contain"
+            />
+        
+            
             <p className="text-[#A3B5C0] text-sm leading-relaxed">
               Delivering premium private aviation services with a focus on safety,
               comfort and operational excellence worldwide.

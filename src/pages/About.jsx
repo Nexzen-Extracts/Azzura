@@ -56,7 +56,7 @@ function About() {
             transition={{ duration: 1, ease: "easeOut" }}
             className="text-4xl md:text-6xl font-semibold text-white tracking-wide"
           >
-            About AZZURA
+            About AZURA
           </motion.h1>
 
           {/* TYPEWRITER SUBTITLE */}
