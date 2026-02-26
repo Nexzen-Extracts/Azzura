@@ -28,7 +28,7 @@ function Footer() {
 
           {/* Column 1 – Logo & About */}
           <div>
-            <h2 className="text-2xl font-heading mb-4">AzurA</h2>
+            <h2 className="text-2xl font-heading mb-4">Azura</h2>
             <p className="text-[#A3B5C0] text-sm leading-relaxed">
               Delivering premium private aviation services with a focus on safety,
               comfort and operational excellence worldwide.
@@ -73,7 +73,7 @@ function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-3 text-[#A3B5C0] text-sm">
-              <li>Email: info@AzurAaviation.com</li>
+              <li>Email: info@Azuraaviation.com</li>
               <li>Phone: +91 98765 43210</li>
               <li>Address: Gurgaon, Haryana, India</li>
             </ul>
@@ -86,7 +86,7 @@ function Footer() {
           <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center text-sm text-[#A3B5C0]">
 
             <p>
-              © {new Date().getFullYear()} AzurA Aviation. All Rights Reserved.
+              © {new Date().getFullYear()} Azura Aviation. All Rights Reserved.
             </p>
 
             <div className="flex gap-6 mt-2 md:mt-0">

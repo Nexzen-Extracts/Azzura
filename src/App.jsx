@@ -4,6 +4,7 @@ import Membership from "./pages/Membership";
 import FleetPage from "./pages/FleetPage";
 import YatraPage from "./pages/YatraPage";
 import Charter from "./pages/Charter";
+import FleetDetails from "./pages/FleetDetails";
 // import SplashCursor from "./components/SplashCursor";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/fleet" element={<FleetPage />} />
         <Route path="/yatra" element={<YatraPage />} />
         <Route path="/charter" element={<Charter />} />
+        <Route path="/fleet/:id" element={<FleetDetails />} />
       </Routes>
     </BrowserRouter>
   );
