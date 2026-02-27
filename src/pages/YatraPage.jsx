@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import YatraContent from "../components/YatraContent";
-
+// import YatraContent from "../components/YatraContent";
+import YatraExperience from "../components/YatraExperience";
 import hero1 from "../assets/yatra/hero1.jpg";
 import hero2 from "../assets/yatra/hero2.jpg";
 import hero3 from "../assets/yatra/hero3.jpg";
@@ -79,8 +79,8 @@ function YatraPage() {
         </div>
 
       </section>
-
-      <YatraContent />
+<YatraExperience />
+      {/* <YatraContent /> */}
       <Footer />
     </>
   );

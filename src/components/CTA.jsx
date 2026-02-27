@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import ctaVideo from "../assets/cta.mp4";
 
 import "@fontsource/playfair-display/400.css";
@@ -8,21 +7,11 @@ import "@fontsource/playfair-display/700.css";
 import "@fontsource/playfair-display/400-italic.css";
 
 function CTA() {
-  const ref = useRef(null);
-
-  // Scroll animation for whole section
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 80%", "center center"],
-  });
-
-  const sectionOpacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const sectionY = useTransform(scrollYProgress, [0, 0.6], [80, 0]);
-
   return (
     <motion.section
-      ref={ref}
-      style={{ opacity: sectionOpacity, y: sectionY }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9 }}
       className="relative min-h-[80vh] flex items-center justify-center overflow-hidden text-white py-16 md:py-20"
     >
       {/* Background Video */}
@@ -36,7 +25,7 @@ function CTA() {
         <source src={ctaVideo} type="video/mp4" />
       </video>
 
-      {/* Strong Dark Overlay (Video ~10–15% visible) */}
+      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-[#081423]/90"></div>
 
       {/* Content */}
@@ -47,9 +36,8 @@ function CTA() {
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xs sm:text-sm tracking-[4px] text-[#D4AF37] uppercase mb-4"
         >
           Exclusive Access
@@ -58,9 +46,8 @@ function CTA() {
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-semibold"
           style={{
             textShadow: "0 12px 40px rgba(0,0,0,0.95)",
@@ -74,9 +61,8 @@ function CTA() {
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-5 text-white/95 text-base sm:text-lg max-w-2xl mx-auto"
           style={{
             fontFamily: "Montserrat, sans-serif",
@@ -90,9 +76,8 @@ function CTA() {
         {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
         >
           <button
