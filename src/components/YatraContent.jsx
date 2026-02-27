@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ================= COMMON IMAGES (FIXED) ================= */
+/* ===== IMPORT LOCAL IMAGES ===== */
+import kedarnath from "../assets/yatra1.jpg";
+import badrinath from "../assets/yatra2.jpg";
+import gangotri from "../assets/yatra3.jpg";
+import yamunotri from "../assets/yatra4.jpg";
 
-const tourImages = [
-  "https://www.yatrabyhelicopter.in/blog/wp-content/uploads/2024/05/Kedarnath-Temple.jpg",
-  "https://m.media-amazon.com/images/I/71JeG+Rd+AL._AC_UF894,1000_QL80_.jpg",
-  "https://travelvaidya.com/blog/wp-content/uploads/2025/05/gangotri-temple.webp",
-  "https://www.chardhamtour.in/assets/images/tourism/yamunotri/yamunotri-geography.webp"
-];
+/* ===== IMAGE ARRAY ===== */
+const tourImages = [kedarnath, badrinath, gangotri, yamunotri];
 
-/* ================= PACKAGE DATA ================= */
+/* ===== PACKAGE DATA ===== */
 
 const packageData = {
   "6N 6D": {
@@ -80,6 +80,21 @@ const packageData = {
 
 const packages = Object.keys(packageData);
 
+/* ===== ANIMATION VARIANTS ===== */
+
+const sectionFade = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12 }
+  }
+};
+
+const cardAnim = {
+  hidden: { opacity: 0, y: 25 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 function YatraContent() {
   const [activePackage, setActivePackage] = useState("6N 6D");
   const [openDay, setOpenDay] = useState(null);
@@ -87,21 +102,26 @@ function YatraContent() {
   const data = packageData[activePackage];
 
   return (
-    <section className="bg-[#081421] py-20 px-6 text-white">
+    <motion.section
+      variants={sectionFade}
+      initial="hidden"
+      animate="show"
+      className="bg-[#081421] py-16 sm:py-20 px-4 sm:px-6 text-white"
+    >
       <div className="max-w-7xl mx-auto">
 
-        {/* ===== Smooth Toggle ===== */}
-        <div className="flex flex-wrap gap-3 mb-10">
+        {/* ===== PACKAGE TOGGLE ===== */}
+        <div className="flex flex-wrap gap-3 mb-8">
           {packages.map(pkg => (
             <motion.button
               key={pkg}
               layout
-              transition={{ duration: 0.3 }}
+              whileHover={{ scale: 1.05 }}
               onClick={() => {
                 setActivePackage(pkg);
                 setOpenDay(null);
               }}
-              className={`px-5 py-2 border rounded transition-all duration-300
+              className={`px-4 py-2 text-sm border rounded transition
               ${
                 activePackage === pkg
                   ? "bg-[#D4AF37] text-[#081421] border-[#D4AF37]"
@@ -113,45 +133,49 @@ function YatraContent() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-[1.6fr_1fr] gap-10">
+        <div className="grid lg:grid-cols-[1.6fr_1fr] gap-8 lg:gap-10">
 
-          {/* ===== LEFT SIDE ===== */}
+          {/* ===== LEFT CONTENT ===== */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activePackage}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
+              variants={cardAnim}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
             >
               {/* Info Cards */}
-              <div className="grid md:grid-cols-4 gap-4 mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
                 <InfoCard title="Duration" value={data.duration} />
                 <InfoCard title="Start From" value={data.price} />
                 <InfoCard title="Date" value="Flexible" />
                 <InfoCard title="Person" value="6 pax or less" />
               </div>
 
-              {/* ===== Fixed Image Cards ===== */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {/* ===== BIGGER IMAGES + HOVER ANIMATION ===== */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
                 {tourImages.map((img, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="rounded-xl overflow-hidden border border-white/10"
+                    whileHover={{ scale: 1.07, y: -4 }}
+                    transition={{ type: "spring", stiffness: 200 }}
+                    className="relative rounded-xl overflow-hidden border border-white/10 group"
                   >
                     <img
                       src={img}
                       alt="Tour"
-                      className="w-full h-32 object-cover"
+                      className="w-full h-36 sm:h-44 lg:h-48 object-cover transition duration-500 group-hover:scale-110"
                     />
+
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition" />
                   </motion.div>
                 ))}
               </div>
 
               {/* Highlights */}
-              <div className="bg-[#0B1A2E] border border-white/10 rounded-xl p-6 mb-8">
-                <h3 className="text-xl font-semibold mb-4">
+              <motion.div variants={cardAnim} className="bg-[#0B1A2E] border border-white/10 rounded-xl p-5 mb-6 hover:shadow-lg hover:shadow-[#D4AF37]/10 transition">
+                <h3 className="text-lg font-semibold mb-3">
                   Tour Highlights
                 </h3>
 
@@ -160,20 +184,21 @@ function YatraContent() {
                     <li key={i}>✓ {item}</li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
 
               {/* Itinerary */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {data.itinerary.map((item, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    whileHover={{ y: -2 }}
                     className="bg-[#0B1A2E] border border-white/10 rounded-lg"
                   >
                     <button
                       onClick={() =>
                         setOpenDay(openDay === index ? null : index)
                       }
-                      className="w-full text-left px-5 py-4 flex justify-between"
+                      className="w-full text-left px-4 py-3 flex justify-between text-sm"
                     >
                       {item.day}
                       <span>{openDay === index ? "-" : "+"}</span>
@@ -185,13 +210,13 @@ function YatraContent() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="px-5 pb-4 text-white/70 text-sm overflow-hidden"
+                          className="px-4 pb-3 text-white/70 text-sm overflow-hidden"
                         >
                           {item.details}
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
@@ -199,40 +224,41 @@ function YatraContent() {
 
           {/* ===== RIGHT FORM ===== */}
           <motion.div
-            key={activePackage + "form"}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4 }}
-            className="bg-[#0B1A2E] border border-white/10 rounded-2xl p-6 h-fit"
+            variants={cardAnim}
+            className="bg-[#0B1A2E] border border-white/10 rounded-2xl p-5 h-fit hover:shadow-xl hover:shadow-[#D4AF37]/10 transition"
           >
-            <h3 className="text-lg font-semibold mb-4">Book This Tour</h3>
+            <h3 className="text-lg font-semibold mb-2">Book This Tour</h3>
 
-            <p className="text-[#D4AF37] mb-6 text-sm">
+            <p className="text-[#D4AF37] mb-5 text-sm">
               Starting from {data.price} / Seat
             </p>
 
-            <form className="space-y-4">
+            <form className="space-y-3">
               <Input placeholder="Name" />
               <Input placeholder="Email" />
               <Input placeholder="Phone" />
-              <Input placeholder="Select Date" />
+              <Input type="date" />
 
-              <select className="form-input" value={activePackage} readOnly>
+              <select className="form-input" value={activePackage} disabled>
                 {packages.map(p => (
                   <option key={p}>{p}</option>
                 ))}
               </select>
 
-              <button className="w-full bg-[#D4AF37] text-[#081421] py-3 rounded font-semibold hover:scale-[1.02] transition">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full bg-[#D4AF37] text-[#081421] py-2.5 rounded font-semibold transition"
+              >
                 SUBMIT
-              </button>
+              </motion.button>
             </form>
           </motion.div>
+
         </div>
       </div>
 
-      <style>
-        {`
+      <style>{`
         .form-input {
           width: 100%;
           padding: 10px 12px;
@@ -240,25 +266,29 @@ function YatraContent() {
           background: transparent;
           border: 1px solid rgba(255,255,255,0.2);
           color: white;
+          font-size: 14px;
         }
-        `}
-      </style>
-    </section>
+      `}</style>
+    </motion.section>
   );
 }
 
-/* Small Components */
+/* ===== SMALL COMPONENTS ===== */
+
 function InfoCard({ title, value }) {
   return (
-    <div className="bg-[#0B1A2E] border border-white/10 rounded-lg p-4">
+    <motion.div
+      whileHover={{ y: -3 }}
+      className="bg-[#0B1A2E] border border-white/10 rounded-lg p-3 transition"
+    >
       <p className="text-white/50 text-xs mb-1">{title}</p>
       <p className="text-sm">{value}</p>
-    </div>
+    </motion.div>
   );
 }
 
-function Input({ placeholder }) {
-  return <input className="form-input" placeholder={placeholder} />;
+function Input({ placeholder, type = "text" }) {
+  return <input type={type} className="form-input" placeholder={placeholder} />;
 }
 
 export default YatraContent;

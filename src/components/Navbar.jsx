@@ -116,9 +116,9 @@ function Navbar() {
 
               {/* ===== Mobile Full Menu ===== */}
               <div className="lg:hidden space-y-5">
-                <MenuLink to="/yatra" text="AzurA Yatra" close={closeMenu} />
-                <MenuLink to="/wed" text="AzurA Wed" close={closeMenu} />
-                <MenuLink to="/rescue" text="AzurA Rescue" close={closeMenu} />
+                <MenuLink to="/yatra" text="Azura Yatra" close={closeMenu} />
+                <MenuLink to="/wed" text="Azura Wed" close={closeMenu} />
+                <MenuLink to="/rescue" text="Azura Rescue" close={closeMenu} />
                 <MenuLink to="/helisetgo" text="HeliSetGo" close={closeMenu} />
 
                 {/* Services Accordion */}

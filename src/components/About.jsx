@@ -5,6 +5,7 @@ import img1 from "../assets/about1.jpg";
 import img2 from "../assets/about2.jpg";
 import img3 from "../assets/about3.jpg";
 import img4 from "../assets/about4.jpg";
+import img5 from "../assets/about5.jpg";
 
 function About() {
   const images = [img1, img2, img3, img4];
@@ -55,7 +56,7 @@ function About() {
               <motion.img
                 key={i}
                 src={img}
-                alt="AzurA Aviation"
+                alt="Azura Aviation"
                 className="absolute inset-0 w-full h-full object-cover rounded-3xl"
                 animate={{
                   opacity: index === i ? 1 : 0,
@@ -103,7 +104,7 @@ function About() {
             variants={item}
             className="text-[#3E556B] text-sm sm:text-base md:text-lg leading-relaxed mb-4"
           >
-            AzurA Aviation delivers premium private air travel solutions
+            Azura Aviation delivers premium private air travel solutions
             designed for comfort, efficiency, and exclusivity. We combine
             advanced aviation expertise with personalized service to create a
             seamless flying experience.

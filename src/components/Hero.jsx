@@ -1,36 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import jetVideo from "../assets/jet.mov";
-
-// Sample airport list (you can expand later)
-const airports = [
-  "New York",
-  "London",
-  "Dubai",
-  "Delhi",
-  "Mumbai",
-  "Paris",
-  "Singapore",
-  "Tokyo",
-  "Los Angeles",
-  "Sydney",
-];
+import jetVideo from "../assets/jet.mp4"; // convert video to mp4 for best performance
 
 function Hero() {
   const [activeTab, setActiveTab] = useState("jet");
-  const [fromSearch, setFromSearch] = useState("");
-  const [toSearch, setToSearch] = useState("");
-
-  const filteredFrom = airports.filter((a) =>
-    a.toLowerCase().includes(fromSearch.toLowerCase())
-  );
-
-  const filteredTo = airports.filter((a) =>
-    a.toLowerCase().includes(toSearch.toLowerCase())
-  );
 
   return (
-    <section className="relative w-full min-h-[100svh] overflow-hidden">
+    <section className="relative w-full min-h-screen overflow-hidden">
 
       {/* Background Video */}
       <video
@@ -46,151 +22,117 @@ function Hero() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#0E2038]/80"></div>
 
-      {/* Content Layout */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 grid md:grid-cols-2 gap-12 items-center text-white">
+      {/* Main Content */}
+<div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+                min-h-screen flex items-center
+                grid lg:grid-cols-2 gap-10 lg:gap-14 text-white">
 
         {/* LEFT CONTENT */}
         <motion.div
-          initial={{ opacity: 0, x: -80 }}
+          initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
+          className="text-center lg:text-left max-w-xl mx-auto lg:mx-0"
         >
-          <h1 className="text-4xl md:text-6xl font-heading leading-tight">
-            Fly Beyond Limits
-            <br />
-            <span className="text-[#A3B5C0]">
-              Private Aviation Redefined
-            </span>
-          </h1>
+          {/* Heading */}
+          <h1 className="leading-tight font-heading text-[clamp(1.8rem,4.5vw,3.2rem)]">
+  <span className="italic font-normal block">
+    Fly Beyond Limits
+  </span>
 
-          <p className="mt-6 text-[#DAD5CF] max-w-lg font-body">
+  <span className="font-semibold whitespace-nowrap">
+    Private Aviation Redefined
+  </span>
+</h1>
+
+          {/* Description */}
+          <p className="mt-4 text-xs sm:text-sm md:text-base text-[#DAD5CF] italic leading-relaxed">
             Experience world-class comfort, privacy, and performance with our
             premium fleet and personalized aviation services.
           </p>
 
-          <div className="mt-8 flex gap-4">
-            <button className="bg-[#A3B5C0] text-[#0E2038] px-8 py-3 rounded-full font-body shadow-lg hover:bg-white transition">
+          {/* Buttons */}
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+            <button className="bg-[#A3B5C0] text-[#0E2038] px-6 py-2.5 rounded-full text-sm shadow-lg hover:bg-white transition w-full sm:w-auto">
               Book Your Flight
             </button>
 
-            <button className="border border-[#A3B5C0] px-8 py-3 rounded-full font-body hover:bg-[#A3B5C0] hover:text-[#0E2038] transition">
+            <button className="border border-[#A3B5C0] px-6 py-2.5 rounded-full text-sm hover:bg-[#A3B5C0] hover:text-[#0E2038] transition w-full sm:w-auto">
               Explore Fleet
             </button>
           </div>
         </motion.div>
 
         {/* RIGHT BOOKING CARD */}
-       {/* RIGHT BOOKING CARD */}
-<motion.div
-  initial={{ opacity: 0, x: 80 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1 }}
-  className="w-full max-w-md mx-auto md:ml-auto"
->
-  <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-5">
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="w-full max-w-sm sm:max-w-md mx-auto lg:ml-auto"
+        >
+          <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-4 sm:p-5">
 
-    {/* Tabs */}
-    <div className="flex mb-5 bg-[#213A5C] rounded-lg overflow-hidden text-sm">
-      <button
-        onClick={() => setActiveTab("jet")}
-        className={`flex-1 py-2 font-medium transition ${
-          activeTab === "jet"
-            ? "bg-[#A3B5C0] text-[#0E2038]"
-            : "text-white hover:bg-[#2c4a73]"
-        }`}
-      >
-        Jet Charter
-      </button>
+            {/* Tabs */}
+            <div className="flex mb-4 bg-[#213A5C] rounded-lg overflow-hidden text-xs sm:text-sm">
+              <button
+                onClick={() => setActiveTab("jet")}
+                className={`flex-1 py-2 transition ${
+                  activeTab === "jet"
+                    ? "bg-[#A3B5C0] text-[#0E2038]"
+                    : "text-white hover:bg-[#2c4a73]"
+                }`}
+              >
+                Jet Charter
+              </button>
 
-      <button
-        onClick={() => setActiveTab("heli")}
-        className={`flex-1 py-2 font-medium transition ${
-          activeTab === "heli"
-            ? "bg-[#A3B5C0] text-[#0E2038]"
-            : "text-white hover:bg-[#2c4a73]"
-        }`}
-      >
-        Helicopter
-      </button>
-    </div>
+              <button
+                onClick={() => setActiveTab("heli")}
+                className={`flex-1 py-2 transition ${
+                  activeTab === "heli"
+                    ? "bg-[#A3B5C0] text-[#0E2038]"
+                    : "text-white hover:bg-[#2c4a73]"
+                }`}
+              >
+                Helicopter
+              </button>
+            </div>
 
-    {/* JET FORM */}
-    {activeTab === "jet" && (
-      <div className="space-y-3">
+            {/* JET FORM */}
+            {activeTab === "jet" && (
+              <div className="space-y-3">
 
-        {/* From & To */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input
-            type="text"
-            placeholder="From"
-            value={fromSearch}
-            onChange={(e) => setFromSearch(e.target.value)}
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <Input placeholder="From" />
+                  <Input placeholder="To" />
+                </div>
 
-          <input
-            type="text"
-            placeholder="To"
-            value={toSearch}
-            onChange={(e) => setToSearch(e.target.value)}
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
-        </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <Input type="date" />
+                  <Input placeholder="Passengers" type="number" />
+                </div>
 
-        {/* Date & Passengers */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <input
-            type="date"
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
+                <ActionButton text="Search Flights" />
+              </div>
+            )}
 
-          <input
-            type="number"
-            placeholder="Passengers"
-            className="p-3 rounded-lg bg-white text-black text-sm w-full"
-          />
-        </div>
+            {/* HELICOPTER FORM */}
+            {activeTab === "heli" && (
+              <div className="space-y-3">
+                <Input placeholder="Full Name" />
+                <Input placeholder="Email" type="email" />
+                <Input placeholder="Phone" type="tel" />
 
-        <button className="w-full mt-2 bg-[#A3B5C0] text-[#0E2038] py-3 rounded-full font-semibold hover:bg-white transition">
-          Search Flights
-        </button>
-      </div>
-    )}
+                <textarea
+                  rows="3"
+                  placeholder="Message"
+                  className="p-2.5 rounded-lg bg-white text-black text-xs sm:text-sm w-full focus:outline-none"
+                ></textarea>
 
-    {/* HELICOPTER FORM */}
-    {activeTab === "heli" && (
-      <div className="space-y-3">
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        />
-
-        <input
-          type="email"
-          placeholder="Email"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        />
-
-        <input
-          type="tel"
-          placeholder="Phone"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        />
-
-        <textarea
-          placeholder="Message"
-          rows="3"
-          className="p-3 rounded-lg bg-white text-black text-sm w-full"
-        ></textarea>
-
-        <button className="w-full bg-[#A3B5C0] text-[#0E2038] py-3 rounded-full font-semibold hover:bg-white transition">
-          Submit Inquiry
-        </button>
-      </div>
-    )}
-  </div>
-</motion.div>
+                <ActionButton text="Submit Inquiry" />
+              </div>
+            )}
+          </div>
+        </motion.div>
 
       </div>
     </section>
@@ -198,3 +140,19 @@ function Hero() {
 }
 
 export default Hero;
+
+/* Reusable Components */
+
+const Input = ({ type = "text", placeholder }) => (
+  <input
+    type={type}
+    placeholder={placeholder}
+    className="p-2.5 rounded-lg bg-white text-black text-xs sm:text-sm w-full focus:outline-none"
+  />
+);
+
+const ActionButton = ({ text }) => (
+  <button className="w-full bg-[#A3B5C0] text-[#0E2038] py-2.5 rounded-full text-sm font-semibold hover:bg-white transition">
+    {text}
+  </button>
+);
