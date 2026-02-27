@@ -7,6 +7,7 @@ import TimelineCinematic from "../components/TimelineCinematic";
 import WhyAZURA from "../components/WhyAzura";
 import ExperienceSection from "../components/ExperienceSection";
 import FinalCTA from "../components/FinalCTA";
+import aboutHero from "../assets/about-hero-section.png";
 function About() {
   const heroRef = useRef(null);
 
@@ -44,7 +45,7 @@ function About() {
   className="relative h-[80vh] min-h-[520px] flex items-center justify-center mt-16 overflow-hidden"
 >
         <motion.img
-          src="/src/assets/about-hero-section.png"
+          src={aboutHero}
           style={{ y: heroY, scale: heroScale }}
           transition={{ ease: "easeOut", duration: 1.2 }}
           className="absolute w-full h-full object-cover"

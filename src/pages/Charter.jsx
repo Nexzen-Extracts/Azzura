@@ -5,6 +5,8 @@ import Footer from "../components/Footer";
 import CharterSection from "../components/CharterSection";
 import CharterProcess from "../components/CharterProcess";
 import CharterSectionForm from "../components/CharterSectionForm";
+import charterHero from "../assets/charter3.jpg";
+
 
 function CharterHero() {
   const heroRef = useRef(null);
@@ -54,11 +56,12 @@ function CharterHero() {
           className="relative h-[95vh] min-h-[650px] flex items-center justify-center overflow-hidden"
           >
           {/* Background Image */}
-          <motion.img
-            src="/src/assets/charter3.jpg"
-            style={{ y: heroY, scale: heroScale }}
-            className="absolute w-full h-full object-cover object-center md:object-[center_35%]"
-          />
+
+            <motion.img
+              src={charterHero}
+              style={{ y: heroY, scale: heroScale }}
+              className="absolute w-full h-full object-cover object-center md:object-[center_35%]"
+            />
 
           {/* Soft Cinematic Overlay (Balanced) */}
           <div className="absolute inset-0 bg-black/45" />
