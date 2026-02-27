@@ -1,22 +1,37 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+// ===== CJ2 Assets =====
+import cj2Hero from "../assets/fleet/cj2/hero.webp";
+import cj2Interior1 from "../assets/fleet/cj2/interior1.jpg";
+import cj2Interior2 from "../assets/fleet/cj2/interior2.jpg";
+import cj2Range from "../assets/fleet/cj2/range.gif";
+import cj2Baggage from "../assets/fleet/cj2/baggage.webp";
 
 export const fleetData = [
-  {
+  
+   {
     id: 1,
     name: "Cessna Citation CJ2",
     type: "Light Jet",
-    image:
-      "https://cdn.avbuyer.com/live/uploads/image/372101_372200/aircraft-private-jets-cessna-citation-cj2-372185_6e151a7cb70e6c70_920X485.webp",
+
+    // ===== Images =====
+    image: cj2Hero,
+
     interior: [
-      "https://premieraviation.com/wp-content/uploads/2017/05/Citation-CJ2-Interior-Shot.jpg",
-      "https://www.airsprint.com/assets/Uploads/Fleet/Citation-CJ2+/CJ2+_Cutaway_ASPLivery_2022R1_2500pxW.jpg"
+      cj2Interior1,
+      cj2Interior2
     ],
+
+    rangeImage: cj2Range,
+    baggageImage: cj2Baggage,
+
+    // ===== Specs =====
     seats: 7,
-    speed: "400 KTS",
+    speed: 400,
     baggage: "74 CUFT",
     range: "1500 NM",
+
     desc:
       "A light business jet known for high cruising speeds and excellent performance for short-haul flights."
   },

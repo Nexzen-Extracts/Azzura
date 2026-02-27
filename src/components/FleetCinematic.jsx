@@ -234,7 +234,7 @@ function FleetCinematic({ data }) {
               </p>
 
               <img
-                src="https://d3tfanr7troppj.cloudfront.net/static_files/images/000/005/583/original/VT-MONrng.png"
+                src={data.rangeImage}
                 className="w-[520px] rounded-xl shadow-2xl"
               />
 
