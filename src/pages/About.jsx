@@ -40,9 +40,9 @@ function About() {
 
       {/* ================= HERO ================= */}
       <section
-        ref={heroRef}
-        className="relative h-[80vh] min-h-[520px] flex items-center justify-center mt-16"
-      >
+  ref={heroRef}
+  className="relative h-[80vh] min-h-[520px] flex items-center justify-center mt-16 overflow-hidden"
+>
         <motion.img
           src="/src/assets/about-hero-section.png"
           style={{ y: heroY, scale: heroScale }}
@@ -65,7 +65,6 @@ function About() {
           {/* TYPEWRITER SUBTITLE */}
           <p className="mt-6 text-lg md:text-xl text-gray-200 min-h-[30px]">
             {displayedText}
-            <span className="animate-pulse">|</span>
           </p>
         </div>
       </section>

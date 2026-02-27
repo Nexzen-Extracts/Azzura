@@ -1,65 +1,107 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import CharterSection from "../components/CharterSection";
 
-const heroImage =
-  "https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=1600";
+function CharterHero() {
+  const heroRef = useRef(null);
 
-function Charter() {
+  /* ===== Parallax ===== */
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
+  /* ===== Typewriter ===== */
+  const fullText =
+    "Fly on your schedule. Experience uncompromised luxury.";
+
+  const [displayedText, setDisplayedText] = useState("");
+  const [typingDone, setTypingDone] = useState(false);
+
+  useEffect(() => {
+    let index = 0;
+
+    const typingInterval = setInterval(() => {
+      setDisplayedText(fullText.slice(0, index + 1));
+      index++;
+
+      if (index === fullText.length) {
+        clearInterval(typingInterval);
+        setTypingDone(true);
+      }
+    }, 45); // slower = premium feel
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
   return (
-    <>
-      <Navbar />
+    <div className="relative overflow-x-hidden bg-black">
 
-      {/* ===== Clean Charter Hero (Fleet Style) ===== */}
-      <section className="relative mt-16">
+      {/* Navbar */}
+      <div className="absolute top-0 left-0 w-full z-30">
+        <Navbar />
+      </div>
 
-        <div className="relative h-[55vh] md:h-[60vh] w-full overflow-hidden">
-
-          {/* Background Zoom Animation */}
+      <section
+          ref={heroRef}
+          className="relative h-[95vh] min-h-[650px] flex items-center justify-center overflow-hidden"
+          >
+          {/* Background Image */}
           <motion.img
-            src={heroImage}
-            alt="Charter Services"
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={{ scale: 1.05 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 8, ease: "easeOut" }}
+            src="/src/assets/charter3.jpg"
+            style={{ y: heroY, scale: heroScale }}
+            className="absolute w-full h-full object-cover object-center md:object-[center_35%]"
           />
 
-          {/* Left Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#081421]/85 via-[#081421]/40 to-transparent"></div>
+          {/* Soft Cinematic Overlay (Balanced) */}
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+          {/* Subtle Warm Highlight for Luxury Feel */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#C6A75E]/10 via-transparent to-transparent" />
 
           {/* Content */}
-          <div className="relative z-10 h-full flex items-center px-6 md:px-16">
-            <div className="max-w-xl text-white">
+          <div className="relative z-20 text-center px-6 max-w-4xl">
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-4xl md:text-6xl font-semibold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
+            >
+              Charter Services
+            </motion.h1>
 
-              <p className="text-sm tracking-[4px] uppercase text-[#D4AF37] mb-4">
-                Charter Services
-              </p>
+            <motion.p
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="mt-6 text-lg md:text-xl text-gray-200 min-h-[32px]"
+            >
+              {displayedText}
+              {!typingDone && (
+                <span className="ml-1 animate-pulse text-white">|</span>
+              )}
+            </motion.p>
 
-              <h1 className="text-4xl md:text-6xl font-heading leading-tight mb-4">
-                Fly Private
-                <br />
-                On Your Schedule
-              </h1>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="mt-10"
+            >
+              <button className="px-12 py-4 rounded-full border border-[#C6A75E] text-[#C6A75E] font-semibold backdrop-blur-md bg-black/30 hover:bg-[#C6A75E] hover:text-black transition-all duration-300 shadow-[0_0_40px_rgba(198,167,94,0.25)]">
+                Request Charter
+              </button>
+            </motion.div>
 
-              <p className="text-[#D0D8E0] text-base md:text-lg">
-                Premium helicopter and private jet charter solutions designed
-                for flexibility, comfort, and seamless travel experiences.
-              </p>
-
-            </div>
           </div>
-
-        </div>
-      </section>
-
-      {/* ===== Rest Content ===== */}
-      <CharterSection />
-
-      <Footer />
-    </>
+        </section>
+    </div>
   );
 }
 
-export default Charter;
+export default CharterHero;
