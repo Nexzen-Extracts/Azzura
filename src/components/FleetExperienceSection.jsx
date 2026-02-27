@@ -1,5 +1,6 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
+import otherBg from "../assets/other.png";
 
 function FleetExperienceSection({ data }) {
   const ref = useRef(null);
@@ -9,21 +10,28 @@ function FleetExperienceSection({ data }) {
     offset: ["start start", "end end"]
   });
 
-  // Step ranges
-  const step2 = useTransform(scrollYProgress, [0.15, 0.3], [0, 1]);
-  const step3 = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
-  const step4 = useTransform(scrollYProgress, [0.55, 0.7], [0, 1]);
-  const step5 = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
+  /* ===== STEP OPACITY CONTROLS (No Overlap) ===== */
+
+  const step1Opacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+
+  const step2Opacity = useTransform(scrollYProgress, [0.15, 0.3, 0.35], [0, 1, 0]);
+
+  const step3Opacity = useTransform(scrollYProgress, [0.35, 0.5, 0.55], [0, 1, 0]);
+
+  const step4Opacity = useTransform(scrollYProgress, [0.55, 0.7, 0.78], [0, 1, 0]);
+
+  const step5Opacity = useTransform(scrollYProgress, [0.78, 0.9], [0, 1]);
+  const step5Y = useTransform(scrollYProgress, [0.78, 1], [80, 0]);
 
   return (
     <section ref={ref}>
       <div className="h-[400vh] relative">
-        <div className="sticky top-0 h-screen">
+        <div className="sticky top-0 h-screen overflow-hidden">
 
-          {/* STEP 1 – FULL SEATS */}
+          {/* STEP 1 */}
           <motion.div
-            style={{ opacity: useTransform(scrollYProgress, [0, 0.12], [1, 0]) }}
-            className="absolute inset-0"
+            style={{ opacity: step1Opacity }}
+            className="absolute inset-0 z-10"
           >
             <img
               src={data.interior?.[0]}
@@ -31,10 +39,10 @@ function FleetExperienceSection({ data }) {
             />
           </motion.div>
 
-          {/* STEP 2 – Seats split */}
+          {/* STEP 2 */}
           <motion.div
-            style={{ opacity: step2 }}
-            className="absolute inset-0 flex bg-black"
+            style={{ opacity: step2Opacity }}
+            className="absolute inset-0 flex bg-black z-20"
           >
             <div className="w-1/2">
               <img
@@ -56,10 +64,10 @@ function FleetExperienceSection({ data }) {
             </div>
           </motion.div>
 
-          {/* STEP 3 – Seats + baggage image */}
+          {/* STEP 3 */}
           <motion.div
-            style={{ opacity: step3 }}
-            className="absolute inset-0 flex bg-black"
+            style={{ opacity: step3Opacity }}
+            className="absolute inset-0 flex bg-black z-30"
           >
             <div className="w-1/2 relative">
               <img
@@ -83,10 +91,10 @@ function FleetExperienceSection({ data }) {
             </div>
           </motion.div>
 
-          {/* STEP 4 – Baggage split */}
+          {/* STEP 4 */}
           <motion.div
-            style={{ opacity: step4 }}
-            className="absolute inset-0 flex bg-black"
+            style={{ opacity: step4Opacity }}
+            className="absolute inset-0 flex bg-black z-40"
           >
             <div className="w-1/2">
               <img
@@ -108,31 +116,33 @@ function FleetExperienceSection({ data }) {
             </div>
           </motion.div>
 
-          {/* STEP 5 – Other specs */}
-         {/* STEP 5 – Other specs (Premium Layout) */}
+          {/* STEP 5 – White Faded PNG Background */}
+         {/* STEP 5 – White Background + PNG (Minimal Fade) */}
 <motion.div
   style={{
-    opacity: step5,
-    y: useTransform(scrollYProgress, [0.8, 1], [80, 0])
+    opacity: step5Opacity,
+    y: step5Y
   }}
-  className="absolute inset-0 bg-white flex items-center justify-center px-6"
+  className="absolute inset-0 flex items-center justify-center px-6 z-50 bg-white"
 >
-  <div className="w-full max-w-6xl">
+  {/* PNG Background Image */}
+  <img
+    src={otherBg}
+    alt="World Map"
+    className="absolute inset-0 w-full h-full object-contain opacity-90 pointer-events-none"
+  />
 
-    {/* Heading */}
-    <motion.h2
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="text-4xl md:text-5xl font-semibold text-center mb-14 text-[#0B1A2E]"
-    >
+  {/* Very minimal fade (optional – almost invisible) */}
+  <div className="absolute inset-0 bg-white/10" />
+
+  {/* Content */}
+  <div className="relative z-10 w-full max-w-6xl">
+
+    <h2 className="text-4xl md:text-5xl font-semibold text-center mb-14 text-[#0B1A2E]">
       Other Specifications
-    </motion.h2>
+    </h2>
 
-    {/* 4 Premium Blocks */}
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-
-      {/* Performance */}
       <SpecCard
         title="Performance"
         data={[
@@ -142,7 +152,6 @@ function FleetExperienceSection({ data }) {
         ]}
       />
 
-      {/* Capacity */}
       <SpecCard
         title="Capacity"
         data={[
@@ -152,7 +161,6 @@ function FleetExperienceSection({ data }) {
         ]}
       />
 
-      {/* Cabin */}
       <SpecCard
         title="Cabin"
         data={[
@@ -162,7 +170,6 @@ function FleetExperienceSection({ data }) {
         ]}
       />
 
-      {/* Aircraft */}
       <SpecCard
         title="Aircraft"
         data={[
@@ -171,7 +178,6 @@ function FleetExperienceSection({ data }) {
           ["Lavatory", data.lavatory || "0"]
         ]}
       />
-
     </div>
   </div>
 </motion.div>
@@ -181,14 +187,15 @@ function FleetExperienceSection({ data }) {
     </section>
   );
 }
+
 function SpecCard({ title, data }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-lg transition"
+      className="bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl p-6 shadow-lg"
     >
       <h3 className="text-lg font-semibold mb-4 text-[#0B1A2E]">
         {title}
@@ -208,4 +215,5 @@ function SpecCard({ title, data }) {
     </motion.div>
   );
 }
+
 export default FleetExperienceSection;
