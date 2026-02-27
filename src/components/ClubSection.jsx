@@ -46,7 +46,7 @@ function ClubSection() {
 
           <p className="text-gray-300 leading-relaxed mb-6">
             Join an exclusive circle of global leaders, entrepreneurs and elite
-            travelers. Azzura Membership extends beyond flights into curated
+            travelers. AZURA Membership extends beyond flights into curated
             luxury experiences, private events and premium lifestyle privileges.
           </p>
 

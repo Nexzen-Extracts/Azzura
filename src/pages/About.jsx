@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TimelineCinematic from "../components/TimelineCinematic";
+import WhyAZURA from "../components/WhyAzura";
+import ExperienceSection from "../components/ExperienceSection";
+import FinalCTA from "../components/FinalCTA";
 function About() {
   const heroRef = useRef(null);
 
@@ -115,7 +118,7 @@ function About() {
       >
         <p>
           Founded in <span className="font-semibold text-[#111]">2026</span>,
-          AZZURA was built to redefine private aviation through innovation,
+          AZURA was built to redefine private aviation through innovation,
           operational excellence and uncompromising safety.
         </p>
 
@@ -162,7 +165,7 @@ function About() {
           </h3>
           <div className="w-10 h-[2px] bg-[#C6A75E] my-3" />
           <p className="text-sm text-gray-500 leading-relaxed">
-            The year AZZURA was established as a next-generation
+            The year AZURA was established as a next-generation
             private aviation brand focused on precision and excellence.
           </p>
         </motion.div>
@@ -176,6 +179,13 @@ function About() {
 
 <TimelineCinematic />
 
+{/* <div className="h-24 bg-gradient-to-b from-white to-[#0F172A]" /> */}
+
+<WhyAZURA />
+
+<ExperienceSection />
+
+<FinalCTA />
       <Footer />
     </div>
   );

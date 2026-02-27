@@ -10,7 +10,7 @@ function TimelineModern() {
     {
       year: "2026",
       title: "Foundation",
-      text: "AZZURA was established to redefine private aviation with precision, discretion and modern luxury.",
+      text: "AZURA was established to redefine private aviation with precision, discretion and modern luxury.",
       image: img2026,
     },
     {
@@ -42,68 +42,61 @@ function TimelineModern() {
   return (
     <section className="bg-white">
 
-      {milestones.map((item, index) => {
-        const isReverse = index % 2 !== 0;
-
-        return (
+      {milestones.map((item, index) => (
+        <div
+          key={index}
+          className="h-screen sticky top-0 flex items-center justify-center"
+        >
           <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 80 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-            viewport={{ once: true }}
-            className="relative py-32 border-b border-gray-100"
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.5 }}
+            className="w-[90%] max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden"
           >
-            <div className="max-w-6xl mx-auto px-6">
+            <div className="grid md:grid-cols-2 items-center">
 
-              <div className={`grid md:grid-cols-2 gap-16 items-center ${isReverse ? "md:flex-row-reverse" : ""}`}>
+              {/* IMAGE */}
+              <div className="relative h-[60vh] md:h-[80vh] overflow-hidden">
+                <motion.img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.6 }}
+                />
+                <div className="absolute inset-0 bg-black/20"></div>
+              </div>
 
-                {/* TEXT SECTION */}
-                <div className="relative">
+              {/* TEXT */}
+              <div className="p-12 md:p-16 relative">
 
-                  <h2 className="absolute -top-16 left-0 text-[120px] md:text-[160px] font-bold text-gray-100 select-none">
+                <h2 className="text-[100px] md:text-[120px] font-bold text-gray-100 absolute top-4 left-8 select-none">
+                  {item.year}
+                </h2>
+
+                <div className="relative z-10">
+                  <p className="text-sm tracking-widest text-[#C6A75E] mb-4">
                     {item.year}
-                  </h2>
+                  </p>
 
-                  <div className="relative z-10">
-                    <p className="text-sm tracking-widest text-[#C6A75E] mb-4">
-                      {item.year}
-                    </p>
+                  <h3 className="text-3xl md:text-4xl font-semibold text-[#111] mb-6">
+                    {item.title}
+                  </h3>
 
-                    <h3 className="text-3xl md:text-4xl font-semibold text-[#111] mb-6">
-                      {item.title}
-                    </h3>
+                  <div className="w-16 h-[3px] bg-[#C6A75E] mb-6"></div>
 
-                    <div className="w-16 h-[3px] bg-[#C6A75E] mb-6"></div>
-
-                    <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
-                      {item.text}
-                    </p>
-                  </div>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    {item.text}
+                  </p>
                 </div>
-
-                {/* IMAGE SECTION */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative overflow-hidden rounded-3xl shadow-xl"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-80 object-cover"
-                  />
-
-                  {/* Elegant overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                </motion.div>
 
               </div>
 
             </div>
           </motion.div>
-        );
-      })}
+        </div>
+      ))}
 
     </section>
   );

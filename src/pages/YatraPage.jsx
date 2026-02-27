@@ -13,7 +13,7 @@ function YatraPage() {
         {/* Background Image */}
         <img
           src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=1600"
-          alt="Azzura Yatra"
+          alt="AZURA Yatra"
           className="absolute inset-0 w-full h-full object-cover"
         />
 
@@ -25,7 +25,7 @@ function YatraPage() {
           <div className="max-w-xl text-white">
 
             <p className="text-[#D4AF37] tracking-[4px] text-sm mb-3 uppercase">
-              Azzura Yatra
+              AZURA Yatra
             </p>
 
             <h1 className="text-4xl md:text-6xl font-heading leading-tight mb-6">
