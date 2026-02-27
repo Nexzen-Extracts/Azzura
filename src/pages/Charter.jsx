@@ -1,6 +1,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import CharterSection from "../components/CharterSection";
+import CharterProcess from "../components/CharterProcess";
+import CharterSectionForm from "../components/CharterSectionForm";
 
 function CharterHero() {
   const heroRef = useRef(null);
@@ -100,8 +104,13 @@ function CharterHero() {
 
           </div>
         </section>
+        <CharterSection />
+        <CharterProcess/>
+        <CharterSectionForm/>
+        <Footer />
     </div>
   );
 }
 
 export default CharterHero;
+
