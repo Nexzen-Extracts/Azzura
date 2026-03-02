@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import img1 from "../assets/charter-1.jpg";
+import img1 from "../assets/charter-1.webp";
 import img2 from "../assets/charter-2.jpg";
-import img3 from "../assets/charter-3.jpg";
-import img4 from "../assets/charter-4.jpg";
+import img3 from "../assets/charter-3.webp";
+import img4 from "../assets/charter-4.webp";
 
 
 /* CONTENT */
