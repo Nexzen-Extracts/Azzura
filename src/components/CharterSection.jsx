@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import CTA from "./CTA"; // Global CTA Component
 
-/* ================= CONTENT (SEO Optimized) ================= */
+
+/* ================= CONTENT ================= */
 
 const points = [
   "On-demand private jet and helicopter charter worldwide",
@@ -22,111 +21,107 @@ const chooseUs = [
   },
   {
     title: "Luxury & Comfort",
-    desc: "Modern aircraft with premium interiors, privacy, and personalized onboard experience."
+    desc: "Modern aircraft with premium interiors, privacy and personalized experience."
   },
   {
     title: "Safety & Compliance",
-    desc: "Strict maintenance protocols and international aviation safety standards."
+    desc: "Strict maintenance protocols aligned with international aviation standards."
   }
 ];
 
-const sliderImages = [
-  "https://i.pinimg.com/originals/05/4e/dc/054edcc0981bfd8c87d3092a6b0682ba.gif",
-  "https://accaircharter.co.uk/wp-content/uploads/2024/10/Private-Jet-In-The-Air_1200x600.gif",
-  "https://www.middleburglife.com/wp-content/uploads/2018/02/You-can-arrive-in-style-and-on-your-own-schedule-flying-private.gif"
-];
-
-/* ================= COMPONENT ================= */
-
 function CharterSection() {
-  const [index, setIndex] = useState(0);
+  const leftAnim = {
+    hidden: { opacity: 0, x: -60 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
 
-  /* Auto Slider */
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % sliderImages.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, []);
+  const rightAnim = {
+    hidden: { opacity: 0, x: 60 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
 
   return (
-    <div>
+    <div className="bg-white">
 
-      {/* ================= SECTION 1 (DARK) ================= */}
-      <section className="bg-[#081421] text-white py-24 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[7fr_3fr] gap-12 items-center">
+      {/* ================= SECTION 1 ================= */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
           {/* LEFT CONTENT */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            variants={leftAnim}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.4 }}
           >
-            <h2 className="text-4xl md:text-5xl font-semibold mb-6 leading-tight">
-              Private Jet & Helicopter Charter Solutions
+            <h2 className="text-4xl lg:text-5xl font-light text-[#0E2038] leading-tight">
+              Private Jet & Helicopter Charter
             </h2>
 
-            <p className="text-white/70 mb-8 text-lg">
+            <p className="text-gray-600 mt-6 max-w-lg leading-relaxed">
               Experience the freedom of private aviation with fully customized
-              charter services designed for corporate travel, luxury journeys,
-              pilgrimage, events, and time-critical missions.
+              charter solutions designed for corporate travel, luxury journeys,
+              events, and time-critical missions.
             </p>
 
-            <ul className="space-y-4">
+            <ul className="mt-8 space-y-4">
               {points.map((point, i) => (
-                <li key={i} className="flex items-start gap-3 text-white/80">
-                  <span className="text-[#D4AF37] text-lg">✓</span>
+                <li key={i} className="flex gap-3 text-gray-700">
+                  <span className="text-[#0E2038] font-semibold">•</span>
                   {point}
                 </li>
               ))}
             </ul>
           </motion.div>
 
-          {/* RIGHT SLIDER */}
+          {/* RIGHT IMAGE (Slider removed) */}
           <motion.div
-            className="relative h-[340px] w-full overflow-hidden rounded-xl border border-white/10"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            variants={rightAnim}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false, amount: 0.4 }}
           >
-            {sliderImages.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                alt="Private Charter Aircraft"
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-                  i === index ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            ))}
+            <img
+              src="https://images.unsplash.com/photo-1540962351504-03099e0a754b"
+              alt="Private Jet"
+              className="rounded-2xl shadow-lg w-full object-cover h-[420px]"
+            />
           </motion.div>
         </div>
       </section>
 
-      {/* ================= SECTION 2 (LIGHT AVIATION STYLE) ================= */}
-      <section className="bg-[#F4F7FB] py-24 px-6">
+      {/* ================= SECTION 2 ================= */}
+      <section className="py-24 px-6 bg-[#F6F7F9]">
         <div className="max-w-7xl mx-auto text-center">
 
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#081421] mb-4">
+          <h2 className="text-3xl lg:text-4xl font-light text-[#0E2038] mb-4">
             Why Choose Our Charter Services
           </h2>
 
-          <p className="text-[#5B6B7C] mb-14 max-w-2xl mx-auto">
-            We combine operational excellence, safety, and luxury to deliver a
-            reliable private aviation experience tailored to your travel needs.
+          <p className="text-gray-600 mb-14 max-w-2xl mx-auto">
+            Operational excellence, safety, and luxury combined to deliver a
+            seamless private aviation experience.
           </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {chooseUs.map((item, i) => (
               <motion.div
                 key={i}
-                whileHover={{ y: -10 }}
-                className="bg-white border border-gray-200 rounded-xl p-6 text-left shadow-sm"
+                whileHover={{ y: -8 }}
+                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
               >
-                <h3 className="text-lg font-semibold mb-2 text-[#081421]">
+                <h3 className="text-lg font-medium text-[#0E2038] mb-2">
                   {item.title}
                 </h3>
-                <p className="text-[#5B6B7C] text-sm">
+                <p className="text-gray-600 text-sm">
                   {item.desc}
                 </p>
               </motion.div>
@@ -135,170 +130,129 @@ function CharterSection() {
         </div>
       </section>
 
-      {/* ================= OUR DELIVERABLES ================= */}
-<section className="bg-[#081421] text-white py-24 px-6">
-  <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      {/* ================= SECTION 3 ================= */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
-    {/* LEFT CONTENT */}
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-    >
-      <h2 className="text-3xl md:text-4xl font-semibold mb-6">
-        Our Deliverables
-      </h2>
+          {/* LEFT IMAGES */}
+          <motion.div
+            variants={leftAnim}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false }}
+            className="grid grid-cols-2 gap-4"
+          >
+            <img
+              src="https://www.poonawallaaviation.com/images/about-bg.jpg"
+              className="rounded-xl h-40 w-full object-cover"
+            />
+            <img
+              src="https://www.dunesair.in/wp-content/uploads/2025/05/5fb32fa5bdc52345ff2a97b1_givsp-ext1.webp"
+              className="rounded-xl h-40 w-full object-cover"
+            />
+            <img
+              src="https://www.vistajet.com/globalassets/aircraft/new-fleet/citation-xls.png"
+              className="rounded-xl h-40 w-full object-cover col-span-2"
+            />
+          </motion.div>
 
-      <ul className="space-y-4 text-white/80">
-        {[
-          "Rapid response to quotation requests",
-          "Matching the right aircraft to your specific travel needs",
-          "Expert guidance on the best aircraft solution",
-          "Competitive pricing for maximum value and efficiency",
-          "Dedicated client services manager for personalized support",
-          "Highest standards of safety, security, and comfort"
-        ].map((item, i) => (
-          <li key={i} className="flex gap-3">
-            <span className="text-[#D4AF37]">✓</span>
-            {item}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
+          {/* RIGHT CONTENT */}
+          <motion.div
+            variants={rightAnim}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false }}
+          >
+            <h2 className="text-3xl lg:text-4xl font-light text-[#0E2038] mb-6">
+              Our Deliverables
+            </h2>
 
-    {/* RIGHT IMAGES */}
-    <motion.div
-      className="grid grid-cols-2 gap-4"
-      initial={{ opacity: 0, x: 40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-    >
-      <img
-        src="https://www.poonawallaaviation.com/images/about-bg.jpg"
-        className="rounded-xl object-cover h-40 w-full"
-        alt="Jet"
-      />
-      <img
-        src="https://www.dunesair.in/wp-content/uploads/2025/05/5fb32fa5bdc52345ff2a97b1_givsp-ext1.webp"
-        className="rounded-xl object-cover h-40 w-full"
-        alt="Helicopter"
-      />
-      <img
-        src="https://www.vistajet.com/globalassets/aircraft/new-fleet/citation-xls.png?width=1929&height=523&mode=stretch"
-        className="rounded-xl object-cover h-40 w-full col-span-2"
-        alt="Charter"
-      />
-    </motion.div>
+            <ul className="space-y-4 text-gray-700">
+              {[
+                "Rapid response to quotation requests",
+                "Matching the right aircraft to your needs",
+                "Expert aircraft selection guidance",
+                "Competitive and transparent pricing",
+                "Dedicated client support manager",
+                "Highest standards of safety and comfort"
+              ].map((item, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="text-[#0E2038] font-semibold">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
 
-  </div>
-</section>
+      {/* ================= SECTION 4 ================= */}
+      <section className="py-24 px-6 bg-[#F6F7F9]">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
-{/* ================= BOOKING SECTION ================= */}
-<section className="bg-[#F4F7FB] py-24 px-6">
-  <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          {/* LEFT IMAGE */}
+          <motion.div
+            variants={leftAnim}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false }}
+          >
+            <img
+              src="https://i.pinimg.com/736x/ab/9a/26/ab9a260420c3057a0a1f7e9053965e16.jpg"
+              className="rounded-2xl shadow-lg h-[480px] w-full object-cover"
+            />
+          </motion.div>
 
-    {/* ===== LEFT IMAGE ===== */}
-    <motion.div
-      initial={{ opacity: 0, x: -40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      className="w-full h-[520px]"
-    >
-      <img
-        src="https://i.pinimg.com/736x/ab/9a/26/ab9a260420c3057a0a1f7e9053965e16.jpg"
-        alt="Private Jet Interior"
-        className="w-full h-full object-cover rounded-lg"
-      />
-    </motion.div>
+          {/* RIGHT FORM */}
+          <motion.div
+            variants={rightAnim}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: false }}
+          >
+            <h2 className="text-3xl lg:text-4xl font-light text-[#0E2038] mb-4">
+              Request a Charter Quote
+            </h2>
 
-    {/* ===== RIGHT FORM (No Card) ===== */}
-    <motion.div
-      initial={{ opacity: 0, x: 40 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      className="w-full"
-    >
-      <h2 className="text-3xl font-semibold text-[#081421] mb-3">
-        Request a Charter Quote
-      </h2>
+            <p className="text-gray-600 mb-8">
+              Share your travel requirements and our aviation team will provide
+              the best aircraft options.
+            </p>
 
-      <p className="text-[#5B6B7C] mb-8">
-        Share your travel requirements and our aviation team will provide the
-        best aircraft options with competitive pricing.
-      </p>
+            <form className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                <input className="input" placeholder="Full Name" />
+                <input className="input" placeholder="Phone Number" />
+              </div>
 
-      <form className="space-y-5">
+              <input className="input" placeholder="Email Address" />
+              <textarea className="input h-32" placeholder="Your Message" />
 
-        {/* Name + Phone */}
-        <div className="grid md:grid-cols-2 gap-4">
-          <input className="form-input" placeholder="Full Name" />
-          <input className="form-input" placeholder="+91 Phone Number" />
+              <button className="px-8 py-3 bg-[#0E2038] text-white rounded-full hover:bg-[#1A3354] transition">
+                Submit Request
+              </button>
+            </form>
+          </motion.div>
         </div>
 
-        {/* Email */}
-        <input className="form-input" placeholder="Email Address" />
+        <style>{`
+          .input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+            background: #fff;
+          }
+          .input:focus {
+            border-color: #0E2038;
+            box-shadow: 0 0 0 1px #0E2038;
+          }
+        `}</style>
+      </section>
 
-        {/* Services */}
-        <div>
-          <p className="text-sm font-medium text-[#081421] mb-2">
-            Select Services
-          </p>
-
-          <div className="grid grid-cols-2 gap-y-2 text-sm text-[#081421]">
-            {[
-              "Aircraft Management",
-              "Aircraft Sourcing & Sales",
-              "Membership Programs",
-              "Charter Services",
-              "MRO",
-              "Aviation Consultancy"
-            ].map((service, i) => (
-              <label key={i} className="flex items-center gap-2">
-                <input type="checkbox" className="accent-[#D4AF37]" />
-                {service}
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Message */}
-        <textarea
-          className="form-input h-32"
-          placeholder="Your message"
-        />
-
-        {/* Submit */}
-        <button className="w-full bg-[#D4AF37] text-[#081421] py-3 font-semibold tracking-wide hover:opacity-90 transition">
-          SUBMIT REQUEST
-        </button>
-      </form>
-    </motion.div>
-  </div>
-
-  {/* Form Styles */}
-  <style>
-    {`
-    .form-input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 4px;
-      outline: none;
-      font-size: 14px;
-      background: #ffffff;
-    }
-
-    .form-input:focus {
-      border-color: #D4AF37;
-      box-shadow: 0 0 0 1px #D4AF37;
-    }
-    `}
-  </style>
-</section>
-
-      {/* ================= GLOBAL CTA ================= */}
-      <CTA />
-
+      
     </div>
   );
 }

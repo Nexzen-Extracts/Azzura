@@ -20,15 +20,13 @@ function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "About", path: "/about" },
+   
     { name: "Yatra", path: "/yatra" },
     { name: "Wed", path: "/wed" },
     { name: "Rescue", path: "/rescue" },
     { name: "HeliSetGo", path: "/helisetgo" },
     { name: "Membership", path: "/membership" },
-     { name: "Contact", path: "/contact" },
-    { name: "Sustainability", path: "/sustainability" },
-    { name: "Merchandise", path: "/merchandise" }
+    
   ];
 
   const servicesList = [

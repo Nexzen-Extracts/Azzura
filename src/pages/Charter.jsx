@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CharterSection from "../components/CharterSection";
+import JetHighlight from "../components/JetHighlight";
+import NewsletterSection from "../components/NewsletterSection";
 
 const heroImage =
   "https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=1600";
@@ -56,6 +58,8 @@ function Charter() {
 
       {/* ===== Rest Content ===== */}
       <CharterSection />
+      <JetHighlight />
+      <NewsletterSection />
 
       <Footer />
     </>

@@ -25,7 +25,7 @@ function App() {
         <Route path="/fleet/:id" element={<FleetDetails />} />
         
       </Routes>
-      <AutoLeadPopup />
+      {/* <AutoLeadPopup /> */}
     </BrowserRouter>
   );
 }

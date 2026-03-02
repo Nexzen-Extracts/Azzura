@@ -14,6 +14,7 @@ import SplitSection from "../components/SplitSection";
 import Statistics from "../components/Statistics";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
+import JetRoutes from "../components/JetRoutes";
 
 
 function Home() {
@@ -36,6 +37,7 @@ function Home() {
         <Fleet />
         <Products />
         <Services />
+        <JetRoutes />
         <WhyChoose />
         <JetHighlight />
         <NewsletterSection />
