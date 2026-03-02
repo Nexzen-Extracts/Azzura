@@ -4,59 +4,57 @@ import Footer from "../components/Footer";
 import CharterSection from "../components/CharterSection";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
-
-const heroImage =
-  "https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=1600";
+import heroImage from "../assets/charter-hero.jpg";
 
 function Charter() {
   return (
     <>
       <Navbar />
 
-      {/* ===== Clean Charter Hero (Fleet Style) ===== */}
-      <section className="relative mt-16">
+      {/* ===== Full Screen Charter Hero ===== */}
+      <section className="relative w-full h-screen overflow-hidden">
 
-        <div className="relative h-[55vh] md:h-[60vh] w-full overflow-hidden">
+        {/* Background Image */}
+        <motion.img
+          src={heroImage}
+          alt="Charter Services"
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 8, ease: "easeOut" }}
+        />
 
-          {/* Background Zoom Animation */}
-          <motion.img
-            src={heroImage}
-            alt="Charter Services"
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={{ scale: 1.05 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 8, ease: "easeOut" }}
-          />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/45" />
 
-          {/* Left Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#081421]/85 via-[#081421]/40 to-transparent"></div>
+        {/* Content Wrapper */}
+        <div className="relative z-10 h-full flex justify-end items-end px-6 md:px-16 pb-16 md:pb-24">
 
-          {/* Content */}
-          <div className="relative z-10 h-full flex items-center px-6 md:px-16">
-            <div className="max-w-xl text-white">
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.4 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="max-w-[520px] text-right text-white"
+          >
+            <p className="uppercase tracking-[6px] text-xs text-white/70 mb-5">
+              Charter Services
+            </p>
 
-              <p className="text-sm tracking-[4px] uppercase text-[#D4AF37] mb-4">
-                Charter Services
-              </p>
+            <h1 className="font-light text-[38px] sm:text-[48px] md:text-[56px] leading-[1.05] mb-6">
+              Fly Private.
+              <br />
+              Fly Smart.
+            </h1>
 
-              <h1 className="text-4xl md:text-6xl font-heading leading-tight mb-4">
-                Fly Private
-                <br />
-                On Your Schedule
-              </h1>
-
-              <p className="text-[#D0D8E0] text-base md:text-lg">
-                Premium helicopter and private jet charter solutions designed
-                for flexibility, comfort, and seamless travel experiences.
-              </p>
-
-            </div>
-          </div>
+            <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-md ml-auto">
+              Personalized charter solutions for stress-free travel.
+            </p>
+          </motion.div>
 
         </div>
       </section>
 
-      {/* ===== Rest Content ===== */}
       <CharterSection />
       <JetHighlight />
       <NewsletterSection />
