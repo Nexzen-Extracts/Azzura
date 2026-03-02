@@ -1,155 +1,152 @@
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
-/* ===== LOCAL IMAGES (ONLY YATRA) ===== */
-import y1 from "../assets/yatra1.jpg";
-import y2 from "../assets/yatra2.jpg";
-import y3 from "../assets/yatra3.jpg";
-import y4 from "../assets/yatra4.jpg";
+/* ===== LOCAL IMAGES ===== */
+import y1 from "../assets/yatra3.jpg";
+import w1 from "../assets/wed.jpg";
+import r1 from "../assets/res.jpg";
+import h1 from "../assets/heli.jpg";
 
-/* ===== PRODUCTS DATA ===== */
 const products = [
   {
     title: "AzuraYatra",
-    images: [y1, y2, y3, y4],
+    image: y1,
+    desc: "Helicopter pilgrimage and spiritual journeys with comfort and safety.",
   },
   {
     title: "AzuraWed",
-    images: [
-      "https://i.pinimg.com/736x/3c/f7/cc/3cf7cc509705f1a96e9f55430d5901da.jpg",
-      "https://serendipitycinema.com/wp-content/uploads/2017/02/Screen-Shot-2017-02-16-at-9.42.17-PM.png",
-      "https://john-cain-photography.nyc3.digitaloceanspaces.com/wp-content/uploads/2020/05/15191945/2792_Thompson-Richards_Wedding_Reception-scaled.jpg",
-      "https://static.wixstatic.com/media/644056_b0183809ce4043348cbd948360797754~mv2.jpeg/v1/fill/w_734,h_490,al_c,lg_1,q_90/644056_b0183809ce4043348cbd948360797754~mv2.webp",
-    ],
+    image: w1,
+    desc: "Luxury aerial wedding entries and exclusive celebration experiences.",
   },
   {
     title: "HeliSetGo",
-    images: [
-      "https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1200",
-      "https://images.unsplash.com/photo-1504198266285-165a48b2f6c4?q=80&w=1200",
-      "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200",
-      "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200",
-    ],
+    image: h1,
+    desc: "On-demand helicopter booking for business and personal travel.",
   },
   {
     title: "Azura Rescue",
-    images: [
-      "https://images.unsplash.com/photo-1584467735871-8f7b7c6d9d4b?q=80&w=1200",
-      "https://images.unsplash.com/photo-1581093588401-22c0b0f90e0b?q=80&w=1200",
-      "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?q=80&w=1200",
-      "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?q=80&w=1200",
-    ],
+    image: r1,
+    desc: "Emergency air evacuation and rapid response rescue operations.",
   },
 ];
 
-/* ===== CARD COMPONENT ===== */
-function ProductCard({ item, index }) {
-  const [current, setCurrent] = useState(0);
-  const [hover, setHover] = useState(false);
-
-  // Auto slider
-  useEffect(() => {
-    if (hover) return;
-
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % item.images.length);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [hover, item.images.length]);
-
-  // Check screen size (disable expansion on mobile)
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
-
-  // 3rd & 4th expand left
-  const expandLeft = index >= 2;
-
+function ProductCard({ item, setActive }) {
   return (
     <motion.div
-      layout
-      onMouseEnter={() => !isMobile && setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      className="relative"
-      style={{ zIndex: hover ? 20 : 1 }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.3 }}
+      onClick={() => setActive(item)}
+      className="relative h-[260px] sm:h-[300px] rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
     >
-      <motion.div
-        layout
-        transition={{ type: "spring", stiffness: 120, damping: 18 }}
-        className="relative h-[340px] rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl"
-        style={{
-          width: hover && !isMobile ? "700px" : "100%",
-          position: hover ? "absolute" : "relative",
-          left: hover && !expandLeft ? 0 : "auto",
-          right: hover && expandLeft ? 0 : "auto",
-        }}
-      >
-        {/* Hover Mode → show 4 images in one row */}
-        {hover && !isMobile ? (
-          <div className="absolute inset-0 flex">
-            {item.images.map((img, i) => (
-              <img
-                key={i}
-                src={img}
-                alt=""
-                className="w-1/4 h-full object-cover"
-              />
-            ))}
-          </div>
-        ) : (
-          // Normal slider
-          <motion.img
-            key={current}
-            src={item.images[current]}
-            alt=""
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
+      <img
+        src={item.image}
+        alt={item.title}
+        className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+      />
 
-        {/* Title */}
-        <div className="absolute top-4 left-4 bg-white/95 text-[#0E2038] px-4 py-1 rounded-full text-sm font-semibold shadow">
-          {item.title}
-        </div>
+      {/* Dark gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-        {/* Button */}
-        <div className="absolute bottom-6 left-6">
-          <button className="px-6 py-2 rounded-full bg-[#0E2038] text-white text-sm font-medium hover:bg-[#213A5C] transition">
-            View Details
-          </button>
-        </div>
-      </motion.div>
+      <div className="absolute bottom-4 left-4 bg-white/95 text-[#0E2038] px-4 py-1 rounded-full text-sm font-medium shadow">
+        {item.title}
+      </div>
     </motion.div>
   );
 }
 
-/* ===== MAIN COMPONENT ===== */
 function Products() {
+  const [active, setActive] = useState(null);
+
   return (
-    <section className="bg-[#F4F7FA] py-20 px-6 overflow-hidden">
+    <section className="bg-white py-20 md:py-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
-        {/* Heading */}
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-heading text-[#0E2038]">
+        {/* ===== Heading (SplitSection Style) ===== */}
+        <div className="text-center mb-12 md:mb-16">
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            className="uppercase tracking-[4px] text-xs text-gray-400 mb-3"
+          >
             Our Products
-          </h2>
-          <p className="text-[#758D93] mt-3">
-            Premium aviation solutions tailored for every journey.
-          </p>
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038]"
+          >
+            Aviation Solutions
+          </motion.h2>
+
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 70 }}
+            viewport={{ once: false }}
+            className="h-[2px] bg-gray-300 mx-auto mt-5"
+          />
         </div>
 
-        {/* Grid Layout */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        {/* ===== Grid ===== */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((item, index) => (
-            <div key={index} className="relative">
-              <ProductCard item={item} index={index} />
-            </div>
+            <ProductCard key={index} item={item} setActive={setActive} />
           ))}
         </div>
-
       </div>
+
+      {/* ===== Popup ===== */}
+      <AnimatePresence>
+        {active && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActive(null)}
+            />
+
+            <motion.div
+              className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+              w-[92%] sm:w-[85%] md:w-[700px] lg:w-[800px]
+              max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden"
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex flex-col md:flex-row">
+
+                <div className="md:w-1/2 h-[220px] md:h-auto">
+                  <img
+                    src={active.image}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="md:w-1/2 p-6 flex flex-col justify-center">
+                  <h3 className="text-xl sm:text-2xl font-light text-[#0E2038]">
+                    {active.title}
+                  </h3>
+
+                  <p className="text-gray-600 mt-3 text-sm sm:text-base">
+                    {active.desc}
+                  </p>
+
+                  <button className="mt-5 px-6 py-2.5 rounded-full bg-[#0E2038] text-white text-sm hover:bg-[#213A5C] transition w-fit">
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

@@ -6,6 +6,7 @@ import FleetPage from "./pages/FleetPage";
 import YatraPage from "./pages/YatraPage";
 import Charter from "./pages/Charter";
 import FleetDetails from "./pages/FleetDetails";
+import AutoLeadPopup from "./components/AutoLeadPopup";
 // import SplashCursor from "./components/SplashCursor";
 
 function App() {
@@ -22,7 +23,9 @@ function App() {
         <Route path="/yatra" element={<YatraPage />} />
         <Route path="/charter" element={<Charter />} />
         <Route path="/fleet/:id" element={<FleetDetails />} />
+        
       </Routes>
+      <AutoLeadPopup />
     </BrowserRouter>
   );
 }

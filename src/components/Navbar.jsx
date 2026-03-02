@@ -1,18 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logoDark from "../assets/logo-dark.png"; // dark logo
+import logoWhite from "../assets/logo.png"; // light logo
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-    setServicesOpen(false);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
-  /* ===== Services with Routes ===== */
+  /* Scroll effect */
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: "About", path: "/about" },
+    { name: "Yatra", path: "/yatra" },
+    { name: "Wed", path: "/wed" },
+    { name: "Rescue", path: "/rescue" },
+    { name: "HeliSetGo", path: "/helisetgo" },
+    { name: "Membership", path: "/membership" },
+     { name: "Contact", path: "/contact" },
+    { name: "Sustainability", path: "/sustainability" },
+    { name: "Merchandise", path: "/merchandise" }
+  ];
+
   const servicesList = [
     { name: "Aircraft Management", path: "/aircraft-management" },
     { name: "Charter Services", path: "/charter" },
@@ -22,156 +40,152 @@ function Navbar() {
     { name: "Advanced Air Mobility", path: "/aam" }
   ];
 
+  const menuLinks = [
+    { name: "About", path: "/about" },
+    { name: "Fleet", path: "/fleet" },
+    { name: "Contact", path: "/contact" },
+    { name: "Sustainability", path: "/sustainability" },
+    { name: "Merchandise", path: "/merchandise" }
+  ];
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#0B1A2E] border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? "bg-white shadow-md" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-5">
 
-        {/* Logo */}
-        <Link to="/">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-8 md:h-10 w-auto object-contain"
-          />
-        </Link>
-
-        {/* ================= Desktop Menu ================= */}
-        <nav className="hidden lg:flex items-center gap-4 text-sm">
-
-          <NavBtn to="/yatra" text="Yatra" />
-          <NavBtn to="/wed" text="Wed" />
-          <NavBtn to="/rescue" text="Rescue" />
-          <NavBtn to="/helisetgo" text="HeliSetGo" />
-
-          {/* Membership Button */}
-          <Link to="/membership">
-            <div className="Btn" data-text="Membership"></div>
+        {/* ===== Mobile ===== */}
+        <div className="flex lg:hidden items-center justify-between py-4">
+          <Link to="/">
+            <img
+              src={scrolled ? logoDark : logoWhite}
+              alt="logo"
+              className="h-8"
+            />
           </Link>
 
-          {/* ===== Services Dropdown (Smooth) ===== */}
-          <div className="relative group">
-            <button className="px-4 py-2 rounded-full text-white hover:bg-white/10 flex items-center gap-1">
-              Services
-              <ChevronDown size={16} />
-            </button>
-
-            {/* Dropdown */}
-            <div className="absolute top-full right-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <div className="w-64 bg-[#0B1A2E] border border-white/10 rounded-xl shadow-2xl">
-                <ul className="py-2 text-sm">
-                  {servicesList.map((service, i) => (
-                    <li key={i}>
-                      <Link
-                        to={service.path}
-                        className="block px-5 py-2 text-white/80 hover:text-[#D4AF37] hover:bg-white/5 transition"
-                      >
-                        {service.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop Hamburger */}
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="ml-2 p-2 rounded-full hover:bg-white/10"
-          >
-            <Menu size={22} className="text-white" />
-          </button>
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <div className="lg:hidden">
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="p-2 rounded-full hover:bg-white/10"
-          >
-            <Menu size={26} className="text-white" />
+          <button onClick={() => setMenuOpen(true)}>
+            <Menu
+              size={26}
+              className={scrolled ? "text-black" : "text-white"}
+            />
           </button>
         </div>
-      </div>
 
-      {/* ================= Overlay Panel ================= */}
-      {menuOpen && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black/70"
-          onClick={closeMenu}
-        >
-          <div
-            className="fixed top-0 right-0 h-full w-full sm:w-80 bg-[#0B1A2E] shadow-2xl animate-slide overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="flex justify-between items-center px-6 py-5 border-b border-white/10">
-              <h2 className="text-white text-xl">Menu</h2>
-              <button onClick={closeMenu}>
-                <X size={26} className="text-white" />
-              </button>
-            </div>
+        {/* ===== Desktop ===== */}
+        <div className="hidden lg:flex flex-col items-center">
 
-            <div className="px-6 py-6 space-y-5 text-white">
+          {/* Logo */}
+          <Link to="/" className="py-4">
+            <img
+              src={scrolled ? logoDark : logoWhite}
+              alt="logo"
+              className="h-10"
+            />
+          </Link>
 
-              {/* ===== Mobile Full Menu ===== */}
-              <div className="lg:hidden space-y-5">
-                <MenuLink to="/yatra" text="Azura Yatra" close={closeMenu} />
-                <MenuLink to="/wed" text="Azura Wed" close={closeMenu} />
-                <MenuLink to="/rescue" text="Azura Rescue" close={closeMenu} />
-                <MenuLink to="/helisetgo" text="HeliSetGo" close={closeMenu} />
+          {/* Divider */}
+          <div className={`w-full h-[1px] ${scrolled ? "bg-black/10" : "bg-white/20"}`}></div>
 
-                {/* Services Accordion */}
-                <div>
-                  <button
-                    onClick={() => setServicesOpen(!servicesOpen)}
-                    className="flex justify-between items-center w-full text-left"
-                  >
-                    Services
-                    <ChevronDown
-                      size={18}
-                      className={`transition ${servicesOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
+          {/* Nav */}
+          <div className="w-full flex items-center justify-center relative py-3">
+            <nav className="flex items-center gap-8 text-sm font-medium">
 
-                  {servicesOpen && (
-                    <ul className="mt-3 space-y-2 text-sm text-white/70 border-l border-white/20 pl-3">
+              {navLinks.map((link, i) => (
+                <NavItem
+                  key={i}
+                  to={link.path}
+                  text={link.name}
+                  scrolled={scrolled}
+                />
+              ))}
+
+              {/* Services Dropdown */}
+              <div className="relative group">
+                <button
+                  className={`flex items-center gap-1 ${
+                    scrolled ? "text-black" : "text-white"
+                  }`}
+                >
+                  Services <ChevronDown size={16} />
+                </button>
+
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                  <div className="w-64 bg-white border border-black/10 rounded-xl shadow-xl">
+                    <ul className="py-2 text-sm">
                       {servicesList.map((service, i) => (
                         <li key={i}>
                           <Link
                             to={service.path}
-                            onClick={closeMenu}
-                            className="block py-1 hover:text-[#D4AF37]"
+                            className="block px-5 py-2 text-black/70 hover:bg-black/5"
                           >
                             {service.name}
                           </Link>
                         </li>
                       ))}
                     </ul>
-                  )}
-                  {/* Membership (Mobile) */}
-<Link to="/membership" onClick={closeMenu}>
-  <div className="Btn w-full mt-2" data-text="Membership"></div>
-</Link>
+                  </div>
                 </div>
               </div>
+            </nav>
 
-              {/* ===== Desktop Hamburger Content ===== */}
-              <MenuLink to="/about" text="About" close={closeMenu} />
-              <MenuLink to="/fleet" text="Fleet" close={closeMenu} />
-              <MenuLink to="/contact" text="Contact" close={closeMenu} />
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="absolute right-6"
+            >
+              <Menu
+                size={26}
+                className={scrolled ? "text-black" : "text-white"}
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== Side Menu ===== */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black/70 z-[9999]"
+          onClick={closeMenu}
+        >
+          <div
+            className="fixed right-0 top-0 h-full w-full sm:w-80 bg-white p-6 text-black animate-slide"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-8">
+              <img src={logoDark} alt="logo" className="h-8" />
+              <button onClick={closeMenu}>
+                <X size={26} />
+              </button>
+            </div>
+
+            <div className="space-y-6 text-lg">
+              {menuLinks.map((item, i) => (
+                <Link
+                  key={i}
+                  to={item.path}
+                  onClick={closeMenu}
+                  className="block hover:underline"
+                >
+                  {item.name}
+                </Link>
+              ))}
 
               <Link to="/contact" onClick={closeMenu}>
-                <div className="Btn w-full mt-3" data-text="Book Now"></div>
+                <div className="mt-6 bg-black text-white font-semibold py-3 rounded-lg text-center">
+                  Book Now
+                </div>
               </Link>
             </div>
           </div>
         </div>
       )}
 
-      {/* Styles */}
-      <style>
-        {`
+      {/* Animation */}
+      <style>{`
         @keyframes slide {
           from { transform: translateX(100%); }
           to { transform: translateX(0); }
@@ -179,74 +193,22 @@ function Navbar() {
         .animate-slide {
           animation: slide 0.3s ease-out;
         }
-
-        .Btn {
-          width: 140px;
-          height: 40px;
-          border-radius: 10px;
-          background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
-          background-size: 250%;
-          background-position: left;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition-duration: 1s;
-          overflow: hidden;
-          font-weight: 600;
-          font-size: 14px;
-        }
-
-        .Btn.w-full {
-          width: 100%;
-        }
-
-        .Btn::before {
-          position: absolute;
-          content: attr(data-text);
-          color: #ffd277;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 97%;
-          height: 90%;
-          border-radius: 8px;
-          background-color: rgba(0,0,0,0.85);
-        }
-
-        .Btn:hover {
-          background-position: right;
-        }
-
-        .Btn:active {
-          transform: scale(0.95);
-        }
-        `}
-      </style>
+      `}</style>
     </header>
   );
 }
 
-function NavBtn({ to, text }) {
+/* ===== Nav Item with Underline Hover ===== */
+function NavItem({ to, text, scrolled }) {
   return (
     <Link
       to={to}
-      className="px-4 py-2 rounded-full text-white hover:bg-white/10 transition"
+      className={`relative pb-1 ${
+        scrolled ? "text-black" : "text-white"
+      }`}
     >
       {text}
-    </Link>
-  );
-}
-
-function MenuLink({ to, text, close }) {
-  return (
-    <Link
-      to={to}
-      onClick={close}
-      className="block text-white hover:text-[#D4AF37]"
-    >
-      {text}
+      <span className="absolute left-0 bottom-0 w-0 h-[1.5px] bg-current transition-all duration-300 group-hover:w-full"></span>
     </Link>
   );
 }

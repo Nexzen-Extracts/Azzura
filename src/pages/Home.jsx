@@ -7,9 +7,14 @@ import Fleet from "../components/Fleet";
 import Products from "../components/Products";
 import Services from "../components/Services";
 import WhyChoose from "../components/WhyChoose";
-import CTA from "../components/CTA";
+// import CTA from "../components/CTA";
 import Footer from "../components/Footer";
 import LogoIntro from "../components/LogoIntro";
+import SplitSection from "../components/SplitSection";
+import Statistics from "../components/Statistics";
+import JetHighlight from "../components/JetHighlight";
+import NewsletterSection from "../components/NewsletterSection";
+
 
 function Home() {
   const [introDone, setIntroDone] = useState(false);
@@ -26,11 +31,15 @@ function Home() {
         <Navbar />
         <Hero />
         <About />
+        <SplitSection />
+        <Statistics />
         <Fleet />
         <Products />
         <Services />
         <WhyChoose />
-        <CTA />
+        <JetHighlight />
+        <NewsletterSection />
+        {/* <CTA /> */}
         <Footer />
       </motion.div>
     </>

@@ -1,81 +1,100 @@
 import { motion } from "framer-motion";
 
+/* ===== Local Images ===== */
+import aircraftManagement from "../assets/services/aircraft-management.webp";
+import aircraftSourcing from "../assets/services/aircraft-sourcing.webp";
+import charterServices from "../assets/services/charter-services.webp";
+import mro from "../assets/services/mro.webp";
+import consultancy from "../assets/services/aviation-consultancy.webp";
+import mobility from "../assets/services/air-mobility.webp";
+
 const services = [
-  {
-    title: "Aircraft Management",
-    img: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200",
-  },
-  {
-    title: "Aircraft Sourcing & Sales",
-    img: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200",
-  },
-  {
-    title: "Charter Services",
-    img: "https://images.unsplash.com/photo-1540339832862-474599807836?q=80&w=1200",
-  },
-  {
-    title: "MRO",
-    img: "https://images.unsplash.com/photo-1569629743817-70d8db6c323b?q=80&w=1200",
-  },
-  {
-    title: "Aviation Consultancy",
-    img: "https://images.unsplash.com/photo-1502920917128-1aa500764b8a?q=80&w=1200",
-  },
-  {
-    title: "Advanced Air Mobility",
-    img: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200",
-  },
+  { title: "Aircraft Management", img: aircraftManagement },
+  { title: "Aircraft Sourcing & Sales", img: aircraftSourcing },
+  { title: "Charter Services", img: charterServices },
+  { title: "MRO", img: mro },
+  { title: "Aviation Consultancy", img: consultancy },
+  { title: "Advanced Air Mobility", img: mobility },
 ];
 
 function Services() {
   return (
-    <section className="bg-[#0E2038] py-24 px-6 text-white">
+    <section className="bg-white py-20 md:py-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
-        {/* Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-heading">
+        {/* ===== Heading (SplitSection Style) ===== */}
+        <div className="text-center mb-14 md:mb-20">
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            className="uppercase tracking-[4px] text-xs text-gray-400 mb-3"
+          >
             Our Services
-          </h2>
-          <p className="text-[#A3B5C0] mt-3">
-            End-to-end aviation solutions designed for performance and reliability.
-          </p>
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038]"
+          >
+            Aviation Expertise
+          </motion.h2>
+
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 70 }}
+            viewport={{ once: false }}
+            className="h-[2px] bg-gray-300 mx-auto mt-5"
+          />
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: false }}
+            className="text-gray-500 mt-6 text-sm md:text-base max-w-2xl mx-auto"
+          >
+            End-to-end aviation solutions designed for performance, reliability,
+            and operational excellence.
+          </motion.p>
         </div>
 
-        {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
+        {/* ===== Grid ===== */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative h-[260px] rounded-xl overflow-hidden cursor-pointer"
+              transition={{ duration: 0.6, delay: index * 0.08 }}
+              viewport={{ once: false, amount: 0.3 }}
+              className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer relative"
             >
               {/* Image */}
-              <img
-                src={service.img}
-                className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110"
-              />
+              <div className="overflow-hidden h-[220px]">
+                <img
+                  src={service.img}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                />
+              </div>
 
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0E2038]/90 via-[#0E2038]/50 to-transparent"></div>
-
-              {/* Title */}
-              <div className="absolute bottom-6 left-6">
-                <h3 className="text-xl font-semibold">
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-lg md:text-xl font-light text-[#0E2038]">
                   {service.title}
                 </h3>
 
-                {/* Hover line animation */}
-                <div className="w-0 h-[2px] bg-[#A3B5C0] mt-2 group-hover:w-16 transition-all duration-300"></div>
+                {/* Premium underline */}
+                <div className="w-0 h-[2px] bg-[#0E2038] mt-3 group-hover:w-12 transition-all duration-300"></div>
               </div>
 
+              {/* Subtle hover border */}
+              <div className="absolute inset-0 rounded-2xl ring-0 group-hover:ring-1 ring-[#0E2038]/10 transition pointer-events-none"></div>
             </motion.div>
           ))}
-
         </div>
 
       </div>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import runwayBg from "../assets/runway.png";
 
 const fleetData = [
   {
@@ -28,74 +27,90 @@ const fleetData = [
 function Fleet() {
   const [active, setActive] = useState(0);
 
+  // Aircraft animation (scroll + button trigger)
+  const planeVariant = {
+    hidden: { opacity: 0, x: -120, scale: 0.95 },
+    show: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 1, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="bg-white py-16 md:py-10 min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <div className="w-full max-w-7xl px-6 md:px-12 text-center">
 
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${runwayBg})` }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 text-white text-center flex flex-col justify-center min-h-screen">
-
-        {/* Heading */}
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3">
+        {/* Heading — SplitSection Font Style */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          className="uppercase tracking-[4px] text-xs text-gray-400 mb-3"
+        >
           Our Fleet
-        </h2>
+        </motion.p>
 
-        <p className="text-gray-200 text-xs sm:text-sm md:text-base mb-6">
-          Choose the aircraft for your journey
-        </p>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038] mb-4"
+        >
+          Choose Your Aircraft
+        </motion.h2>
 
-        {/* Aircraft Animation (Landing then STOP) */}
         <motion.div
-          key={active}
-          initial={{ x: -500, y: -250, opacity: 0, rotate: -8, scale: 0.9 }}
-          animate={{
-            x: 0,
-            y: 0,
-            opacity: 1,
-            rotate: 0,
-            scale: 1,
-          }}
-          transition={{
-            duration: 1.2,
-            ease: "easeOut",
-          }}
+          initial={{ width: 0 }}
+          whileInView={{ width: 60 }}
+          viewport={{ once: false }}
+          className="h-[2px] bg-gray-300 mx-auto mb-10"
+        />
+
+        {/* Aircraft Animation */}
+        <motion.div
+          key={active} // re-animate on button click
+          variants={planeVariant}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.4 }}
           className="flex justify-center"
         >
-          <motion.img
+          <img
             src={fleetData[active].img}
-            className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] max-w-4xl 
-                       object-contain drop-shadow-2xl"
+            alt={fleetData[active].name}
+            className="w-[90%] sm:w-[80%] md:w-[65%] lg:w-[55%] max-w-4xl object-contain drop-shadow-xl"
           />
         </motion.div>
 
         {/* Info */}
-        <p className="text-gray-200 mt-4 text-xs sm:text-sm md:text-base">
+        <motion.p
+          key={fleetData[active].desc}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-gray-600 mt-6 text-sm md:text-base"
+        >
           {fleetData[active].desc}
-        </p>
+        </motion.p>
 
         {/* Selector */}
-        <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           {fleetData.map((item, index) => (
             <button
               key={index}
               onClick={() => setActive(index)}
-              className={`px-4 sm:px-5 py-2 rounded-full border text-xs sm:text-sm transition
+              className={`px-5 py-2 rounded-full border text-sm transition-all duration-300
                 ${
                   active === index
-                    ? "bg-white text-black border-white"
-                    : "border-white/50 text-white hover:bg-white/10"
+                    ? "bg-[#0E2038] text-white border-[#0E2038]"
+                    : "border-gray-300 text-gray-700 hover:bg-gray-100"
                 }`}
             >
               {item.name}
             </button>
           ))}
         </div>
-
       </div>
     </section>
   );
