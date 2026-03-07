@@ -1,0 +1,77 @@
+.glowing-box {
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 999px;
+  display: inline-block;
+  position: relative;
+  transition: 0.4s cubic-bezier(0.77, -0.68, 0.62, 1.23);
+}
+
+.glowing-box:hover {
+  transform: scale(1.15);
+}
+
+.glowing-box-active .glowing-box-animations,
+.glowing-box-active .glowing-box-borders-masker {
+  opacity: 1;
+}
+
+.glowing-box-animations {
+  opacity: 0;
+  pointer-events: none;
+  transition: 1s ease opacity;
+}
+
+.glowing-box-glow {
+  filter: blur(10px);
+  opacity: 0.1;
+}
+
+.glowing-box-borders,
+.glowing-box-glow,
+.glowing-box-stars {
+  animation: borderTurn var(--animation-speed) infinite linear;
+  background-image: conic-gradient(
+    from 0 at 50% 50%,
+    rgba(255, 255, 255, 0.5) 0deg,
+    rgba(255, 255, 255, 0) 60deg,
+    rgba(255, 255, 255, 0) 310deg,
+    rgba(255, 255, 255, 0.5) 360deg
+  );
+}
+
+.glowing-box-button {
+  background: radial-gradient(
+      107.5% 107.5% at 50% 215%,
+      rgba(255, 255, 255, 0.24) 0%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 10px 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.glowing-span {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 8.85%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@keyframes borderTurn {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -5,6 +5,9 @@ import AboutMembership from "../components/AboutMembership";
 import MembershipBenefits from "../components/MembershipBenefits";
 import ClubSection from "../components/ClubSection";
 import MembershipPricing from "../components/MembershipPricing";
+import JetHighlight from "../components/JetHighlight";
+import NewsletterSection from "../components/NewsletterSection";
+import JetExperience from "../components/JetExperience";
 // import MembershipBenefits from "../components/MembershipBenefits";
 // import MembershipPricing from "../components/MembershipPricing";
 import CTA from "../components/CTA";
@@ -19,11 +22,14 @@ function Membership() {
       <AboutMembership />
       <MembershipBenefits />
       <ClubSection />
+      <JetExperience />
       <MembershipPricing />
       {/* <MembershipBenefits />
       <MembershipPricing /> */}
 
-      <CTA />
+      {/* <CTA /> */}
+      <JetHighlight />
+      <NewsletterSection />
       <Footer />
     </div>
   );

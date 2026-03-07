@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-// import YatraContent from "../components/YatraContent";
 import YatraExperience from "../components/YatraExperience";
+import JetHighlight from "../components/JetHighlight";
+import NewsletterSection from "../components/NewsletterSection";
+
 import hero1 from "../assets/yatra/hero1.jpg";
 import hero2 from "../assets/yatra/hero2.jpg";
 import hero3 from "../assets/yatra/hero3.jpg";
@@ -10,14 +13,16 @@ import hero4 from "../assets/yatra/hero4.jpg";
 import hero5 from "../assets/yatra/hero5.jpg";
 
 function YatraPage() {
+
   const images = [hero1, hero2, hero3, hero4, hero5];
   const [index, setIndex] = useState(0);
 
-  // Auto slider
+  // Hero slider
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
     }, 4000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -25,62 +30,69 @@ function YatraPage() {
     <>
       <Navbar />
 
-      {/* ===== Hero Section ===== */}
-      <section className="relative h-screen w-full overflow-hidden bg-[#081421]">
+      {/* HERO SECTION */}
+      <section className="relative w-full h-screen overflow-hidden">
 
-        {/* Image Slider */}
+        {/* Background slider */}
         {images.map((img, i) => (
-          <img
+          <motion.img
             key={i}
             src={img}
             alt="Chardham Yatra"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ease-in-out ${
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 8, ease: "easeOut" }}
           />
         ))}
 
-        {/* Lighter Overlay (better visibility) */}
-        <div className="absolute inset-0 bg-[#081421]/50"></div>
-
-        {/* Left Gradient (lighter) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081421]/80 via-[#081421]/40 to-transparent"></div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex items-center px-6 sm:px-10 md:px-16 max-w-7xl mx-auto">
-          <div className="text-white max-w-xl mt-16 md:mt-24">
+        <div className="relative z-10 h-full flex items-end justify-start px-6 md:px-16 pb-24">
 
-            {/* Heading with Hover Effect */}
-           <h1
-  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight cursor-pointer transition-all duration-500 hover:scale-[1.03]"
-  style={{
-    fontFamily: "'Samarkan', sans-serif",
-    textShadow: "0 8px 30px rgba(0,0,0,0.7)",
-  }}
-  onMouseEnter={(e) =>
-    (e.currentTarget.style.textShadow =
-      "0 0 25px rgba(14,165,233,0.9)")
-  }
-  onMouseLeave={(e) =>
-    (e.currentTarget.style.textShadow =
-      "0 8px 30px rgba(0,0,0,0.7)")
-  }
->
-  Chardham Yatra
-</h1>
+          <motion.div
+            initial={{ opacity: 0, x: -120 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.4 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="max-w-xl text-left text-white"
+          >
 
-            {/* Smaller Subheading */}
-            <p className="mt-5 text-white/85 text-sm sm:text-base md:text-lg leading-relaxed">
-              Experience sacred journeys across India with private aviation,
-              priority darshan, and seamless spiritual travel planning.
+            {/* Label */}
+            <p className="text-xs md:text-sm tracking-[4px] uppercase text-white/70 mb-4">
+              Spiritual Journey
             </p>
 
-          </div>
+            {/* Heading */}
+            <h1
+              className="samarkan text-4xl sm:text-5xl md:text-6xl mb-4 leading-tight"
+              style={{ textShadow: "0 10px 30px rgba(0,0,0,0.6)" }}
+            >
+              Chardham Yatra
+            </h1>
+
+            {/* Description */}
+            <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
+              Experience sacred journeys across India with private aviation,
+              priority darshan and seamless spiritual travel planning.
+            </p>
+
+          </motion.div>
+
         </div>
 
       </section>
-<YatraExperience />
-      {/* <YatraContent /> */}
+
+      <YatraExperience />
+
+      <JetHighlight />
+
+      <NewsletterSection />
+
       <Footer />
     </>
   );

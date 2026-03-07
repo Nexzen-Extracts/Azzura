@@ -25,7 +25,7 @@ function Navbar() {
     { name: "Wed", path: "/wed" },
     { name: "Rescue", path: "/rescue" },
     { name: "HeliSetGo", path: "/helisetgo" },
-    { name: "Membership", path: "/membership" },
+    { name: "Azura Gold +", path: "/membership" },
     
   ];
 

@@ -1,106 +1,160 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import membershipImg from "../assets/membership-about.jpeg";
-// import MembershipPopup from "./MembershipPopup";
+import membershipImg from "../assets/interior-1.jpg";
+import membershipImg2 from "../assets/interior-2.jpg";
 
 function AboutMembership() {
+
   const [open, setOpen] = useState(false);
 
-  return (
-    <section className="bg-black py-10 md:py-14 px-6">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+  const leftAnim = {
+    hidden: { opacity: 0, x: -60 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
-        {/* Left Image */}
+  const rightAnim = {
+    hidden: { opacity: 0, x: 60 },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  return (
+    <section className="w-full bg-black font-sans overflow-x-hidden">
+
+      {/* ================= SECTION 1 ================= */}
+      <div className="flex flex-col lg:flex-row min-h-[70vh]">
+
+        {/* LEFT IMAGE */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="w-full"
+          variants={leftAnim}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="lg:w-1/2 h-[320px] lg:h-auto"
         >
           <img
             src={membershipImg}
             alt="Membership"
-            className="rounded-lg object-cover w-full h-[360px] md:h-[420px] shadow-xl"
+            className="w-full h-full object-cover"
           />
         </motion.div>
 
-        {/* Right Content */}
+        {/* RIGHT CONTENT */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-white max-w-lg"
+          variants={rightAnim}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
         >
-          <h2 className="text-2xl md:text-4xl font-semibold mb-4 leading-tight">
-            Exclusive Membership Experience
-          </h2>
+          <div className="max-w-xl">
 
-          <p className="text-gray-300 leading-relaxed mb-6 text-sm md:text-base">
-            Our membership program is designed for frequent flyers who value
-            flexibility, priority access, and transparent pricing. Enjoy
-            guaranteed availability, premium fleet access, and personalized
-            aviation support worldwide.
-          </p>
+            <p className="uppercase tracking-[5px] text-xs text-gray-400 mb-3">
+              Membership Program
+            </p>
 
-          {/* Premium Button */}
-          <button
-            onClick={() => setOpen(true)}
-            className="Btn"
-            data-text="Join Membership"
-          ></button>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white mb-5">
+              Exclusive Membership Experience
+            </h2>
+
+            <div className="w-16 h-[2px] bg-gray-500 mb-6" />
+
+            <p className="text-gray-300 leading-relaxed mb-8">
+              Our membership program provides priority aircraft access,
+              flexible booking options and premium aviation services
+              designed for frequent private flyers.
+            </p>
+
+            <button
+              onClick={() => setOpen(true)}
+              className="membership-btn"
+            >
+              Become a Member
+            </button>
+
+          </div>
         </motion.div>
       </div>
 
-      {/* Popup */}
-      {open && <MembershipPopup close={() => setOpen(false)} />}
 
-      {/* Premium Button CSS */}
-      <style>
-        {`
-        .Btn {
-          width: 180px;
-          height: 44px;
-          border: none;
-          border-radius: 10px;
-          background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a);
-          background-size: 250%;
-          background-position: left;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition-duration: 0.8s;
-          overflow: hidden;
-          font-weight: 600;
-          font-size: 14px;
+      {/* ================= SECTION 2 ================= */}
+      <div className="flex flex-col lg:flex-row min-h-[70vh]">
+
+        {/* LEFT CONTENT */}
+        <motion.div
+          variants={leftAnim}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
+        >
+          <div className="max-w-xl">
+
+            <p className="uppercase tracking-[5px] text-xs text-gray-400 mb-3">
+              Membership Benefits
+            </p>
+
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white mb-5">
+              Priority Fleet Access
+            </h2>
+
+            <div className="w-16 h-[2px] bg-gray-500 mb-6" />
+
+            <p className="text-gray-300 leading-relaxed">
+              Members receive priority access to our premium fleet,
+              ensuring aircraft availability even during peak travel
+              periods. Enjoy flexible booking, transparent pricing,
+              and seamless aviation support worldwide.
+            </p>
+
+          </div>
+        </motion.div>
+
+
+        {/* RIGHT IMAGE */}
+        <motion.div
+          variants={rightAnim}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
+          className="lg:w-1/2 h-[320px] lg:h-auto"
+        >
+          <img
+            src={membershipImg2}
+            alt="Fleet Access"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+
+      </div>
+
+
+      <style>{`
+
+        .membership-btn{
+          padding:14px 32px;
+          border:1px solid rgba(255,255,255,0.7);
+          background:transparent;
+          color:#ffffff;
+          font-size:14px;
+          letter-spacing:.5px;
+          transition:all .3s ease;
         }
 
-        .Btn::before {
-          position: absolute;
-          content: attr(data-text);
-          color: #ffd277;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 97%;
-          height: 90%;
-          border-radius: 8px;
-          background-color: rgba(0, 0, 0, 0.9);
-          transition-duration: 0.8s;
+        .membership-btn:hover{
+          background:#ffffff;
+          color:#000000;
         }
 
-        .Btn:hover {
-          background-position: right;
-        }
+      `}</style>
 
-        .Btn:active {
-          transform: scale(0.96);
-        }
-        `}
-      </style>
     </section>
   );
 }

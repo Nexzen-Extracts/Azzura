@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+// Import images from assets
+import lightJet from "../assets/fleet/light-jet.png";
+import midJet from "../assets/fleet/midsize-jet.png";
+import largeJet from "../assets/fleet/large-jet.png";
+import helicopter from "../assets/fleet/helicopter.png";
+
 const fleetData = [
   {
     name: "Light Jet",
-    img: "https://d3tfanr7troppj.cloudfront.net/static_files/images/000/005/753/original/Light_Jet_PNG.webp",
+    img: lightJet,
     desc: "6–8 passengers • Range 1,500 miles",
   },
   {
     name: "MidSize Jet",
-    img: "https://d3tfanr7troppj.cloudfront.net/static_files/images/000/006/226/original/Mid_Size_Jet_1.webp",
+    img: midJet,
     desc: "5–10 passengers • Range 2,000–3,000 miles",
   },
   {
     name: "Large Jet",
-    img: "https://d3tfanr7troppj.cloudfront.net/static_files/images/000/006/983/original/Large_Jet__.webp",
+    img: largeJet,
     desc: "10–15 passengers • Range 7,000+ miles",
   },
   {
     name: "Helicopter",
-    img: "https://d3tfanr7troppj.cloudfront.net/static_files/images/000/005/759/original/Helicopter_PNG.webp",
+    img: helicopter,
     desc: "3–6 passengers • Range 350–500 miles",
   },
 ];
@@ -27,7 +33,6 @@ const fleetData = [
 function Fleet() {
   const [active, setActive] = useState(0);
 
-  // Aircraft animation (scroll + button trigger)
   const planeVariant = {
     hidden: { opacity: 0, x: -120, scale: 0.95 },
     show: {
@@ -42,7 +47,7 @@ function Fleet() {
     <section className="bg-white py-16 md:py-10 min-h-[90vh] flex items-center justify-center overflow-hidden">
       <div className="w-full max-w-7xl px-6 md:px-12 text-center">
 
-        {/* Heading — SplitSection Font Style */}
+        {/* Heading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,9 +73,9 @@ function Fleet() {
           className="h-[2px] bg-gray-300 mx-auto mb-10"
         />
 
-        {/* Aircraft Animation */}
+        {/* Aircraft Image */}
         <motion.div
-          key={active} // re-animate on button click
+          key={active}
           variants={planeVariant}
           initial="hidden"
           whileInView="show"
@@ -84,7 +89,7 @@ function Fleet() {
           />
         </motion.div>
 
-        {/* Info */}
+        {/* Description */}
         <motion.p
           key={fleetData[active].desc}
           initial={{ opacity: 0, y: 15 }}
@@ -94,7 +99,7 @@ function Fleet() {
           {fleetData[active].desc}
         </motion.p>
 
-        {/* Selector */}
+        {/* Selector Buttons */}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {fleetData.map((item, index) => (
             <button
@@ -111,6 +116,7 @@ function Fleet() {
             </button>
           ))}
         </div>
+
       </div>
     </section>
   );
