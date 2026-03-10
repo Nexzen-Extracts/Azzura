@@ -22,28 +22,40 @@ onClick={()=>setOpen(true)}
 initial={{scale:1}}
 animate={{scale:open?0:1,opacity:open?0:1}}
 transition={{duration:.3}}
-whileHover={{scale:1.08}}
+whileHover={{scale:1.1}}
 whileTap={{scale:.9}}
 style={{
 position:"fixed",
 bottom:"35px",
 left:"50%",
 transform:"translateX(-50%)",
-width:"64px",
-height:"64px",
-borderRadius:"20px",
-background:"linear-gradient(135deg,#fff,#f2f2f2)",
+width:"68px",
+height:"68px",
+borderRadius:"50%",
+background:"linear-gradient(145deg,#ffffff,#f1f1f1)",
 border:"1px solid rgba(0,0,0,.08)",
 cursor:"pointer",
 zIndex:9999,
 display:"flex",
 alignItems:"center",
 justifyContent:"center",
-boxShadow:"0 15px 40px rgba(0,0,0,.25)"
+boxShadow:"0 10px 25px rgba(0,0,0,.25), inset 0 2px 3px rgba(255,255,255,.6)"
 }}
 >
 
-<span style={{fontSize:"22px"}}>🔍</span>
+<svg
+width="26"
+height="26"
+viewBox="0 0 24 24"
+fill="none"
+stroke="#0E2038"
+strokeWidth="2.2"
+strokeLinecap="round"
+strokeLinejoin="round"
+>
+<circle cx="11" cy="11" r="7"/>
+<line x1="16.65" y1="16.65" x2="21" y2="21"/>
+</svg>
 
 </motion.button>
 
