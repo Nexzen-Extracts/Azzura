@@ -20,10 +20,10 @@ const routes = [
 ];
 
 const features = [
-  "Luxury Amenities",
-  "Global Coverage",
-  "24/7 Concierge",
-  "Flexible Scheduling",
+  "Bespoke Comfort",
+  "Global Access",
+  "Elite Concierge",
+  "Tailored Departures",
 ];
 
 function JetRoutes() {
@@ -61,14 +61,12 @@ function JetRoutes() {
           >
             {/* SplitSection Typography */}
             <h2 className="text-4xl lg:text-5xl font-light text-[#0E2038] leading-tight">
-              Discover Premium <br />
-              Air Travel
+              Luxury in Flight
             </h2>
 
             <p className="text-gray-600 mt-6 text-base leading-relaxed max-w-md">
-              Experience unmatched luxury, privacy and efficiency with our curated
-              global routes. Every journey is designed for comfort, exclusivity
-              and seamless travel.
+              A refined way to travel where comfort, privacy, and performance meet.
+Every detail is crafted to elevate your journey beyond expectations.
             </p>
 
             {/* Feature Pills */}
@@ -85,7 +83,7 @@ function JetRoutes() {
 
             {/* CTA */}
             <button className="mt-10 px-8 py-4 rounded-full bg-[#0E2038] text-white text-base shadow-lg hover:bg-[#1A3354] transition">
-              Request Flight Plan
+              Plan Your Journey
             </button>
           </motion.div>
 

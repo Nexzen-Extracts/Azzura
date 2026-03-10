@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Headset, ShieldCheck, Settings } from "lucide-react";
 
@@ -20,7 +21,7 @@ const features = [
 ];
 
 function WhyChoose() {
-  // Left content animation (from left)
+
   const leftVariant = {
     hidden: { opacity: 0, x: -80 },
     show: {
@@ -39,7 +40,6 @@ function WhyChoose() {
     },
   };
 
-  // Right animation (from right)
   const rightVariant = {
     hidden: { opacity: 0, x: 100 },
     show: {
@@ -53,7 +53,7 @@ function WhyChoose() {
     <section className="bg-[#F4F6F8] py-20 md:py-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-10 gap-10 items-center">
 
-        {/* LEFT 70% */}
+        {/* LEFT CONTENT */}
         <motion.div
           className="lg:col-span-7"
           variants={leftVariant}
@@ -61,7 +61,7 @@ function WhyChoose() {
           whileInView="show"
           viewport={{ once: false, amount: 0.3 }}
         >
-          {/* SplitSection style heading */}
+
           <motion.p
             variants={itemVariant}
             className="uppercase tracking-[4px] text-xs text-gray-400 mb-3"
@@ -89,16 +89,19 @@ function WhyChoose() {
             comfort, operational precision and uncompromising safety.
           </motion.p>
 
-          {/* Features */}
+          {/* FEATURES */}
           <div className="grid md:grid-cols-3 gap-10 mt-14">
+
             {features.map((item, index) => {
+
               const Icon = item.icon;
+
               return (
                 <motion.div
                   key={index}
                   variants={itemVariant}
-                  viewport={{ once: false }}
                 >
+
                   <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4">
                     <Icon className="text-[#A3B5C0]" size={26} />
                   </div>
@@ -110,13 +113,18 @@ function WhyChoose() {
                   <p className="text-sm text-[#6B7C8F]">
                     {item.desc}
                   </p>
+
                 </motion.div>
               );
+
             })}
+
           </div>
+
         </motion.div>
 
-        {/* RIGHT 30% – Route Map */}
+
+        {/* RIGHT ROUTE MAP */}
         <motion.div
           className="lg:col-span-3 relative h-[360px] hidden lg:block"
           variants={rightVariant}
@@ -124,13 +132,15 @@ function WhyChoose() {
           whileInView="show"
           viewport={{ once: false, amount: 0.3 }}
         >
+
           <div className="absolute inset-0 rounded-2xl bg-[#0E2038] overflow-hidden shadow-lg">
 
-            {/* subtle texture */}
+            {/* texture */}
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,#ffffff,transparent_40%),radial-gradient(circle_at_70%_70%,#ffffff,transparent_40%)]"></div>
 
-            {/* Routes */}
+            {/* ROUTES */}
             <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 300">
+
               <path
                 d="M20 240 Q150 40 280 180"
                 stroke="#A3B5C0"
@@ -138,6 +148,7 @@ function WhyChoose() {
                 fill="none"
                 strokeOpacity="0.6"
               />
+
               <path
                 d="M40 60 Q200 160 260 40"
                 stroke="#758D93"
@@ -145,35 +156,55 @@ function WhyChoose() {
                 fill="none"
                 strokeOpacity="0.6"
               />
+
             </svg>
 
-            {/* City points */}
+            {/* CITY POINTS */}
             <div className="absolute top-6 left-6 w-3 h-3 bg-white rounded-full shadow-[0_0_8px_white]" />
             <div className="absolute top-16 right-10 w-3 h-3 bg-white rounded-full shadow-[0_0_8px_white]" />
             <div className="absolute bottom-12 left-16 w-3 h-3 bg-white rounded-full shadow-[0_0_8px_white]" />
             <div className="absolute bottom-20 right-12 w-3 h-3 bg-white rounded-full shadow-[0_0_8px_white]" />
 
-            {/* Moving planes */}
+            {/* MOVING PLANES */}
             <div
-              className="absolute"
+              className="absolute text-white text-sm"
               style={{
                 offsetPath: "path('M20 240 Q150 40 280 180')",
-                animation: "fly1 8s linear infinite",
+                offsetRotate: "auto",
+                animation: "fly1 8s linear infinite"
               }}
             >
               ✈
             </div>
 
             <div
-              className="absolute text-[#A3B5C0]"
+              className="absolute text-[#A3B5C0] text-sm"
               style={{
                 offsetPath: "path('M40 60 Q200 160 260 40')",
-                animation: "fly2 10s linear infinite",
+                offsetRotate: "auto",
+                animation: "fly2 10s linear infinite"
               }}
             >
               ✈
             </div>
+
           </div>
+
+          {/* KEYFRAMES */}
+          <style>
+            {`
+            @keyframes fly1 {
+              0% { offset-distance: 0%; }
+              100% { offset-distance: 100%; }
+            }
+
+            @keyframes fly2 {
+              0% { offset-distance: 0%; }
+              100% { offset-distance: 100%; }
+            }
+            `}
+          </style>
+
         </motion.div>
 
       </div>
@@ -182,3 +213,4 @@ function WhyChoose() {
 }
 
 export default WhyChoose;
+

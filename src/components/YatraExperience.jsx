@@ -1,33 +1,31 @@
 import { motion } from "framer-motion";
-
 import { useEffect, useState } from "react";
 
 import kedar from "../assets/yatra/kedarnath.jpg";
 import badri from "../assets/yatra/badrinath.jpg";
 import ganga from "../assets/yatra/gangotri.jpg";
 import yamuna from "../assets/yatra/yamunotri.jpg";
-import Statistics from "../components/Statistics";
+
 import heli from "../assets/heli-expe.jpg";
-import heli2 from "../assets/heli.jpg"
-import yatraexp from "../assets/yatra/hero2.jpg"
+import heli2 from "../assets/helipad.jpg";
+import yatraexp from "../assets/yatra/hero2.jpg";
 
 import g1 from "../assets/yatra/gallery1.jpeg";
 import g2 from "../assets/yatra/gallery2.jpg";
 import g3 from "../assets/yatra/gallery3.webp";
 import g4 from "../assets/yatra/gallery4.webp";
 
-function Counter({ end }) {
+import YatraStats from "../components/YatraStats";
 
+function Counter({ end }) {
 const [count,setCount]=useState(0);
 
 useEffect(()=>{
-
 let start=0;
 const duration=1500;
 const increment=end/(duration/16);
 
 const timer=setInterval(()=>{
-
 start+=increment;
 
 if(start>=end){
@@ -44,12 +42,11 @@ return()=>clearInterval(timer);
 },[end]);
 
 return <span>{count}</span>;
-
 }
 
-function YatraExperience() {
+function YatraExperience(){
 
-const dhams = [
+const dhams=[
 { name:"Kedarnath", img:kedar },
 { name:"Badrinath", img:badri },
 { name:"Gangotri", img:ganga },
@@ -75,7 +72,7 @@ return(
 
 {/* ================= CHAR DHAM ================= */}
 
-<section className="w-full py-20 px-6">
+<section className="w-full py-16 px-6">
 
 <div className="max-w-7xl mx-auto">
 
@@ -83,7 +80,7 @@ return(
 The Sacred Char Dham
 </h2>
 
-<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
 {dhams.map((d,i)=>(
 <motion.div
@@ -91,11 +88,13 @@ key={i}
 variants={leftAnim}
 initial="hidden"
 whileInView="show"
+viewport={{once:false, amount:0.3}}
 className="cursor-pointer"
 >
 
 <img
 src={d.img}
+loading="lazy"
 className="w-full h-60 object-cover"
 />
 
@@ -117,16 +116,17 @@ className="w-full h-60 object-cover"
 
 <section className="w-full bg-[#F6F7F9]">
 
-<div className="flex flex-col lg:flex-row min-h-[70vh]">
+<div className="flex flex-col lg:flex-row min-h-[60vh]">
 
 <motion.div
 variants={leftAnim}
 initial="hidden"
 whileInView="show"
+viewport={{once:false, amount:0.3}}
 className="lg:w-1/2 h-[350px] lg:h-auto"
 >
 
-<img src={kedar} className="w-full h-full object-cover"/>
+<img src={kedar} loading="lazy" className="w-full h-full object-cover"/>
 
 </motion.div>
 
@@ -135,7 +135,8 @@ className="lg:w-1/2 h-[350px] lg:h-auto"
 variants={rightAnim}
 initial="hidden"
 whileInView="show"
-className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
+viewport={{once:false, amount:0.3}}
+className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-10"
 >
 
 <div className="max-w-xl">
@@ -169,13 +170,14 @@ Badrinath, Gangotri and Yamunotri.
 
 <section className="w-full">
 
-<div className="flex flex-col lg:flex-row min-h-[70vh]">
+<div className="flex flex-col lg:flex-row min-h-[60vh]">
 
 <motion.div
 variants={leftAnim}
 initial="hidden"
 whileInView="show"
-className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
+viewport={{once:false, amount:0.3}}
+className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-10"
 >
 
 <div className="max-w-xl">
@@ -205,10 +207,11 @@ the breathtaking Himalayan landscape.
 variants={rightAnim}
 initial="hidden"
 whileInView="show"
+viewport={{once:false, amount:0.3}}
 className="lg:w-1/2 h-[350px] lg:h-auto"
 >
 
-<img src={heli} className="w-full h-full object-cover"/>
+<img src={heli} loading="lazy" className="w-full h-full object-cover"/>
 
 </motion.div>
 
@@ -219,24 +222,35 @@ className="lg:w-1/2 h-[350px] lg:h-auto"
 
 {/* ================= GALLERY ================= */}
 
-<section className="py-16 overflow-hidden">
+{/* ================= GALLERY ================= */}
+
+<section className="py-16 overflow-hidden bg-white">
+
+<div className="w-full overflow-hidden">
 
 <motion.div
 className="flex gap-4"
-animate={{x:["0%","-50%"]}}
-transition={{duration:22,ease:"linear",repeat:Infinity}}
-style={{width:"max-content"}}
+animate={{ x: ["0px", "-1200px"] }}
+transition={{
+repeat: Infinity,
+repeatType: "loop",
+duration: 25,
+ease: "linear"
+}}
 >
 
-{[...gallery,...gallery].map((img,i)=>(
+{[...gallery, ...gallery, ...gallery].map((img, i) => (
 <img
 key={i}
 src={img}
-className="w-64 h-44 object-cover flex-shrink-0"
+loading="lazy"
+className="w-72 h-44 object-cover rounded-lg flex-shrink-0"
 />
 ))}
 
 </motion.div>
+
+</div>
 
 </section>
 
@@ -245,16 +259,17 @@ className="w-64 h-44 object-cover flex-shrink-0"
 
 <section className="w-full bg-[#F6F7F9]">
 
-<div className="flex flex-col lg:flex-row min-h-[70vh]">
+<div className="flex flex-col lg:flex-row min-h-[60vh]">
 
 <motion.div
 variants={leftAnim}
 initial="hidden"
 whileInView="show"
+viewport={{once:false, amount:0.3}}
 className="lg:w-1/2 h-[350px] lg:h-auto"
 >
 
-<img src={g1} className="w-full h-full object-cover"/>
+<img src={g1} loading="lazy" className="w-full h-full object-cover"/>
 
 </motion.div>
 
@@ -263,7 +278,8 @@ className="lg:w-1/2 h-[350px] lg:h-auto"
 variants={rightAnim}
 initial="hidden"
 whileInView="show"
-className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
+viewport={{once:false, amount:0.3}}
+className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-10"
 >
 
 <div className="max-w-xl w-full">
@@ -276,92 +292,51 @@ Packages
 Char Dham Yatra Packages
 </h2>
 
-
 <div className="space-y-4">
 
-
 <details className="border rounded-lg p-4 cursor-pointer bg-white">
-
 <summary className="flex justify-between text-lg text-[#0E2038] list-none">
-
 Same Day Charter
-
 <span>+</span>
-
 </summary>
-
 <p className="mt-3 text-gray-600 text-sm">
-
 Morning departure from Dehradun with helicopter visit
 to Kedarnath and Badrinath including VIP darshan.
-
 </p>
-
 </details>
 
-
-
 <details className="border rounded-lg p-4 cursor-pointer bg-white">
-
 <summary className="flex justify-between text-lg text-[#0E2038] list-none">
-
 2 Days / 1 Night
-
 <span>+</span>
-
 </summary>
-
 <p className="mt-3 text-gray-600 text-sm">
-
 Yamunotri and Gangotri journey with overnight
 stay and comfortable helicopter travel.
-
 </p>
-
 </details>
 
-
-
 <details className="border rounded-lg p-4 cursor-pointer bg-white">
-
 <summary className="flex justify-between text-lg text-[#0E2038] list-none">
-
 3 Days / 2 Nights
-
 <span>+</span>
-
 </summary>
-
 <p className="mt-3 text-gray-600 text-sm">
-
 Relaxed pilgrimage including Kedarnath
 and Badrinath with premium accommodation.
-
 </p>
-
 </details>
-
-
 
 <details className="border rounded-lg p-4 cursor-pointer bg-white">
-
 <summary className="flex justify-between text-lg text-[#0E2038] list-none">
-
 4 Days / 3 Nights Luxury
-
 <span>+</span>
-
 </summary>
-
 <p className="mt-3 text-gray-600 text-sm">
-
 Full Char Dham coverage with helicopter charter,
 VIP darshan and luxury resort stay.
-
 </p>
-
 </details>
-
 
 </div>
 
@@ -374,23 +349,18 @@ VIP darshan and luxury resort stay.
 </section>
 
 
-
-{/* ================= WHY CHOOSE US ================= */}
-
 {/* ================= WHY CHOOSE US ================= */}
 
 <section className="w-full bg-white">
 
-<div className="flex flex-col lg:flex-row min-h-[70vh]">
-
-
-{/* LEFT CONTENT */}
+<div className="flex flex-col lg:flex-row min-h-[60vh]">
 
 <motion.div
 initial={{opacity:0,x:-60}}
 whileInView={{opacity:1,x:0}}
+viewport={{once:false, amount:0.3}}
 transition={{duration:.8}}
-className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
+className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-10"
 >
 
 <div className="max-w-xl">
@@ -405,53 +375,43 @@ A Trusted Char Dham Helicopter Experience
 
 <div className="w-16 h-[2px] bg-gray-300 mb-8"/>
 
-
 <div className="space-y-6 text-gray-600">
-
 
 <div>
 <h3 className="text-lg text-[#0E2038] mb-1">
 Luxury Helicopters
 </h3>
 <p className="text-sm">
-Modern helicopters designed for safe and comfortable
-Himalayan journeys with experienced pilots.
+Modern helicopters designed for safe and comfortable Himalayan journeys.
 </p>
 </div>
-
 
 <div>
 <h3 className="text-lg text-[#0E2038] mb-1">
 VIP Temple Darshan
 </h3>
 <p className="text-sm">
-Priority temple access ensuring smooth and peaceful
-darshan at every sacred destination.
+Priority temple access ensuring smooth and peaceful darshan.
 </p>
 </div>
-
 
 <div>
 <h3 className="text-lg text-[#0E2038] mb-1">
 Expert Travel Assistance
 </h3>
 <p className="text-sm">
-Dedicated trip managers guiding pilgrims throughout
-the entire Char Dham journey.
+Dedicated trip managers guiding pilgrims.
 </p>
 </div>
-
 
 <div>
 <h3 className="text-lg text-[#0E2038] mb-1">
 All Inclusive Experience
 </h3>
 <p className="text-sm">
-Accommodation, transfers, meals and temple
-arrangements handled seamlessly.
+Accommodation, transfers, meals and temple arrangements handled seamlessly.
 </p>
 </div>
-
 
 </div>
 
@@ -460,185 +420,35 @@ arrangements handled seamlessly.
 </motion.div>
 
 
-
-{/* RIGHT IMAGE */}
-
 <motion.div
 initial={{opacity:0,x:60}}
 whileInView={{opacity:1,x:0}}
+viewport={{once:false, amount:0.3}}
 transition={{duration:.8}}
 className="lg:w-1/2 h-[350px] lg:h-auto"
 >
 
 <img
 src={heli2}
+loading="lazy"
 className="w-full h-full object-cover"
 />
 
 </motion.div>
 
-
 </div>
 
 </section>
 
+
 {/* ================= TRUST STRIP ================= */}
 
-<Statistics />
-
-<section className="w-full bg-[#F6F7F9]">
-  <div className="flex flex-col lg:flex-row min-h-[70vh]">
-
-    {/* LEFT IMAGE */}
-    <motion.div
-      variants={leftAnim}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false }}
-      className="lg:w-1/2 h-[350px] lg:h-auto"
-    >
-      <img
-        src={yatraexp}
-        alt="Char Dham Helicopter Yatra"
-        className="w-full h-full object-cover"
-      />
-    </motion.div>
-
-
-    {/* RIGHT FORM */}
-    <motion.div
-      variants={rightAnim}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false }}
-      className="lg:w-1/2 flex items-center px-6 md:px-10 lg:px-14 py-12"
-    >
-
-      <div className="max-w-xl w-full">
-
-        <p className="uppercase tracking-[5px] text-xs text-gray-400 mb-3">
-          Request Quote
-        </p>
-
-        <h2 className="text-3xl md:text-4xl font-light text-[#0E2038] mb-6">
-          Plan Your Char Dham Journey
-        </h2>
-
-        <p className="text-gray-600 mb-8 text-sm leading-relaxed">
-          Share your travel preferences and our pilgrimage specialists
-          will assist you in planning the perfect Char Dham helicopter
-          journey with the most suitable package options.
-        </p>
-
-        <form className="space-y-5">
-
-          {/* Name + Phone */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <input
-              className="premium-input"
-              placeholder="Full Name"
-            />
-            <input
-              className="premium-input"
-              placeholder="Contact Number"
-            />
-          </div>
-
-          {/* Email */}
-          <input
-            className="premium-input"
-            placeholder="Email Address"
-          />
-
-          {/* Package Select */}
-          <div className="relative">
-
-            <select className="premium-input premium-select">
-
-              <option value="">Select Package</option>
-              <option>Same Day Charter</option>
-              <option>2 Days / 1 Night</option>
-              <option>3 Days / 2 Nights</option>
-              <option>4 Days / 3 Nights Luxury</option>
-
-            </select>
-
-            <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
-              ▼
-            </div>
-
-          </div>
-
-          {/* Message */}
-          <textarea
-            className="premium-input h-32"
-            placeholder="Tell us about your travel plan"
-          />
-
-          {/* Button */}
-          <button className="w-full bg-[#0E2038] text-white py-3.5 rounded-full font-medium tracking-wide shadow-md hover:bg-[#1A3354] transition-all duration-300">
-
-            Request Quote
-
-          </button>
-
-        </form>
-
-      </div>
-
-    </motion.div>
-
-  </div>
-
-
-  <style>{`
-
-  .premium-input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #e5e7eb;
-    border-radius: 999px;
-    font-size: 14px;
-    background: #ffffff;
-    color: #0E2038;
-    outline: none;
-    transition: all 0.25s ease;
-  }
-
-  textarea.premium-input {
-    border-radius: 16px;
-    resize: none;
-  }
-
-  .premium-input:focus {
-    border-color: #0E2038;
-    box-shadow: 0 4px 20px rgba(14, 32, 56, 0.08);
-  }
-
-  .premium-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    padding-right: 40px;
-    cursor: pointer;
-  }
-
-  .premium-select option {
-    color: #0E2038;
-    background: #ffffff;
-  }
-
-  `}</style>
-
-</section>
-
-
+<YatraStats />
 
 
 </div>
 
 );
-
 }
 
 export default YatraExperience;

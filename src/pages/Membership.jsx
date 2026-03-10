@@ -22,7 +22,7 @@ function Membership() {
       <AboutMembership />
       <MembershipBenefits />
       <ClubSection />
-      <JetExperience />
+      {/* <JetExperience /> */}
       <MembershipPricing />
       {/* <MembershipBenefits />
       <MembershipPricing /> */}

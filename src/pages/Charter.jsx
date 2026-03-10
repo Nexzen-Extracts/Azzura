@@ -5,6 +5,8 @@ import CharterSection from "../components/CharterSection";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
 import heroImage from "../assets/charter-hero.jpg";
+import FeatureSection from "../components/FeatureSection";
+import heli from "../assets/charter-11.jpg";
 
 function Charter() {
   return (
@@ -57,6 +59,20 @@ function Charter() {
 
       <CharterSection />
       <JetHighlight />
+<FeatureSection
+  image={heli}
+  subtitle="Private Charter Access"
+  title="Experience Private Aviation with Azura Membership"
+  description="Azura Charter Membership offers a smarter way to access private aviation. Enjoy priority booking, flexible travel options, and seamless journeys across our global network. Choose from our modern fleet and experience the comfort, privacy, and efficiency that define the Azura flying experience."
+  
+  buttonPrimaryText="Explore Membership"
+  buttonPrimaryLink="/membership"
+
+  buttonSecondaryText="View Our Fleet"
+  buttonSecondaryLink="/fleet"
+
+  reverse={true}
+/>
       <NewsletterSection />
 
       <Footer />

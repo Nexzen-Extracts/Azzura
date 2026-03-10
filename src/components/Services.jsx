@@ -40,7 +40,7 @@ function Services() {
             viewport={{ once: false }}
             className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038]"
           >
-            Aviation Expertise
+            Aviation Excellence
           </motion.h2>
 
           <motion.div
@@ -56,8 +56,7 @@ function Services() {
             viewport={{ once: false }}
             className="text-gray-500 mt-6 text-sm md:text-base max-w-2xl mx-auto"
           >
-            End-to-end aviation solutions designed for performance, reliability,
-            and operational excellence.
+            End-to-end aviation solutions crafted for precision, reliability, and seamless operations.
           </motion.p>
         </div>
 

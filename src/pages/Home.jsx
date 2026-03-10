@@ -15,6 +15,7 @@ import Statistics from "../components/Statistics";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
 import JetRoutes from "../components/JetRoutes";
+import JetTrackingStrip from "../components/JetTrackingStrip";
 
 
 function Home() {
@@ -40,6 +41,7 @@ function Home() {
         <JetRoutes />
         <WhyChoose />
         <JetHighlight />
+        <JetTrackingStrip/>
         <NewsletterSection />
         {/* <CTA /> */}
         <Footer />

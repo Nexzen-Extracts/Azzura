@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import clubImg from "../assets/custom1.png";
-import clubImg2 from "../assets/custom2.png";
+import clubImg from "../assets/custom1.jpg";
+import clubImg2 from "../assets/custom2.jpg";
 
 function ClubSection() {
 

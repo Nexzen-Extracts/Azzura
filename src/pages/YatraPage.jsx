@@ -5,16 +5,18 @@ import Footer from "../components/Footer";
 import YatraExperience from "../components/YatraExperience";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
+import FeatureSection from "../components/FeatureSection";
+import heli from "../assets/azura-wed.jpg";
 
 import hero1 from "../assets/yatra/hero1.jpg";
 import hero2 from "../assets/yatra/hero2.jpg";
-import hero3 from "../assets/yatra/hero3.jpg";
+// import hero3 from "../assets/yatra/hero3.jpg";
 import hero4 from "../assets/yatra/hero4.jpg";
 import hero5 from "../assets/yatra/hero5.jpg";
 
 function YatraPage() {
 
-  const images = [hero1, hero2, hero3, hero4, hero5];
+  const images = [hero1, hero2,  hero4, hero5];
   const [index, setIndex] = useState(0);
 
   // Hero slider
@@ -90,7 +92,16 @@ function YatraPage() {
       <YatraExperience />
 
       <JetHighlight />
+<FeatureSection
+  image={heli}
+  subtitle="Azura Wed"
+  title="Your Wedding Journey, Elevated by Azura"
+  description="Azura Wed brings together luxury private aviation and unforgettable wedding experiences. Fly with your family and guests in style while Azura ensures a seamless journey to your dream destination wedding. From the first takeoff to the final celebration, every moment becomes extraordinary."
 
+  buttonPrimaryText="Discover Azura Wed"
+  buttonPrimaryLink="/wed"
+   reverse={true}
+/>
       <NewsletterSection />
 
       <Footer />

@@ -50,7 +50,7 @@ function JetHighlight() {
   };
 
   return (
-    <section className="bg-white py-20 md:py-28 px-6 overflow-hidden">
+    <section className="bg-white py-20 md:py-8 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
         {/* LEFT */}
@@ -88,14 +88,14 @@ function JetHighlight() {
           </p>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038] mb-5">
-            Ready to Fly Differently?
+            Where Journeys Begin?
           </h2>
 
           <div className="w-16 h-[2px] bg-gray-300 mb-6" />
 
           <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-8">
-            Join the world’s most exclusive private aviation community. Your next
-            journey begins with a single conversation.
+           Private aviation designed for those who value time, comfort, and discretion.
+Experience travel that moves at your pace.
           </p>
 
           {/* CTA Buttons */}

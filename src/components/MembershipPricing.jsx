@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, X } from "lucide-react";
@@ -165,32 +166,49 @@ transition={{duration:.4}}
 className="grid md:grid-cols-3 gap-8"
 >
 
-{plans[billing].map((plan,index)=>(
+{plans[billing].map((plan,index)=>{
 
-<div
+let animation;
+
+if(index===0){
+animation={initial:{opacity:0,x:-80},animate:{opacity:1,x:0}}
+}
+else if(index===2){
+animation={initial:{opacity:0,x:80},animate:{opacity:1,x:0}}
+}
+else{
+animation={initial:{opacity:0,scale:.9},animate:{opacity:1,scale:1}}
+}
+
+return(
+
+<motion.div
 key={index}
-className={`flex flex-col border rounded-2xl p-8 bg-white shadow-sm
+initial={animation.initial}
+animate={animation.animate}
+transition={{duration:.6}}
+className={`group flex flex-col border rounded-2xl p-8 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:bg-[#0E2038]
 ${plan.popular?"border-[#0E2038]":"border-gray-200"}
 `}
 >
 
-<h3 className="text-xl font-medium text-[#0E2038] mb-2">
+<h3 className="text-xl font-medium text-[#0E2038] mb-2 group-hover:text-white">
 {plan.name}
 </h3>
 
 
 <div className="mb-6">
 
-<span className="text-4xl font-light text-[#0E2038]">
+<span className="text-4xl font-light text-[#0E2038] group-hover:text-white">
 ${Math.round(plan.price)}
 </span>
 
-<span className="text-gray-400 text-sm ml-2">
+<span className="text-gray-400 text-sm ml-2 group-hover:text-gray-300">
 /{billing==="monthly"?"month":"year"}
 </span>
 
 {plan.save && (
-<p className="text-xs text-green-600 mt-1">
+<p className="text-xs text-green-600 mt-1 group-hover:text-green-300">
 {plan.save}
 </p>
 )}
@@ -207,15 +225,15 @@ ${Math.round(plan.price)}
 
 <li key={i} className="flex justify-between text-sm">
 
-<span className="text-gray-600">
+<span className="text-gray-600 group-hover:text-gray-200">
 {feature}
 </span>
 
 {plan.features[feature]?
 
-<Check size={18} className="text-[#0E2038]"/>:
+<Check size={18} className="text-[#0E2038] group-hover:text-white"/>:
 
-<X size={18} className="text-gray-300"/>
+<X size={18} className="text-gray-300 group-hover:text-gray-400"/>
 
 }
 
@@ -233,9 +251,11 @@ ${Math.round(plan.price)}
 Get Offer
 </button>
 
-</div>
+</motion.div>
 
-))}
+)
+
+})}
 
 </motion.div>
 
@@ -258,9 +278,9 @@ letter-spacing:.5px;
 transition:all .3s ease;
 }
 
-.pricing-btn:hover{
-background:#0E2038;
-color:#ffffff;
+.group:hover .pricing-btn{
+background:white;
+color:#0E2038;
 }
 
 `}</style>
@@ -272,3 +292,4 @@ color:#ffffff;
 }
 
 export default MembershipPricing;
+

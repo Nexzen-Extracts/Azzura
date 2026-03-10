@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FleetContent from "../components/FleetContent";
+import JetHighlight from "../components/JetHighlight";
+import NewsletterSection from "../components/NewsletterSection";
 
 const heroImage =
   "https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1600";
@@ -11,50 +13,58 @@ function FleetPage() {
     <>
       <Navbar />
 
-      {/* ===== Clean Fleet Hero ===== */}
-      <section className="relative mt-16">
+      {/* ===== Premium Fleet Hero ===== */}
+      <section className="relative w-full h-screen overflow-hidden">
 
-        <div className="relative h-[55vh] md:h-[60vh] w-full overflow-hidden">
+        {/* Background Image */}
+        <motion.img
+          src={heroImage}
+          alt="Fleet"
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ scale: 1.08 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 8, ease: "easeOut" }}
+        />
 
-          {/* Background */}
-          <motion.img
-            src={heroImage}
-            alt="Fleet"
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={{ scale: 1.05 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 8, ease: "easeOut" }}
-          />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/45"></div>
 
-          {/* Left text fade */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#081421]/85 via-[#081421]/40 to-transparent"></div>
+        {/* Content */}
+        <div className="relative z-10 h-full flex justify-end items-end px-6 md:px-16 pb-16 md:pb-24">
 
-          {/* Content */}
-          <div className="relative z-10 h-full flex items-center px-6 md:px-16">
-            <div className="max-w-xl text-white">
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.4 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="max-w-[520px] text-right text-white"
+          >
 
-              <p className="text-sm tracking-[4px] uppercase text-[#D4AF37] mb-4">
-                Our Fleet
-              </p>
+            <p className="uppercase tracking-[6px] text-xs text-white/70 mb-5">
+              Our Fleet
+            </p>
 
-              <h1 className="text-4xl md:text-6xl font-heading leading-tight mb-4">
-                Fly Beyond
-                <br />
-                Every Destination
-              </h1>
+            <h1 className="font-light text-[38px] sm:text-[48px] md:text-[56px] leading-[1.05] mb-6">
+              Aircraft
+              <br />
+              Built for Excellence
+            </h1>
 
-              <p className="text-[#D0D8E0] text-base md:text-lg">
-                A modern fleet engineered for performance, comfort and reliability across every mission.
-              </p>
+            <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-md ml-auto">
+              Discover a modern fleet designed for performance, comfort
+              and reliability across every destination.
+            </p>
 
-            </div>
-          </div>
+          </motion.div>
 
         </div>
+
       </section>
 
-      {/* No gap here */}
+      {/* Fleet Content */}
       <FleetContent />
+      <JetHighlight />
+      <NewsletterSection />
 
       <Footer />
     </>

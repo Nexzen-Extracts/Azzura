@@ -26,7 +26,7 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="bg-white py-20 md:py-28 px-6 overflow-hidden">
+    <section className="bg-white py-20 md:py-8 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
         {/* Cream Card */}
