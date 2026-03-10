@@ -264,7 +264,10 @@ zoom={3}
 style={{height:"100%",width:"100%"}}
 >
 
-<TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"/>
+<TileLayer
+url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+attribution="&copy; OpenStreetMap & Carto"
+/>
 
 {otherJets.map((jet,i)=>(
 <Marker key={i} position={jet.pos} icon={otherPlane}/>

@@ -4,9 +4,8 @@ import Footer from "../components/Footer";
 import FleetContent from "../components/FleetContent";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
+import heroImage from "../assets/fleet-hero2.jpg";
 
-const heroImage =
-  "https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1600";
 
 function FleetPage() {
   return (
