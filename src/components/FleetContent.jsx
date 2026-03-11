@@ -8,23 +8,30 @@ import cj2Interior1 from "../assets/fleet/cj2/interior1.jpg";
 import cj2Interior2 from "../assets/fleet/cj2/interior2.jpg";
 import cj2Range from "../assets/fleet/cj2/range.gif";
 import cj2Baggage from "../assets/fleet/cj2/baggage.webp";
+import cj2Interior3 from "../assets/fleet/cj2/interior3.jpg";
+import cj2Interior4 from "../assets/fleet/cj2/interior4.jpg";
 
 export const fleetData = [
   {
-    id: 1,
-    name: "Cessna Citation CJ2",
-    type: "Light Jet",
-    image: cj2Hero,
-    interior: [cj2Interior1, cj2Interior2],
-    rangeImage: cj2Range,
-    baggageImage: cj2Baggage,
-    seats: 7,
-    speed: 400,
-    baggage: "74 CUFT",
-    range: "1500 NM",
-    desc:
-      "A light business jet known for high cruising speeds and excellent performance for short-haul flights."
-  },
+  id: 1,
+  name: "Cessna Citation CJ2",
+  type: "Light Jet",
+  image: cj2Hero,
+  interior: [
+    cj2Interior1,
+    cj2Interior2,
+    cj2Interior3,
+    cj2Interior4
+  ],
+  rangeImage: cj2Range,
+  baggageImage: cj2Baggage,
+  seats: 7,
+  speed: 400,
+  baggage: "74 CUFT",
+  range: "1500 NM",
+  desc:
+    "A light business jet known for high cruising speeds and excellent performance for short-haul flights."
+},
   {
     id: 2,
     name: "Hawker Beechcraft 750",
@@ -126,52 +133,60 @@ function FleetContent() {
           viewport={{ once: true }}
           className="space-y-8"
         >
-          {filtered.map(item => (
-            <motion.div
-              key={item.id}
-              variants={cardAnim}
-              whileHover={{ y: -8 }}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-lg transition"
-            >
-              {/* Image */}
-              <div className="md:w-[40%] h-[220px] overflow-hidden">
-                <motion.img
-                  src={item.image}
-                  alt={item.name}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+          {filtered.map(item => {
 
-              {/* Content */}
-              <div className="flex-1 p-6 flex flex-col justify-between">
+            const slug =
+              item.name.toLowerCase().replace(/\s+/g, "-") + "-" + item.id;
 
-                <div>
-                  <h3 className="text-2xl font-semibold text-[#0E2038] mb-1">
-                    {item.name}
-                  </h3>
+            return (
+              <motion.div
+                key={item.id}
+                variants={cardAnim}
+                whileHover={{ y: -8 }}
+                className="bg-white border border-gray-200 rounded-xl overflow-hidden flex flex-col md:flex-row shadow-sm hover:shadow-lg transition"
+              >
 
-                  <p className="text-gray-400 text-sm mb-3">
-                    {item.type}
-                  </p>
-
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
+                {/* Image */}
+                <div className="md:w-[40%] h-[220px] overflow-hidden">
+                  <motion.img
+                    src={item.image}
+                    alt={item.name}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
 
-                {/* Button */}
-                <button
-                  onClick={() => navigate(`/fleet/${item.id}`)}
-                  className="mt-6 border border-[#0E2038] text-[#0E2038] px-5 py-2 rounded-lg hover:bg-[#0E2038] hover:text-white transition w-fit text-sm"
-                >
-                  View Details
-                </button>
+                {/* Content */}
+                <div className="flex-1 p-6 flex flex-col justify-between">
 
-              </div>
-            </motion.div>
-          ))}
+                  <div>
+                    <h3 className="text-2xl font-semibold text-[#0E2038] mb-1">
+                      {item.name}
+                    </h3>
+
+                    <p className="text-gray-400 text-sm mb-3">
+                      {item.type}
+                    </p>
+
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+
+                  {/* Button */}
+                  <button
+                    onClick={() => navigate(`/fleet/${slug}`)}
+                    className="mt-6 border border-[#0E2038] text-[#0E2038] px-5 py-2 rounded-lg hover:bg-[#0E2038] hover:text-white transition w-fit text-sm"
+                  >
+                    View Details
+                  </button>
+
+                </div>
+
+              </motion.div>
+            );
+          })}
         </motion.div>
 
       </div>
