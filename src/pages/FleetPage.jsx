@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import FleetContent from "../components/FleetContent";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
-import heroImage from "../assets/fleet-hero2.jpg";
+import heroImage from "../assets/fleet-hero2.JPG";
 
 
 function FleetPage() {
