@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import bgImage from "../assets/runway.png";
 import blueprint from "../assets/blueprint.png";
-import speedGif from "../assets/speed.gif";
+import speedVideo from "../assets/speed.mp4";
 import rangeGif from "../assets/range.gif";
 import JetExperience from "../components/JetExperience";
 
@@ -137,94 +137,82 @@ className="w-full h-full object-cover"
 
 <section className="w-full bg-[#F4F5F7] py-24">
 
-<div className="max-w-7xl mx-auto px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
-<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {/* HEADING */}
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-light text-[#0E2038] tracking-wide">
+        Aircraft Performance
+      </h2>
+    </div>
 
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-{/* SPEED GIF */}
-
-<motion.div
-initial={{opacity:0,x:-60}}
-whileInView={{opacity:1,x:0}}
-transition={{duration:.8}}
-className="h-[260px] bg-white border border-gray-200 rounded-lg flex items-center justify-center"
+      {/* SPEED VIDEO */}
+      <motion.div
+        initial={{opacity:0,x:-60}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:.8}}
+         className="h-[260px] bg-[#141e29] border border-gray-200 rounded-lg flex items-center justify-center p-6"
 >
+        <video
+          src={speedVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-contain"
+        />
+      </motion.div>
 
-<img
-src={speedGif}
-className="w-36 object-contain"
-/>
+      {/* SPEED NUMBER */}
+      <motion.div
+        initial={{opacity:0,x:-60}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:.8,delay:.1}}
+        className="h-[260px] bg-white border border-gray-200 rounded-lg flex flex-col items-center justify-center text-center"
+      >
+        <h3 className="text-5xl font-light text-[#0E2038]">
+          <Counter value={parseInt(fleet.speed)} />
+        </h3>
 
-</motion.div>
+        <p className="uppercase tracking-[4px] text-xs text-gray-500 mt-3">
+          Cruise Speed
+        </p>
+      </motion.div>
 
+      {/* RANGE NUMBER */}
+      <motion.div
+        initial={{opacity:0,x:60}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:.8,delay:.1}}
+        className="h-[260px] bg-[#141e29] rounded-lg flex flex-col items-center justify-center text-center"
+      >
+        <h3 className="text-5xl font-light text-white">
+          <Counter value={parseInt(fleet.range)} />
+        </h3>
 
-{/* SPEED NUMBER */}
+        <p className="uppercase tracking-[4px] text-xs text-white/70 mt-3">
+          Flying Range
+        </p>
+      </motion.div>
 
-<motion.div
-initial={{opacity:0,x:-60}}
-whileInView={{opacity:1,x:0}}
-transition={{duration:.8,delay:.1}}
-className="h-[260px] bg-white border border-gray-200 rounded-lg flex flex-col items-center justify-center text-center"
->
+      {/* MAP */}
+      <motion.div
+        initial={{opacity:0,x:60}}
+        whileInView={{opacity:1,x:0}}
+        transition={{duration:.8}}
+        className="h-[260px] bg-white border border-gray-200 rounded-lg flex items-center justify-center p-6"
+      >
+        <img
+          src={rangeGif}
+          className="w-full h-full object-contain"
+        />
+      </motion.div>
 
-<h3 className="text-5xl font-light text-[#0E2038]">
+    </div>
 
-<Counter value={parseInt(fleet.speed)} />
-
-</h3>
-
-<p className="uppercase tracking-[4px] text-xs text-gray-500 mt-3">
-Cruise Speed
-</p>
-
-</motion.div>
-
-
-
-{/* RANGE NUMBER */}
-
-<motion.div
-initial={{opacity:0,x:60}}
-whileInView={{opacity:1,x:0}}
-transition={{duration:.8,delay:.1}}
-className="h-[260px] bg-white border border-gray-200 rounded-lg flex flex-col items-center justify-center text-center"
->
-
-<h3 className="text-5xl font-light text-[#0E2038]">
-
-<Counter value={parseInt(fleet.range)} />
-
-</h3>
-
-<p className="uppercase tracking-[4px] text-xs text-gray-500 mt-3">
-Flying Range
-</p>
-
-</motion.div>
-
-
-
-{/* RANGE GIF */}
-
-<motion.div
-initial={{opacity:0,x:60}}
-whileInView={{opacity:1,x:0}}
-transition={{duration:.8}}
-className="h-[260px] bg-white border border-gray-200 rounded-lg flex items-center justify-center"
->
-
-<img
-src={rangeGif}
-className="w-36 object-contain"
-/>
-
-</motion.div>
-
-
-</div>
-
-</div>
+  </div>
 
 </section>
 {/* ================= AIRCRAFT SPECS ================= */}

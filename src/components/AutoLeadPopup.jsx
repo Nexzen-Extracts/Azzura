@@ -10,6 +10,7 @@ isSameDay
 } from "date-fns";
 
 export default function AzzuraSearchWithFloatingIcon(){
+    
 
 const [open,setOpen]=useState(false)
 
