@@ -2,8 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import FleetContent from "../components/FleetContent";
-import JetHighlight from "../components/JetHighlight";
-import NewsletterSection from "../components/NewsletterSection";
+
 import heroImage from "../assets/fleet-hero2.jpg";
 
 
@@ -62,8 +61,7 @@ function FleetPage() {
 
       {/* Fleet Content */}
       <FleetContent />
-      <JetHighlight />
-      <NewsletterSection />
+     
 
       <Footer />
     </>
