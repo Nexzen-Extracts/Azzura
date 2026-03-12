@@ -3,32 +3,47 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 // ===== CJ2 Assets =====
+// ===== CJ2 Assets =====
 import cj2Hero from "../assets/fleet/cj2/hero.webp";
 import cj2Interior1 from "../assets/fleet/cj2/interior1.jpg";
 import cj2Interior2 from "../assets/fleet/cj2/interior2.jpg";
-import cj2Range from "../assets/fleet/cj2/range.gif";
-import cj2Baggage from "../assets/fleet/cj2/baggage.webp";
 import cj2Interior3 from "../assets/fleet/cj2/interior3.jpg";
 import cj2Interior4 from "../assets/fleet/cj2/interior4.jpg";
 
+import cj2Overview from "../assets/fleet/cj2/overview.jpg";
+import cj2Specs from "../assets/fleet/cj2/specs.jpeg";
+
+import cj2Range from "../assets/fleet/cj2/range.gif";
+import cj2Baggage from "../assets/fleet/cj2/baggage.webp";
+
 export const fleetData = [
-  {
+{
   id: 1,
   name: "Cessna Citation CJ2",
   type: "Light Jet",
+
+  // Hero image
   image: cj2Hero,
+
+  // NEW images for sections
+  overviewImage: cj2Overview,
+  specsImage: cj2Specs,
+
   interior: [
     cj2Interior1,
     cj2Interior2,
     cj2Interior3,
     cj2Interior4
   ],
+
   rangeImage: cj2Range,
   baggageImage: cj2Baggage,
+
   seats: 7,
   speed: 400,
   baggage: "74 CUFT",
   range: "1500 NM",
+
   desc:
     "A light business jet known for high cruising speeds and excellent performance for short-haul flights."
 },

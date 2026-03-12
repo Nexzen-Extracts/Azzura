@@ -40,8 +40,9 @@ function Home() {
         <Products />
         <Services />
         <JetRoutes />
-        <WhyChoose />
          <JetTrackingStrip/>
+        <WhyChoose />
+        
         <JetHighlight />
        
         <MerchandiseSection />
