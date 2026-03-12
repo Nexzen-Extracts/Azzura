@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import bgImage from "../assets/runway.png"; // your background
+import bgImage from "../assets/runway.png";
 
 const statsData = [
   { number: 95, label: "Professional Pilots" },
@@ -19,19 +19,21 @@ function Counter({ value }) {
 
     let start = 0;
     const duration = 1500;
-    const increment = value / (duration / 16);
+    let startTime = null;
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= value) {
-        setCount(value);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
+    const animate = (time) => {
+      if (!startTime) startTime = time;
+      const progress = Math.min((time - startTime) / duration, 1);
+
+      const current = Math.floor(progress * value);
+      setCount(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
       }
-    }, 16);
+    };
 
-    return () => clearInterval(timer);
+    requestAnimationFrame(animate);
   }, [isInView, value]);
 
   return <span ref={ref}>{count}</span>;
@@ -41,14 +43,14 @@ function Statistics() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
 
-      {/* Fixed Background */}
+      {/* Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: `url(${bgImage})` }}
       />
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/65" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 text-center text-white">
@@ -56,6 +58,7 @@ function Statistics() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           className="uppercase tracking-[4px] text-xs text-gray-300 mb-3"
         >
           Our Performance
@@ -64,27 +67,35 @@ function Statistics() {
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           className="text-3xl md:text-4xl lg:text-5xl font-light mb-6"
         >
           Aviation in Numbers
         </motion.h2>
 
-        <div className="h-[2px] bg-white/40 w-16 mx-auto mb-12" />
+        <div className="h-[2px] bg-white/40 w-16 mx-auto mb-14" />
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
+
           {statsData.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.15 }}
+              viewport={{ once: false }}
             >
-              <h3 className="text-4xl md:text-5xl font-light mb-2">
+              <h3 className="text-4xl md:text-5xl font-light mb-2 tracking-wide">
                 <Counter value={item.number} />+
               </h3>
-              <p className="text-gray-200">{item.label}</p>
+
+              <p className="text-gray-200 text-sm md:text-base">
+                {item.label}
+              </p>
             </motion.div>
           ))}
+
         </div>
 
       </div>

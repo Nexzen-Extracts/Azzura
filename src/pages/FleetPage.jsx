@@ -22,6 +22,9 @@ function FleetPage() {
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 8, ease: "easeOut" }}
+           loading="eager"
+  decoding="async"
+  fetchpriority="high"
         />
 
         {/* Overlay */}

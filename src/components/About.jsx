@@ -48,11 +48,14 @@ function About() {
           whileInView="show"
           viewport={{ once: false, amount: 0.3 }}
         >
-          <img
-            src={aboutImg}
-            alt="Private Aviation"
-            className="w-full h-full object-cover"
-          />
+         <img
+  src={aboutImg}
+  alt="Private Aviation"
+  className="w-full h-full object-cover"
+  loading="lazy"
+  decoding="async"
+  sizes="(max-width: 1024px) 100vw, 50vw"
+/>
 
           {/* Cinematic overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />

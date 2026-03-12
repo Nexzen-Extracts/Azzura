@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Headset, ShieldCheck, Settings } from "lucide-react";
 
@@ -22,16 +21,20 @@ const features = [
 
 function WhyChoose() {
 
-  const leftVariant = {
+  const container = {
     hidden: { opacity: 0, x: -80 },
     show: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.9, ease: "easeOut", staggerChildren: 0.2 },
+      transition: {
+        duration: 0.9,
+        ease: "easeOut",
+        staggerChildren: 0.2,
+      },
     },
   };
 
-  const itemVariant = {
+  const item = {
     hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
@@ -40,7 +43,7 @@ function WhyChoose() {
     },
   };
 
-  const rightVariant = {
+  const right = {
     hidden: { opacity: 0, x: 100 },
     show: {
       opacity: 1,
@@ -56,33 +59,33 @@ function WhyChoose() {
         {/* LEFT CONTENT */}
         <motion.div
           className="lg:col-span-7"
-          variants={leftVariant}
+          variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.3 }}
         >
 
           <motion.p
-            variants={itemVariant}
+            variants={item}
             className="uppercase tracking-[4px] text-xs text-gray-400 mb-3"
           >
             Why Choose Us
           </motion.p>
 
           <motion.h2
-            variants={itemVariant}
+            variants={item}
             className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038]"
           >
             Time-Smart Luxury at Your Command
           </motion.h2>
 
           <motion.div
-            variants={itemVariant}
+            variants={item}
             className="w-16 h-[2px] bg-gray-300 mt-5 mb-6"
           />
 
           <motion.p
-            variants={itemVariant}
+            variants={item}
             className="text-[#6B7C8F] max-w-2xl"
           >
             We understand the value of your time. Our focus is on convenience,
@@ -92,29 +95,30 @@ function WhyChoose() {
           {/* FEATURES */}
           <div className="grid md:grid-cols-3 gap-10 mt-14">
 
-            {features.map((item, index) => {
+            {features.map((feature, index) => {
 
-              const Icon = item.icon;
+              const Icon = feature.icon;
 
               return (
-                <motion.div
+                <motion.article
                   key={index}
-                  variants={itemVariant}
+                  variants={item}
+                  className="group"
                 >
 
-                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 transition group-hover:shadow-md">
                     <Icon className="text-[#A3B5C0]" size={26} />
                   </div>
 
                   <h3 className="font-light text-[#0E2038] mb-2">
-                    {item.title}
+                    {feature.title}
                   </h3>
 
                   <p className="text-sm text-[#6B7C8F]">
-                    {item.desc}
+                    {feature.desc}
                   </p>
 
-                </motion.div>
+                </motion.article>
               );
 
             })}
@@ -127,7 +131,7 @@ function WhyChoose() {
         {/* RIGHT ROUTE MAP */}
         <motion.div
           className="lg:col-span-3 relative h-[360px] hidden lg:block"
-          variants={rightVariant}
+          variants={right}
           initial="hidden"
           whileInView="show"
           viewport={{ once: false, amount: 0.3 }}
@@ -171,7 +175,8 @@ function WhyChoose() {
               style={{
                 offsetPath: "path('M20 240 Q150 40 280 180')",
                 offsetRotate: "auto",
-                animation: "fly1 8s linear infinite"
+                animation: "planeFly1 8s linear infinite",
+                willChange: "offset-distance",
               }}
             >
               ✈
@@ -182,7 +187,8 @@ function WhyChoose() {
               style={{
                 offsetPath: "path('M40 60 Q200 160 260 40')",
                 offsetRotate: "auto",
-                animation: "fly2 10s linear infinite"
+                animation: "planeFly2 10s linear infinite",
+                willChange: "offset-distance",
               }}
             >
               ✈
@@ -190,27 +196,27 @@ function WhyChoose() {
 
           </div>
 
-          {/* KEYFRAMES */}
-          <style>
-            {`
-            @keyframes fly1 {
-              0% { offset-distance: 0%; }
-              100% { offset-distance: 100%; }
-            }
-
-            @keyframes fly2 {
-              0% { offset-distance: 0%; }
-              100% { offset-distance: 100%; }
-            }
-            `}
-          </style>
-
         </motion.div>
 
       </div>
+
+      {/* GLOBAL KEYFRAMES */}
+      <style>
+        {`
+        @keyframes planeFly1 {
+          from { offset-distance: 0%; }
+          to { offset-distance: 100%; }
+        }
+
+        @keyframes planeFly2 {
+          from { offset-distance: 0%; }
+          to { offset-distance: 100%; }
+        }
+        `}
+      </style>
+
     </section>
   );
 }
 
 export default WhyChoose;
-

@@ -50,6 +50,9 @@ function YatraPage() {
               opacity: { duration: 2 },
               scale: { duration: 8 }
             }}
+             loading="eager"
+  decoding="async"
+  fetchpriority="high"
           />
         ))}
 

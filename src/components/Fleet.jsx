@@ -82,11 +82,14 @@ function Fleet() {
           viewport={{ once: false, amount: 0.4 }}
           className="flex justify-center"
         >
-          <img
-            src={fleetData[active].img}
-            alt={fleetData[active].name}
-            className="w-[90%] sm:w-[80%] md:w-[65%] lg:w-[55%] max-w-4xl object-contain drop-shadow-xl"
-          />
+        <img
+  src={fleetData[active].img}
+  alt={fleetData[active].name}
+  className="w-[90%] sm:w-[80%] md:w-[65%] lg:w-[55%] max-w-4xl object-contain drop-shadow-xl"
+  loading="lazy"
+  decoding="async"
+  sizes="(max-width:768px) 90vw, (max-width:1024px) 65vw, 55vw"
+/>
         </motion.div>
 
         {/* Description */}

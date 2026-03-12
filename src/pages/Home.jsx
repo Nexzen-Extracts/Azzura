@@ -7,7 +7,7 @@ import Fleet from "../components/Fleet";
 import Products from "../components/Products";
 import Services from "../components/Services";
 import WhyChoose from "../components/WhyChoose";
-// import CTA from "../components/CTA";
+
 import Footer from "../components/Footer";
 import LogoIntro from "../components/LogoIntro";
 import SplitSection from "../components/SplitSection";

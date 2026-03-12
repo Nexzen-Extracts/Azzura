@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -66,11 +65,14 @@ function ProductCard({ item, index, setActive }) {
       onClick={() => setActive(item)}
       className="relative h-[260px] sm:h-[300px] rounded-2xl overflow-hidden shadow-lg cursor-pointer group"
     >
+
       <img
         src={item.image}
         alt={item.title}
         loading="lazy"
-        className="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+        decoding="async"
+        sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
+        className="w-full h-full object-cover transition duration-700 group-hover:scale-110 will-change-transform"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -78,6 +80,7 @@ function ProductCard({ item, index, setActive }) {
       <div className="absolute bottom-4 left-4 bg-white/95 text-[#0E2038] px-4 py-1 rounded-full text-sm font-medium shadow">
         {item.title}
       </div>
+
     </motion.div>
   );
 }
@@ -98,6 +101,7 @@ function Products() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
             className="uppercase tracking-[4px] text-xs text-gray-400 mb-3"
           >
             Our Products
@@ -106,6 +110,7 @@ function Products() {
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
             className="text-3xl md:text-4xl lg:text-5xl font-light text-[#0E2038]"
           >
             Aviation Solutions
@@ -114,6 +119,7 @@ function Products() {
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: 70 }}
+            viewport={{ once: false }}
             className="h-[2px] bg-gray-300 mx-auto mt-5"
           />
 
@@ -142,6 +148,7 @@ function Products() {
 
         {active && (
           <>
+
             {/* Overlay */}
 
             <motion.div
@@ -167,6 +174,7 @@ function Products() {
                 {/* Close Button */}
 
                 <button
+                  aria-label="Close popup"
                   onClick={() => setActive(null)}
                   className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow hover:bg-gray-100 transition z-10"
                 >
@@ -178,11 +186,14 @@ function Products() {
                   {/* Image */}
 
                   <div className="md:w-1/2 h-[200px] md:h-[260px]">
+
                     <img
                       src={active.image}
-                      alt=""
+                      alt={active.title}
+                      decoding="async"
                       className="w-full h-full object-cover"
                     />
+
                   </div>
 
                   {/* Content */}
@@ -219,4 +230,3 @@ function Products() {
 }
 
 export default Products;
-

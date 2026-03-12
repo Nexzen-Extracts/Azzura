@@ -7,10 +7,7 @@ import ClubSection from "../components/ClubSection";
 import MembershipPricing from "../components/MembershipPricing";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
-import JetExperience from "../components/JetExperience";
-// import MembershipBenefits from "../components/MembershipBenefits";
-// import MembershipPricing from "../components/MembershipPricing";
-import CTA from "../components/CTA";
+
 
 function Membership() {
   return (
@@ -22,12 +19,11 @@ function Membership() {
       <AboutMembership />
       <MembershipBenefits />
       <ClubSection />
-      {/* <JetExperience /> */}
+      
       <MembershipPricing />
-      {/* <MembershipBenefits />
-      <MembershipPricing /> */}
+     
 
-      {/* <CTA /> */}
+      
       <JetHighlight />
       <NewsletterSection />
       <Footer />

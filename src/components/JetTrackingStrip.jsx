@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -10,14 +10,14 @@ const [open,setOpen]=useState(false);
 const [jetNumber,setJetNumber]=useState("");
 const [result,setResult]=useState(null);
 
-const planeIcon = new L.Icon({
+const planeIcon=new L.Icon({
 iconUrl:"https://cdn-icons-png.flaticon.com/512/7893/7893979.png",
 iconSize:[40,40]
 });
 
-const otherPlane = new L.Icon({
+const otherPlane=new L.Icon({
 iconUrl:"https://cdn-icons-png.flaticon.com/512/34/34627.png",
-iconSize:[22,22]
+iconSize:[20,20]
 });
 
 const dummyJets={
@@ -71,12 +71,17 @@ const otherJets=[
 ];
 
 const checkJet=()=>{
+
+if(!jetNumber) return;
+
 const data=dummyJets[jetNumber.toUpperCase()];
+
 if(data){
-  setResult(data);
+setResult(data);
 }else{
-  setResult({error:true});
+setResult({error:true});
 }
+
 };
 
 return(
@@ -92,8 +97,11 @@ return(
 <p className="text-sm text-gray-300 flex items-center gap-2">
 
 <span className="relative flex h-3 w-3">
-  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+
+<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+
+<span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+
 </span>
 
 Live Charter Jet Tracking
@@ -113,12 +121,18 @@ Track Jet
 
 </section>
 
-
 {/* FULLSCREEN DASHBOARD */}
+
+<AnimatePresence>
 
 {open &&(
 
-<div className="fixed inset-0 z-[9999] bg-[#0b1628]">
+<motion.div
+initial={{opacity:0}}
+animate={{opacity:1}}
+exit={{opacity:0}}
+className="fixed inset-0 z-[9999] bg-[#0b1628]"
+>
 
 <button
 onClick={()=>setOpen(false)}
@@ -127,11 +141,9 @@ className="absolute right-6 top-6 text-gray-400 text-xl z-[1000]"
 ✕
 </button>
 
-
 <div className="grid lg:grid-cols-2 h-full">
 
-
-{/* LEFT PANEL (DATA) */}
+{/* LEFT PANEL */}
 
 <div className="p-10 flex flex-col justify-center">
 
@@ -145,12 +157,13 @@ Charter Jet Tracker
 placeholder="Enter Jet Number (AZ101)"
 value={jetNumber}
 onChange={(e)=>setJetNumber(e.target.value)}
+onKeyDown={(e)=>e.key==="Enter" && checkJet()}
 className="px-4 py-3 bg-white text-[#0E2038] placeholder-gray-400 rounded w-full outline-none"
 />
 
 <button
 onClick={checkJet}
-className="px-6 py-3 bg-cyan-500 rounded"
+className="px-6 py-3 bg-cyan-500 rounded text-white hover:bg-cyan-400 transition"
 >
 
 Track
@@ -158,10 +171,13 @@ Track
 </button>
 
 </div>
-{result?.error && (
-  <p className="text-sm text-red-400 mt-3">
-    Your booking is not confirmed or scheduled.
-  </p>
+
+{result?.error &&(
+
+<p className="text-sm text-red-400">
+Your booking is not confirmed or scheduled.
+</p>
+
 )}
 
 {result && !result.error &&(
@@ -169,33 +185,24 @@ Track
 <div className="space-y-5">
 
 <div>
-
 <p className="text-gray-400 text-sm">Jet Number</p>
 <p className="text-gray-200 text-xl">{jetNumber.toUpperCase()}</p>
-
 </div>
 
 <div>
-
 <p className="text-gray-400 text-sm">Route</p>
 <p className="text-gray-200">{result.route}</p>
-
 </div>
 
 <div>
-
 <p className="text-gray-400 text-sm">Current Location</p>
 <p className="text-gray-200">{result.current}</p>
-
 </div>
 
 <div>
-
 <p className="text-gray-400 text-sm">Status</p>
 <p className="text-gray-200">{result.status}</p>
-
 </div>
-
 
 {/* PROGRESS */}
 
@@ -206,7 +213,7 @@ Track
 <div className="w-full h-2 bg-gray-700 rounded">
 
 <div
-className="h-2 bg-cyan-400 rounded"
+className="h-2 bg-cyan-400 rounded transition-all duration-700"
 style={{width:`${result.progress}%`}}
 ></div>
 
@@ -214,35 +221,26 @@ style={{width:`${result.progress}%`}}
 
 </div>
 
-
 <div className="grid grid-cols-2 gap-6 pt-4">
 
 <div>
-
 <p className="text-gray-400 text-sm">Departure</p>
 <p className="text-gray-200">{result.departure}</p>
-
 </div>
 
 <div>
-
 <p className="text-gray-400 text-sm">Arrival</p>
 <p className="text-gray-200">{result.arrival}</p>
-
 </div>
 
 <div>
-
 <p className="text-gray-400 text-sm">ETA</p>
 <p className="text-gray-200">{result.eta}</p>
-
 </div>
 
 <div>
-
 <p className="text-gray-400 text-sm">Distance</p>
 <p className="text-gray-200">{result.distance}</p>
-
 </div>
 
 </div>
@@ -253,20 +251,18 @@ style={{width:`${result.progress}%`}}
 
 </div>
 
-
-{/* RIGHT PANEL (MAP) */}
+{/* MAP */}
 
 <div className="h-full">
 
 <MapContainer
-center={[25,55]}
-zoom={3}
+center={result?.coords || [25,55]}
+zoom={result ? 5 : 3}
 style={{height:"100%",width:"100%"}}
 >
 
 <TileLayer
 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-attribution="&copy; OpenStreetMap & Carto"
 />
 
 {otherJets.map((jet,i)=>(
@@ -276,6 +272,7 @@ attribution="&copy; OpenStreetMap & Carto"
 {result && !result.error &&(
 
 <>
+
 <Marker position={result.coords} icon={planeIcon}/>
 
 <Polyline
@@ -293,9 +290,11 @@ pathOptions={{color:"#00c3ff",weight:3,dashArray:"6"}}
 
 </div>
 
-</div>
+</motion.div>
 
 )}
+
+</AnimatePresence>
 
 </>
 

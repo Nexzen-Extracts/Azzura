@@ -22,7 +22,7 @@ function Services() {
     <section className="bg-white py-20 md:py-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
 
-        {/* ===== Heading (SplitSection Style) ===== */}
+        {/* ===== Heading ===== */}
         <div className="text-center mb-14 md:mb-20">
 
           <motion.p
@@ -56,14 +56,18 @@ function Services() {
             viewport={{ once: false }}
             className="text-gray-500 mt-6 text-sm md:text-base max-w-2xl mx-auto"
           >
-            End-to-end aviation solutions crafted for precision, reliability, and seamless operations.
+            End-to-end aviation solutions crafted for precision, reliability,
+            and seamless operations.
           </motion.p>
+
         </div>
 
         {/* ===== Grid ===== */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
           {services.map((service, index) => (
-            <motion.div
+
+            <motion.article
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -71,29 +75,40 @@ function Services() {
               viewport={{ once: false, amount: 0.3 }}
               className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer relative"
             >
+
               {/* Image */}
               <div className="overflow-hidden h-[220px]">
+
                 <img
                   src={service.img}
                   alt={service.title}
-                  className="w-full h-full object-cover transition duration-700 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                  className="w-full h-full object-cover transition duration-700 group-hover:scale-105 will-change-transform"
                 />
+
               </div>
 
               {/* Content */}
               <div className="p-6">
+
                 <h3 className="text-lg md:text-xl font-light text-[#0E2038]">
                   {service.title}
                 </h3>
 
                 {/* Premium underline */}
                 <div className="w-0 h-[2px] bg-[#0E2038] mt-3 group-hover:w-12 transition-all duration-300"></div>
+
               </div>
 
-              {/* Subtle hover border */}
+              {/* Hover Border */}
               <div className="absolute inset-0 rounded-2xl ring-0 group-hover:ring-1 ring-[#0E2038]/10 transition pointer-events-none"></div>
-            </motion.div>
+
+            </motion.article>
+
           ))}
+
         </div>
 
       </div>
