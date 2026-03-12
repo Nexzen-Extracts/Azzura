@@ -8,8 +8,8 @@ import {
   Plane
 } from "lucide-react";
 
-import benefitImg from "../assets/membership-benefit.jpg";
-import benefitImg2 from "../assets/couple-2.jpg";
+import benefitImg from "../assets/membership-benefit1.webp";
+import benefitImg2 from "../assets/membership-benefit2.webp";
 
 /* Force Same Font */
 const fontStyle = {
@@ -64,7 +64,7 @@ return (
 
 <section
 style={fontStyle}
-className="bg-black py-24 px-6 text-white"
+className="bg-black py-24 px-6 text-white overflow-hidden"
 >
 
 <div className="max-w-7xl mx-auto">
@@ -75,7 +75,7 @@ className="bg-black py-24 px-6 text-white"
 initial={{opacity:0,y:40}}
 whileInView={{opacity:1,y:0}}
 transition={{duration:.7}}
-viewport={{once:true}}
+viewport={{ once:false, amount:0.3 }}
 className="text-center mb-20"
 >
 
@@ -109,10 +109,10 @@ return(
 
 <motion.div
 key={i}
-initial={{opacity:0,x:-90}}
+initial={{opacity:0,x:-80}}
 whileInView={{opacity:1,x:0}}
-transition={{delay:i*0.1,duration:.6}}
-viewport={{once:true}}
+transition={{delay:i*0.15,duration:.7}}
+viewport={{ once:false, amount:0.3 }}
 whileHover={{y:-8}}
 className="p-7 border border-white/10 bg-[#070707] hover:border-white/20 transition-all duration-300"
 >
@@ -142,7 +142,7 @@ className="p-7 border border-white/10 bg-[#070707] hover:border-white/20 transit
 initial={{opacity:0,x:100}}
 whileInView={{opacity:1,x:0}}
 transition={{duration:.8}}
-viewport={{once:true}}
+viewport={{ once:false, amount:0.3 }}
 className="lg:col-span-3 h-[320px]"
 >
 
@@ -168,7 +168,7 @@ className="w-full h-full object-cover"
 initial={{opacity:0,x:-100}}
 whileInView={{opacity:1,x:0}}
 transition={{duration:.8}}
-viewport={{once:true}}
+viewport={{ once:false, amount:0.3 }}
 className="lg:col-span-3 h-[320px]"
 >
 
@@ -193,10 +193,10 @@ return(
 
 <motion.div
 key={i}
-initial={{opacity:0,x:90}}
+initial={{opacity:0,x:80}}
 whileInView={{opacity:1,x:0}}
-transition={{delay:i*0.1,duration:.6}}
-viewport={{once:true}}
+transition={{delay:i*0.15,duration:.7}}
+viewport={{ once:false, amount:0.3 }}
 whileHover={{y:-8}}
 className="p-7 border border-white/10 bg-[#070707] hover:border-white/20 transition-all duration-300"
 >

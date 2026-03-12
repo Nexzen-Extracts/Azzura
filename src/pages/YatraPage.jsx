@@ -7,7 +7,7 @@ import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
 import FeatureSection from "../components/FeatureSection";
 
-import heli from "../assets/azura-wed.jpg";
+import heli from "../assets/azura-wed.webp";
 
 import hero1 from "../assets/yatra/hero1.webp";
 import hero2 from "../assets/yatra/hero2.webp";

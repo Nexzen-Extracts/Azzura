@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import membershipImg from "../assets/interior-1.jpg";
-import membershipImg2 from "../assets/interior-2.jpg";
+import membershipImg from "../assets/memb2.jpg";
+import membershipImg2 from "../assets/memb1.webp";
 
 function AboutMembership() {
 

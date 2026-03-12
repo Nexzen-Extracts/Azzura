@@ -1,9 +1,9 @@
 
 import { motion } from "framer-motion";
-import img2026 from "../assets/about-2026.jpg";
-import img2027 from "../assets/about-2027.jpg";
+import img2026 from "../assets/about11.webp";
+import img2027 from "../assets/about12.webp";
 import img2028 from "../assets/about-2028.jpg";
-import img2029 from "../assets/about-2029.jpg";
+import img2029 from "../assets/azura-wed.webp";
 import img2030 from "../assets/about-2030.jpg";
 
 function AboutSection() {
