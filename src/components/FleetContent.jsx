@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 // ===== CJ2 Assets =====
 // ===== CJ2 Assets =====
 import cj2Hero from "../assets/fleet/cj2/hero.webp";
-import cj2Interior1 from "../assets/fleet/cj2/interior1.jpg";
-import cj2Interior2 from "../assets/fleet/cj2/interior2.jpg";
-import cj2Interior3 from "../assets/fleet/cj2/interior3.jpg";
-import cj2Interior4 from "../assets/fleet/cj2/interior4.jpg";
+import cj2Interior1 from "../assets/fleet/cj2/interior1.webp";
+import cj2Interior2 from "../assets/fleet/cj2/interior2.webp";
+import cj2Interior3 from "../assets/fleet/cj2/interior3.webp";
+import cj2Interior4 from "../assets/fleet/cj2/interior4.webp";
 
 import cj2Overview from "../assets/fleet/cj2/overview.jpg";
 import cj2Specs from "../assets/fleet/cj2/specs.jpg";

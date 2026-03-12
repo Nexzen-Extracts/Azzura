@@ -9,10 +9,10 @@ import FeatureSection from "../components/FeatureSection";
 
 import heli from "../assets/azura-wed.jpg";
 
-import hero1 from "../assets/yatra/hero1.jpg";
-import hero2 from "../assets/yatra/hero2.jpg";
-import hero4 from "../assets/yatra/hero4.jpg";
-import hero5 from "../assets/yatra/hero5.jpg";
+import hero1 from "../assets/yatra/hero1.webp";
+import hero2 from "../assets/yatra/hero2.webp";
+import hero4 from "../assets/yatra/hero4.webp";
+import hero5 from "../assets/yatra/hero5.webp";
 
 function YatraPage() {
 

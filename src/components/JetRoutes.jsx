@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 /* Images */
-import r1 from "../assets/about-2026.jpg";
-import r2 from "../assets/about-2027.jpg";
+import r1 from "../assets/luxary1.webp";
+import r2 from "../assets/luxary2.webp";
 
 const routes = [
   {

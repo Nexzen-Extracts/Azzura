@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 /* ===== LOCAL IMAGES ===== */
-import y1 from "../assets/yatra3.jpg";
-import w1 from "../assets/wed.jpg";
-import r1 from "../assets/res.jpg";
-import h1 from "../assets/heli.jpg";
+import y1 from "../assets/yatra3.webp";
+import w1 from "../assets/wed.webp";
+import r1 from "../assets/res.webp";
+import h1 from "../assets/heli.webp";
 
 const products = [
   {

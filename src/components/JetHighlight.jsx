@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import jetImg from "../assets/jet-highlight.jpg";
+import jetImg from "../assets/jet-highlight.webp";
 
 function Counter({ end }) {
   const ref = useRef(null);

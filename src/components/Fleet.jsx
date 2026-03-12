@@ -2,10 +2,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 // Import images from assets
-import lightJet from "../assets/fleet/light-jet.png";
-import midJet from "../assets/fleet/midsize-jet.png";
-import largeJet from "../assets/fleet/large-jet.png";
-import helicopter from "../assets/fleet/helicopter.png";
+import lightJet from "../assets/fleet/light-jet.webp";
+import midJet from "../assets/fleet/midsize-jet.webp";
+import largeJet from "../assets/fleet/large-jet.webp";
+import helicopter from "../assets/fleet/helicopter.webp";
 
 const fleetData = [
   {
