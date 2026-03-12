@@ -11,7 +11,7 @@ import cj2Interior3 from "../assets/fleet/cj2/interior3.jpg";
 import cj2Interior4 from "../assets/fleet/cj2/interior4.jpg";
 
 import cj2Overview from "../assets/fleet/cj2/overview.jpg";
-import cj2Specs from "../assets/fleet/cj2/specs.jpeg";
+import cj2Specs from "../assets/fleet/cj2/specs.jpg";
 
 import cj2Range from "../assets/fleet/cj2/range.gif";
 import cj2Baggage from "../assets/fleet/cj2/baggage.webp";
