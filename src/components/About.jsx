@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import aboutImg from "../assets/about1.jpg";
+import aboutImg from "../assets/about1.webp";
 
 function About() {
   // Image animation (from left)
