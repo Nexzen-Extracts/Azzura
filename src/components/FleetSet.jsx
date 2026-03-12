@@ -153,7 +153,7 @@ className="w-full h-full object-cover"
         initial={{opacity:0,x:-60}}
         whileInView={{opacity:1,x:0}}
         transition={{duration:.8}}
-         className="h-[260px] bg-[#141e29] border border-gray-200 rounded-lg flex items-center justify-center p-6"
+         className="h-[260px] bg-[#28282d] border border-gray-200 rounded-lg flex items-center justify-center p-6"
 >
         <video
           src={speedVideo}
@@ -186,7 +186,7 @@ className="w-full h-full object-cover"
         initial={{opacity:0,x:60}}
         whileInView={{opacity:1,x:0}}
         transition={{duration:.8,delay:.1}}
-        className="h-[260px] bg-[#141e29] rounded-lg flex flex-col items-center justify-center text-center"
+        className="h-[260px] bg-[#28282d] rounded-lg flex flex-col items-center justify-center text-center"
       >
         <h3 className="text-5xl font-light text-white">
           <Counter value={parseInt(fleet.range)} />

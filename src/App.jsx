@@ -10,6 +10,7 @@ import AutoLeadPopup from "./components/AutoLeadPopup";
 // import SplashCursor from "./components/SplashCursor";
 import FleetContent from "./components/FleetContent";
 import FleetDetails from "./components/FleetDetails";
+import SustainabilityPage from "./pages/SustainabilityPage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
          {/* <Route path="/fleet" element={<FleetContent />} /> */}
 
   <Route path="/fleet/:slug" element={<FleetDetails />} />
+  <Route path="/sustainability" element={<SustainabilityPage />} />
         
       </Routes>
       <AutoLeadPopup />

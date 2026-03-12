@@ -6,24 +6,24 @@ import YatraExperience from "../components/YatraExperience";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
 import FeatureSection from "../components/FeatureSection";
+
 import heli from "../assets/azura-wed.jpg";
 
 import hero1 from "../assets/yatra/hero1.jpg";
 import hero2 from "../assets/yatra/hero2.jpg";
-// import hero3 from "../assets/yatra/hero3.jpg";
 import hero4 from "../assets/yatra/hero4.jpg";
 import hero5 from "../assets/yatra/hero5.jpg";
 
 function YatraPage() {
 
-  const images = [hero1, hero2,  hero4, hero5];
+  const images = [hero1, hero2, hero4, hero5];
   const [index, setIndex] = useState(0);
 
-  // Hero slider
+  // Smooth Hero Slider
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -32,21 +32,24 @@ function YatraPage() {
     <>
       <Navbar />
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="relative w-full h-screen overflow-hidden">
 
-        {/* Background slider */}
         {images.map((img, i) => (
           <motion.img
             key={i}
             src={img}
             alt="Chardham Yatra"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
-            initial={{ scale: 1.08 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 8, ease: "easeOut" }}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{
+              opacity: i === index ? 1 : 0,
+              scale: i === index ? 1.1 : 1.05
+            }}
+            transition={{
+              opacity: { duration: 2 },
+              scale: { duration: 8 }
+            }}
           />
         ))}
 
@@ -58,26 +61,19 @@ function YatraPage() {
 
           <motion.div
             initial={{ opacity: 0, x: -120 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.4 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="max-w-xl text-left text-white"
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            className="max-w-xl text-white"
           >
 
-            {/* Label */}
             <p className="text-xs md:text-sm tracking-[4px] uppercase text-white/70 mb-4">
               Spiritual Journey
             </p>
 
-            {/* Heading */}
-            <h1
-              className="samarkan text-4xl sm:text-5xl md:text-6xl mb-4 leading-tight"
-              style={{ textShadow: "0 10px 30px rgba(0,0,0,0.6)" }}
-            >
+            <h1 className="samarkan text-4xl sm:text-5xl md:text-6xl mb-4 leading-tight">
               Chardham Yatra
             </h1>
 
-            {/* Description */}
             <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
               Experience sacred journeys across India with private aviation,
               priority darshan and seamless spiritual travel planning.
@@ -92,16 +88,17 @@ function YatraPage() {
       <YatraExperience />
 
       <JetHighlight />
-<FeatureSection
-  image={heli}
-  subtitle="Azura Wed"
-  title="Your Wedding Journey, Elevated by Azura"
-  description="Azura Wed brings together luxury private aviation and unforgettable wedding experiences. Fly with your family and guests in style while Azura ensures a seamless journey to your dream destination wedding. From the first takeoff to the final celebration, every moment becomes extraordinary."
 
-  buttonPrimaryText="Discover Azura Wed"
-  buttonPrimaryLink="/wed"
-   reverse={true}
-/>
+      <FeatureSection
+        image={heli}
+        subtitle="Azura Wed"
+        title="Your Wedding Journey, Elevated by Azura"
+        description="Azura Wed brings together luxury private aviation and unforgettable wedding experiences."
+        buttonPrimaryText="Discover Azura Wed"
+        buttonPrimaryLink="/wed"
+        reverse={true}
+      />
+
       <NewsletterSection />
 
       <Footer />

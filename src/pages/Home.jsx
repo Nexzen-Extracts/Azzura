@@ -16,6 +16,7 @@ import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
 import JetRoutes from "../components/JetRoutes";
 import JetTrackingStrip from "../components/JetTrackingStrip";
+import MerchandiseSection from "../components/MerchandiseSection";
 
 
 function Home() {
@@ -40,8 +41,10 @@ function Home() {
         <Services />
         <JetRoutes />
         <WhyChoose />
+         <JetTrackingStrip/>
         <JetHighlight />
-        <JetTrackingStrip/>
+       
+        <MerchandiseSection />
         <NewsletterSection />
         {/* <CTA /> */}
         <Footer />
