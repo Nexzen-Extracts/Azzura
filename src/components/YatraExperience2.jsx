@@ -2,17 +2,17 @@ import { motion } from "framer-motion";
 
 import { useEffect, useState } from "react";
 
-import kedar from "../assets/yatra/kedarnath.jpg";
-import badri from "../assets/yatra/badrinath.jpg";
-import ganga from "../assets/yatra/gangotri.jpg";
-import yamuna from "../assets/yatra/yamunotri.jpg";
+import kedar from "../assets/yatra/kedarnath.webp";
+import badri from "../assets/yatra/badrinath.webp";
+import ganga from "../assets/yatra/gangotri.webp";
+import yamuna from "../assets/yatra/yamunotri.webp";
 import Statistics from "../components/Statistics";
 import heli from "../assets/heli-expe.jpg";
 import heli2 from "../assets/helipad.jpg"
-import yatraexp from "../assets/yatra/hero2.jpg"
+import yatraexp from "../assets/yatra/hero2.webp"
 
-import g1 from "../assets/yatra/gallery1.jpeg";
-import g2 from "../assets/yatra/gallery2.jpg";
+import g1 from "../assets/yatra/gallery1.webp";
+import g2 from "../assets/yatra/gallery2.webp";
 import g3 from "../assets/yatra/gallery3.webp";
 import g4 from "../assets/yatra/gallery4.webp";
 
