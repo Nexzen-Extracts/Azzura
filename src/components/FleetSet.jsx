@@ -118,7 +118,7 @@ className="lg:w-1/2 h-[320px] lg:h-auto"
 >
 
 <img
-src={fleet.image}
+src={fleet.overviewImage}
 className="w-full h-full object-cover"
 />
 
@@ -233,7 +233,7 @@ className="lg:w-1/2 h-[320px] lg:h-auto"
 >
 
 <img
-src={fleet.image}
+src={fleet.specsImage}
 className="w-full h-full object-cover"
 />
 
