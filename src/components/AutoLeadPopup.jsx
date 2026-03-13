@@ -10,43 +10,111 @@ isSameDay
 } from "date-fns";
 
 export default function AzzuraSearchWithFloatingIcon(){
-    
 
 const [open,setOpen]=useState(false)
+const [show,setShow]=useState(false)
+const [expand,setExpand]=useState(false)
+
+useEffect(()=>{
+
+const timer=setTimeout(()=>{
+
+setShow(true)
+
+setTimeout(()=>{
+setExpand(true)
+},600)
+
+},3500)
+
+return ()=>clearTimeout(timer)
+
+},[])
+
 
 return(
 
 <>
 
-<motion.button
-onClick={()=>setOpen(true)}
-initial={{scale:1}}
-animate={{scale:open?0:1,opacity:open?0:1}}
-transition={{duration:.3}}
-whileHover={{scale:1.1}}
-whileTap={{scale:.9}}
+{/* Apple style search pill */}
+
+<AnimatePresence>
+
+{show && !open &&(
+
+<motion.div
+initial={{ y: 120, opacity: 0 }}
+animate={{ y: 0, opacity: 1 }}
+exit={{ y: 120, opacity: 0 }}
+transition={{ duration: .5 }}
 style={{
-position:"fixed",
-bottom:"35px",
-left:"50%",
-transform:"translateX(-50%)",
-width:"56px",
-height:"56px",
-borderRadius:"50%",
-background:"linear-gradient(145deg,#ffffff,#f1f1f1)",
-border:"1px solid rgba(0,0,0,.08)",
-cursor:"pointer",
-zIndex:9999,
-display:"flex",
-alignItems:"center",
-justifyContent:"center",
-boxShadow:"0 10px 25px rgba(0,0,0,.25), inset 0 2px 3px rgba(255,255,255,.6)"
+position: "fixed",
+bottom: "35px",
+left: "50%",
+zIndex: 9999
 }}
 >
 
+<motion.div
+onClick={()=>setOpen(true)}
+animate={{width:expand?"auto":"60px"}}
+transition={{duration:.45}}
+style={{
+transform:"translateX(-50%)",   // IMPORTANT FIX
+height:"60px",
+borderRadius:"40px",
+background:"rgba(12,32,54,.75)",
+backdropFilter:"blur(18px)",
+border:"1px solid rgba(255,255,255,.15)",
+display:"flex",
+alignItems:"center",
+justifyContent:"center",
+gap:"12px",
+padding:"0 18px",
+cursor:"pointer",
+overflow:"hidden",
+boxShadow:"0 18px 45px rgba(0,0,0,.45)"
+}}
+>
+
+<AnimatePresence>
+
+{expand &&(
+
+<motion.span
+initial={{opacity:0,x:-10}}
+animate={{opacity:1,x:0}}
+exit={{opacity:0}}
+style={{
+color:"#fff",
+fontSize:"16px",
+fontWeight:"500",
+whiteSpace:"nowrap"
+}}
+>
+
+Plan Your Journey
+
+</motion.span>
+
+)}
+
+</AnimatePresence>
+
+
+<div style={{
+width:"40px",
+height:"40px",
+borderRadius:"50%",
+background:"#fff",
+display:"flex",
+alignItems:"center",
+justifyContent:"center"
+}}>
+
 <svg
-width="26"
-height="26"
+width="20"
+height="20"
 viewBox="0 0 24 24"
 fill="none"
 stroke="#0E2038"
@@ -58,9 +126,19 @@ strokeLinejoin="round"
 <line x1="16.65" y1="16.65" x2="21" y2="21"/>
 </svg>
 
-</motion.button>
+</div>
+
+</motion.div>
+
+</motion.div>
+
+)}
+
+</AnimatePresence>
 
 
+
+{/* FORM */}
 
 <AnimatePresence>
 
@@ -238,8 +316,6 @@ return(
 
 <div ref={containerRef} className="p-5">
 
-{/* Search Bar */}
-
 <div className="bg-[#0C2036] rounded-xl p-2 flex flex-wrap md:flex-nowrap items-center">
 
 <div
@@ -302,7 +378,7 @@ className="flex-1 px-5 py-3 cursor-pointer hover:bg-[#132A45] rounded-lg"
 
 
 
-{/* Airport Dropdown */}
+{/* AIRPORT */}
 
 {(activeField==="from"||activeField==="to")&&(
 
@@ -345,7 +421,7 @@ className="p-2 hover:bg-[#132A45] rounded-lg cursor-pointer text-white"
 
 
 
-{/* Calendar */}
+{/* CALENDAR */}
 
 {activeField==="date"&&(
 
@@ -360,11 +436,11 @@ className="p-2 hover:bg-[#132A45] rounded-lg cursor-pointer text-white"
 
 
 
-{/* Guests */}
+{/* GUESTS */}
 
 {activeField==="guest"&&(
 
-<div className="mt-3 bg-[#0C2036] p-6 rounded-xl shadow-xl max-h-[300px] overflow-y-auto">
+<div className="mt-3 bg-[#0C2036] p-6 rounded-xl shadow-xl">
 
 {["adults","children","infants","pets"].map(type=>(
 
