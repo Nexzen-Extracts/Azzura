@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import CharterSection from "../components/CharterSection";
 import JetHighlight from "../components/JetHighlight";
 import NewsletterSection from "../components/NewsletterSection";
-import heroImage from "../assets/charter-hero.jpg";
+import heroImage from "../assets/charter121.webp";
 import FeatureSection from "../components/FeatureSection";
 import heli from "../assets/charter-11.jpg";
 

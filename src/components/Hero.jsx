@@ -1,10 +1,10 @@
 import jetVideo from "../assets/jet.mov";
+import AirbnbSearch from "./AirbnbSearch";
 
 function Hero() {
   return (
     <section className="relative w-full h-screen overflow-hidden">
 
-      {/* Background Video - Pure (No dark effect) */}
       <video
         autoPlay
         loop
@@ -14,6 +14,8 @@ function Hero() {
       >
         <source src={jetVideo} type="video/mp4" />
       </video>
+
+      <AirbnbSearch />
 
     </section>
   );

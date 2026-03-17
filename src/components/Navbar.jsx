@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoDark from "../assets/logo-dark.png"; // dark logo
-import logoWhite from "../assets/logo.png"; // light logo
- import AzuraGoldButton from "../components/AzuraGoldButton";
+import logoDark from "../assets/logo-dark.png";
+import logoWhite from "../assets/logo.png";
+import AzuraGoldButton from "../components/AzuraGoldButton";
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
- 
+
   const closeMenu = () => setMenuOpen(false);
- 
+
   /* Scroll effect */
   useEffect(() => {
     const handleScroll = () => {
@@ -18,34 +19,34 @@ function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
- 
+
+  /* ===== NAV LINKS (NO REWARDS HERE) ===== */
   const navLinks = [
-   
-    { name: "Yatra", path: "/yatra" },
+    { name: "Expedition", path: "/yatra" },
     { name: "Wed", path: "/wed" },
     { name: "Rescue", path: "/rescue" },
     { name: "HeliSetGo", path: "/helisetgo" },
     { name: "Azura Gold +", path: "/membership" },
-   
   ];
- 
+
   const servicesList = [
     { name: "Aircraft Management", path: "/aircraft-management" },
     { name: "Charter Services", path: "/charter" },
     { name: "Aircraft Sales & Sourcing", path: "/aircraft-sales" },
     { name: "MRO", path: "/mro" },
     { name: "Aviation Consultancy", path: "/consultancy" },
-    { name: "Advanced Air Mobility", path: "/aam" }
+    { name: "Advanced Air Mobility", path: "/aam" },
   ];
- 
+
+  /* ===== SIDE MENU (REWARDS HERE ONLY) ===== */
   const menuLinks = [
+    { name: "Elite Rewards", path: "/rewards" }, // ✅ ONLY HERE
     { name: "About", path: "/about" },
     { name: "Fleet", path: "/fleet" },
-    { name: "Contact", path: "/contact" },
     { name: "Sustainability", path: "/sustainability" },
-    { name: "Merchandise", path: "/merchandise" }
+    { name: "Merchandise", path: "/merchandise" },
   ];
- 
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -53,7 +54,7 @@ function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-5">
- 
+
         {/* ===== Mobile ===== */}
         <div className="flex lg:hidden items-center justify-between py-4">
           <Link to="/">
@@ -63,7 +64,7 @@ function Navbar() {
               className="h-8"
             />
           </Link>
- 
+
           <button onClick={() => setMenuOpen(true)}>
             <Menu
               size={26}
@@ -71,10 +72,10 @@ function Navbar() {
             />
           </button>
         </div>
- 
+
         {/* ===== Desktop ===== */}
         <div className="hidden lg:flex flex-col items-center">
- 
+
           {/* Logo */}
           <Link to="/" className="py-4">
             <img
@@ -83,35 +84,38 @@ function Navbar() {
               className="h-10"
             />
           </Link>
- 
+
           {/* Divider */}
-          <div className={`w-full h-[1px] ${scrolled ? "bg-black/10" : "bg-white/20"}`}></div>
- 
+          <div
+            className={`w-full h-[1px] ${
+              scrolled ? "bg-black/10" : "bg-white/20"
+            }`}
+          ></div>
+
           {/* Nav */}
           <div className="w-full flex items-center justify-center relative py-3">
             <nav className="flex items-center gap-6 text-sm font-medium">
- 
+
               {navLinks.map((link, i) => {
- 
-  if (link.name === "Azura Gold +") {
-  return (
-    <Link key={i} to={link.path}>
-      <AzuraGoldButton scrolled={scrolled} />
-    </Link>
-  );
-}
- 
-  return (
-    <NavItem
-      key={i}
-      to={link.path}
-      text={link.name}
-      scrolled={scrolled}
-    />
-  );
- 
-})}
- 
+
+                if (link.name === "Azura Gold +") {
+                  return (
+                    <Link key={i} to={link.path}>
+                      <AzuraGoldButton $scrolled={scrolled} />
+                    </Link>
+                  );
+                }
+
+                return (
+                  <NavItem
+                    key={i}
+                    to={link.path}
+                    text={link.name}
+                    scrolled={scrolled}
+                  />
+                );
+              })}
+
               {/* Services Dropdown */}
               <div className="relative group">
                 <button
@@ -121,7 +125,7 @@ function Navbar() {
                 >
                   Services <ChevronDown size={16} />
                 </button>
- 
+
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
                   <div className="w-64 bg-white border border-black/10 rounded-xl shadow-xl">
                     <ul className="py-2 text-sm">
@@ -140,7 +144,7 @@ function Navbar() {
                 </div>
               </div>
             </nav>
- 
+
             {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(true)}
@@ -154,7 +158,7 @@ function Navbar() {
           </div>
         </div>
       </div>
- 
+
       {/* ===== Side Menu ===== */}
       {menuOpen && (
         <div
@@ -171,7 +175,7 @@ function Navbar() {
                 <X size={26} />
               </button>
             </div>
- 
+
             <div className="space-y-6 text-lg">
               {menuLinks.map((item, i) => (
                 <Link
@@ -183,7 +187,7 @@ function Navbar() {
                   {item.name}
                 </Link>
               ))}
- 
+
               <Link to="/contact" onClick={closeMenu}>
                 <div className="mt-6 bg-black text-white font-semibold py-3 rounded-lg text-center">
                   Book Now
@@ -193,7 +197,7 @@ function Navbar() {
           </div>
         </div>
       )}
- 
+
       {/* Animation */}
       <style>{`
         @keyframes slide {
@@ -207,13 +211,13 @@ function Navbar() {
     </header>
   );
 }
- 
-/* ===== Nav Item with Underline Hover ===== */
+
+/* ===== Nav Item ===== */
 function NavItem({ to, text, scrolled }) {
   return (
     <Link
       to={to}
-      className={`relative pb-1 ${
+      className={`relative pb-1 group ${
         scrolled ? "text-black" : "text-white"
       }`}
     >
@@ -222,5 +226,5 @@ function NavItem({ to, text, scrolled }) {
     </Link>
   );
 }
- 
+
 export default Navbar;

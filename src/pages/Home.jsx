@@ -7,7 +7,6 @@ import Fleet from "../components/Fleet";
 import Products from "../components/Products";
 import Services from "../components/Services";
 import WhyChoose from "../components/WhyChoose";
-
 import Footer from "../components/Footer";
 import LogoIntro from "../components/LogoIntro";
 import SplitSection from "../components/SplitSection";
@@ -18,8 +17,8 @@ import JetRoutes from "../components/JetRoutes";
 import JetTrackingStrip from "../components/JetTrackingStrip";
 import MerchandiseSection from "../components/MerchandiseSection";
 
-
 function Home() {
+
   const [introDone, setIntroDone] = useState(false);
 
   return (
@@ -31,8 +30,11 @@ function Home() {
         animate={{ opacity: introDone ? 1 : 0 }}
         transition={{ duration: 0.8 }}
       >
+
         <Navbar />
+
         <Hero />
+
         <About />
         <SplitSection />
         <Statistics />
@@ -40,15 +42,13 @@ function Home() {
         <Products />
         <Services />
         <JetRoutes />
-         <JetTrackingStrip/>
+        <JetTrackingStrip />
         <WhyChoose />
-        
         <JetHighlight />
-       
         <MerchandiseSection />
         <NewsletterSection />
-        {/* <CTA /> */}
         <Footer />
+
       </motion.div>
     </>
   );

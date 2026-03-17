@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const AzuraGoldButton = ({ scrolled }) => {
-
+const AzuraGoldButton = ({ $scrolled }) => {
 return(
 
-<Wrapper scrolled={scrolled}>
+<Wrapper scrolled={$scrolled}>
 
 <div className="glowing-box">
 
