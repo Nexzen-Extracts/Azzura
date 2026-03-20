@@ -4,6 +4,14 @@ import redCard from "../assets/tiercard-red.avif";
 import silverCard from "../assets/tiercard-silver.avif";
 import goldCard from "../assets/tiercard-gold.avif";
 import platinumCard from "../assets/tiercard-platinum.avif";
+import heroImage2 from "../assets/section1.jpg";
+import heroImage3 from "../assets/rewards2.jpg";
+import ben1 from "../assets/ben1.jpg";
+import ben2 from "../assets/ben2.jpg";
+import ben3 from "../assets/ben3.jpg";
+import ben4 from "../assets/ben4.jpg";
+import calc from "../assets/calculator.jpg";
+
 
 function AzuraRewards() {
 
@@ -60,68 +68,75 @@ function AzuraRewards() {
   return (
     <div className="bg-white overflow-x-hidden">
 
-{/* ================= INTRO ================= */}
+{/* ================= Smarter way ================= */}
 <section className="w-full bg-white">
-  <div className="flex flex-col lg:flex-row min-h-[75vh] items-stretch">
 
-    {/* LEFT CONTENT */}
-    <motion.div
+  {/* TOP HEADING */}
+  <div className="text-center py-14 px-6">
+    <motion.h2
       variants={leftAnim}
       initial="hidden"
       whileInView="show"
-      className="lg:w-1/2 flex items-center px-6 lg:px-14 py-12 relative z-10"
+      viewport={{ once: true }}
+      className="text-4xl lg:text-5xl font-light text-[#0E2038]"
     >
-      <div className="max-w-xl">
-        <p className="uppercase tracking-[5px] text-xs text-gray-400 mb-3">
-          Rewards Program
-        </p>
+      A Smarter Way to Fly Private
+    </motion.h2>
+  </div>
 
-        <h2 className="text-4xl font-light text-[#0E2038] mb-5 leading-snug">
-          A Smarter Way to Fly Private
-        </h2>
+  {/* IMAGE SECTION */}
+  <div className="px-3 lg:px-6">
 
-        <div className="w-16 h-[2px] bg-gray-300 mb-6" />
+    <div className="relative w-full overflow-hidden">
 
-        <p className="text-gray-600 leading-relaxed mb-6">
-          With Azura Elite Rewards, every journey becomes more valuable. 
-          Earn points on every flight, unlock exclusive privileges, and 
-          experience a new standard of luxury aviation tailored for you.
-        </p>
+      {/* IMAGE */}
+      <img
+        src={heroImage2}
+        alt="Rewards"
+        className="w-full h-[260px] sm:h-[300px] lg:h-[360px] object-cover object-center"
+      />
 
-        {/* BUTTONS */}
-        <div className="flex gap-4">
-          <button className="bg-[#0E2038] text-white px-6 py-3 rounded-full hover:opacity-90 transition">
+      {/* OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+
+      {/* CONTENT */}
+      <motion.div
+        variants={leftAnim}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="absolute inset-0 flex flex-col justify-center px-6 lg:px-16 max-w-xl"
+      >
+
+        <h3 className="text-2xl lg:text-3xl font-light text-white mb-4 leading-snug whitespace-nowrap">
+  EMBARK ON AN ELITE JOURNEY
+</h3>
+
+<p className="text-gray-200 mb-6 text-sm lg:text-base leading-relaxed">
+  Join the Azura Privilege Circle and unlock a world of bespoke travel, exclusive rewards, and unparalleled luxury.
+  <br />
+  Enjoy <span className="font-semibold text-white">1,000 Welcome Reward Points</span> as you begin your journey with Azura.
+</p>
+
+        <div className="flex gap-3">
+          <button className="bg-[#0E2038] px-5 py-2.5 rounded-md hover:opacity-90 transition shadow-sm">
             Book Now
           </button>
 
-          <button className="border border-[#0E2038] text-[#0E2038] px-6 py-3 rounded-full hover:bg-[#0E2038] hover:text-white transition">
+          <button className="border border-white px-5 py-2.5 rounded-md hover:bg-white hover:text-black transition">
             Enquiry Now
           </button>
         </div>
-      </div>
-    </motion.div>
 
-    {/* RIGHT IMAGE WITH SMOOTH FADE */}
-    <motion.div
-      variants={rightAnim}
-      initial="hidden"
-      whileInView="show"
-      className="lg:w-1/2 h-[320px] lg:h-auto relative overflow-hidden"
-    >
-      <img 
-        src="https://cdn.prod.website-files.com/6714320ba85d0d0e22bc7471/68a7811b6ebbc7e33565bc06_file_e7ffa8kk.png"
-        className="w-full h-full object-cover"
-      />
+      </motion.div>
 
-      {/* 🔥 MAIN FADE (LEFT SIDE MERGE) */}
-      <div className="hidden lg:block absolute top-0 left-0 h-full w-72
-      bg-gradient-to-l from-transparent via-white/80 to-white" />
-
-      {/* 🔥 EXTRA BLUR SMOOTHNESS */}
-      <div className="hidden lg:block absolute top-0 left-0 h-full w-40 backdrop-blur-sm" />
-    </motion.div>
+    </div>
 
   </div>
+
+  {/* GAP */}
+  <div className="h-12 lg:h-16"></div>
+
 </section>
 
 {/* ================= HOW IT WORKS ================= */}
@@ -136,7 +151,7 @@ function AzuraRewards() {
       className="lg:w-1/2 h-[320px] lg:h-auto relative overflow-hidden"
     >
       <img
-        src="https://t3.ftcdn.net/jpg/00/95/73/18/360_F_95731897_ZEQSc1AwZD4JOZes5PQiaIkFxnpArztH.jpg"
+        src={heroImage3}
         className="w-full h-full object-cover"
       />
 
@@ -414,8 +429,7 @@ bg-gradient-to-r from-white via-[#f5f7fa] to-[#0E2038]/15">
   <div
     className="absolute inset-0 bg-cover bg-center md:bg-fixed"
     style={{
-      backgroundImage:
-        "url('https://images.squarespace-cdn.com/content/v1/629388d4dfb39c164f10b505/84ff83b8-c4fd-4512-82e1-7a04a40b4944/Cheapest-Private-Jet-to-charter.jpg')"
+     backgroundImage: `url(${calc})`
     }}
   />
 
@@ -504,73 +518,101 @@ bg-gradient-to-r from-white via-[#f5f7fa] to-[#0E2038]/15">
 </section>
 
 {/* ================= BENEFITS (PREMIUM) ================= */}
+{/* ================= BENEFITS (PREMIUM) ================= */}
 <section className="w-full py-24 
 bg-gradient-to-r from-white via-[#f5f7fa] to-[#0E2038]/10">
 
-  <div className="max-w-6xl mx-auto px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
     {/* HEADER */}
-    <div className="text-center mb-16">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}   // 🔥 no repeat = no glitch
+      transition={{ duration: 0.4 }}
+      className="text-center mb-16"
+    >
       <h2 className="text-4xl font-light text-[#0E2038] mb-3 tracking-wide">
         Exclusive Benefits
       </h2>
       <div className="w-16 h-[2px] bg-[#0E2038]/30 mx-auto" />
-    </div>
+    </motion.div>
 
     {/* GRID */}
-    <div className="grid md:grid-cols-4 gap-8">
+    <div className="grid md:grid-cols-4 gap-10">
 
       {[
         {
           title: "No Expiry",
-          desc: "Your points remain valid with no expiration limits."
+          desc: "Your reward points never expire, giving you complete flexibility to redeem them whenever it suits your travel plans.",
+          img: ben1
         },
         {
           title: "Priority Support",
-          desc: "Get faster assistance with dedicated member service."
+          desc: "Enjoy faster assistance with dedicated member support, ensuring your travel experience remains smooth and hassle-free.",
+          img: ben2
         },
         {
           title: "Tailored Travel",
-          desc: "Personalized journeys crafted for your preferences."
+          desc: "Experience personalized journeys designed around your preferences, from routes to onboard comfort and services.",
+          img: ben3
         },
         {
           title: "Fast Booking",
-          desc: "Quick and seamless booking experience every time."
+          desc: "Book your private flights quickly and seamlessly with our optimized booking system built for convenience.",
+          img: ben4
         }
-      ].map((item, i) => (
+      ].map((item, i) => {
 
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.1 }}
-          className="group relative bg-white border border-gray-200 
-          rounded-xl p-8 text-center 
-          hover:shadow-xl hover:-translate-y-1 
-          transition duration-300 cursor-pointer overflow-hidden"
-        >
+        const isLeft = i < 2;
 
-          {/* TOP ACCENT LINE */}
-          <div className="absolute top-0 left-0 w-full h-[2px] 
-          bg-gradient-to-r from-[#0E2038] to-transparent opacity-70" />
+        return (
+          <motion.div
+            key={i}
+            initial={{
+              opacity: 0,
+              x: isLeft ? -60 : 60
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0
+            }}
+            viewport={{ once: true }}   // 🔥 smooth + no repeat glitch
+            transition={{
+              duration: 0.45,
+              ease: "easeOut"
+            }}
+            className="group bg-white border border-gray-200 
+            rounded-xl overflow-hidden 
+            hover:shadow-2xl hover:-translate-y-2 
+            transition duration-300 cursor-pointer will-change-transform"
+          >
 
-          {/* TITLE */}
-          <h3 className="text-[#0E2038] font-semibold text-lg mb-3">
-            {item.title}
-          </h3>
+            {/* IMAGE */}
+            <div className="w-full h-56 overflow-hidden">
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+            </div>
 
-          {/* DESC */}
-          <p className="text-gray-500 text-sm leading-relaxed">
-            {item.desc}
-          </p>
+            {/* CONTENT */}
+            <div className="p-6">
 
-          {/* HOVER OVERLAY */}
-          <div className="absolute inset-0 bg-[#0E2038] opacity-0 
-          group-hover:opacity-5 transition duration-300" />
+              <h3 className="text-[#0E2038] text-lg mb-3">
+                {item.title}
+              </h3>
 
-        </motion.div>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {item.desc}
+              </p>
 
-      ))}
+            </div>
+
+          </motion.div>
+        );
+      })}
 
     </div>
 
