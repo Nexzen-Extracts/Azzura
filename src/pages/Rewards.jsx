@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AzuraRewards from "../components/AzuraRewards";
-import heroImage from "../assets/charter121.webp"; // change if needed
+import heroImage from "../assets/rewards.jpg";
 
 function Rewards() {
   return (
